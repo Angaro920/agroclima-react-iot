@@ -10,17 +10,21 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
+import { Pages } from "../../constants/pages";
+
+
+console.log(Pages);
 
 type MenuItem = Required<MenuProps>["items"][number];
 
 const items: MenuItem[] = [
   {
-    key: "dashboard",
+    key: Pages.DASHBOARD,
     label: "Dashboard",
     icon: <DashboardOutlined />,
   },
   {
-    key: "maquinas",
+    key: Pages.DEVICES,
     label: "maquinas",
     icon: <ExperimentOutlined />,
   },
@@ -45,8 +49,8 @@ const items: MenuItem[] = [
   },
 ];
 
-export const MenuDashboard = () => {
+export const MenuDashboard = ({setCurrentPage}) => {
   return (
-    <Menu defaultSelectedKeys={['1']} items={items} theme="dark" mode='inline'/>
+    <Menu defaultSelectedKeys={['1']} items={items} theme="dark" mode='inline' onClick={(event) => {setCurrentPage(event.key)}}/>
   )
 }
