@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Layout, Col, Row, FloatButton } from "antd";
+import { Layout, Col, Row, FloatButton} from "antd";
 import {
   CartasDashboard,
   MenuDashboard,
@@ -11,13 +11,13 @@ import {
 import { MoonOutlined, RocketOutlined } from "@ant-design/icons";
 import { dashboardStyle } from "./styles";
 
-const { /* Header, */ Content, Footer, Sider } = Layout;
+const { /* Header, */  Content, Footer, Sider } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   /* const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken(); */
+    token: { colorBgContainer},
+  } = theme.useToken(); */ 
 
   return (
     <Layout style={dashboardStyle.globalLayoutStyle}>
