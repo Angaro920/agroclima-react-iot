@@ -1,3 +1,6 @@
 export * from './Menu';
 export * from './Cartas';
-export * from './Lineal';
+export * from './LinealChart';
+export * from './ComposedChart';	
+export * from './AreaChart';
+export * from './BarChart';	

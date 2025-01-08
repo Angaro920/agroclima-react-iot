@@ -22,4 +22,12 @@ export const dashboardStyle: Record<string, CSSProperties> = {
     background: "white",
     borderRadius: "10px",
   },
+  chartdiv:{
+    height: "300px",
+    width: "auto",
+    marginTop: 20,
+    border: "2px solid #f0f0f0",
+    borderRadius: "10px",
+  }
 }
+

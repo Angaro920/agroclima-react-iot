@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { Layout, Col, Row, FloatButton, Card } from "antd";
+import { Layout, Col, Row, FloatButton } from "antd";
 import {
   CartasDashboard,
   MenuDashboard,
   LineChartComponent,
+  ComposedChartComponent,
+  AreaChartComponent,
+  BarChartComponent,
 } from "./components";
-import { MoonOutlined } from "@ant-design/icons";
+import { MoonOutlined, RocketOutlined } from "@ant-design/icons";
 import { dashboardStyle } from "./styles";
 
 const { /* Header, */ Content, Footer, Sider } = Layout;
@@ -24,7 +27,7 @@ const App = () => {
         onCollapse={(value) => setCollapsed(value)}
         /* style={{ background: colorBgContainer }} */
       >
-        <div style={dashboardStyle.logomenu}>Logo </div>
+        <div><RocketOutlined /> </div>
         <MenuDashboard />
       </Sider>
       <Layout>
@@ -47,58 +50,29 @@ const App = () => {
             </Row>
             <Row gutter={16}>
               <Col span={6}>
-                <div
-                  style={{
-                    height: 300,
-                    width: 400,
-                    marginTop: 20,
-                    marginLeft: 10,
-                    marginRight: 20,
-                  }}
-                >
+              <div style={dashboardStyle.chartdiv}>
                   <LineChartComponent />
                 </div>
               </Col>
               <Col span={6}>
-                <div
-                  style={{
-                    height: 300,
-                    width: 400,
-                    marginTop: 20,
-                    marginLeft: 10,
-                    marginRight: 20,
-                  }}
-                >
-                  <LineChartComponent />
+                <div style={dashboardStyle.chartdiv}>
+                  <AreaChartComponent />
                 </div>
               </Col>
               <Col span={6}>
-                <div
-                  style={{
-                    height: 300,
-                    width: 400,
-                    marginTop: 20,
-                    marginLeft: 10,
-                    marginRight: 20,
-                  }}
-                >
-                  <LineChartComponent />
+              <div style={dashboardStyle.chartdiv}>
+                  <BarChartComponent />
                 </div>
               </Col>
               <Col span={6}>
-                <div
-                  style={{
-                    height: 300,
-                    width: 400,
-                    marginTop: 20,
-                    marginLeft: 10,
-                    marginRight: 20,
-                  }}
-                >
+              <div style={dashboardStyle.chartdiv}>
                   <LineChartComponent />
                 </div>
               </Col>
             </Row>
+            <div style={dashboardStyle.chartdiv}>
+              <ComposedChartComponent />
+            </div>
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
