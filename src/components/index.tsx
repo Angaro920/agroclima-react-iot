@@ -1,1 +1,2 @@
-export * from './Menu/menu.tsx';
+export * from './Menu';
+export * from './Cartas';
