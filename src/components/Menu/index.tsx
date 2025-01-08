@@ -1,46 +1,57 @@
-import {ReactNode, Key} from 'react';
 import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
+  DashboardOutlined,
+  ExperimentOutlined,
+  LogoutOutlined,
   TeamOutlined,
+  UserAddOutlined,
+  UserDeleteOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Menu } from 'antd';
+  UserSwitchOutlined,
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import { Menu } from "antd";
 
-type MenuItem = Required<MenuProps>['items'][number];
-
-function getItem(
-  label: ReactNode,
-  key: Key,
-  icon?: ReactNode,
-  children?: MenuItem[],
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
-}
+type MenuItem = Required<MenuProps>["items"][number];
 
 const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
+  {
+    key: "dashboard",
+    label: "Dashboard",
+    icon: <DashboardOutlined />,
+  },
+  {
+    key: "maquinas",
+    label: "maquinas",
+    icon: <ExperimentOutlined />,
+  },
+  {
+    key: "users",
+    label: "Usuarios",
+    icon: <TeamOutlined />,
+    children: [
+      { key: "add", label: "Agregar", icon: <UserAddOutlined /> },
+      { key: "delete", label: "Eliminar", icon: <UserDeleteOutlined /> },
+      { key: "update", label: "Editar", icon: <UserSwitchOutlined /> },
+      { key: "read", label: "Listar", icon: <UserOutlined /> },
+    ],
+  },
+  {
+    type: "divider",
+  },
+  {
+    key: "logout",
+    label: "Cerrar sesion",
+    icon: <LogoutOutlined />,
+  },
 ];
 
-
 export const MenuDashboard = () => {
-  
   return (
-    <Menu defaultSelectedKeys={['1']} items={items} theme="light" mode='inline'/>
-  )
-}
+    <Menu
+      defaultSelectedKeys={["1"]}
+      items={items}
+      theme="light"
+      mode="inline"
+    />
+  );
+};

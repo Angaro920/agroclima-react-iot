@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Layout, theme, Card, Col, Row, FloatButton } from "antd";
 import { MenuDashboard } from "./components";
-/* import { globalLayoutStyle, logomenu } from "./styles"; */
+import { MoonOutlined } from "@ant-design/icons";
+ import { dashboardStyle } from "./styles"; 
 
-const { Header, Content, Footer, Sider } = Layout;
+const { /* Header, */ Content, Footer, Sider } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -12,7 +13,7 @@ const App = () => {
   } = theme.useToken();
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={dashboardStyle.globalLayoutStyle}>
       <Sider
         collapsible
         collapsed={collapsed}
@@ -20,30 +21,15 @@ const App = () => {
         style={{ background: colorBgContainer }}
       >
         <div
-          style={{
-            background: "white",
-            borderRadius: "50%",
-            width: 70,
-            height: 70,
-            alignItems: "center",
-            alignContent: "center",
-            display: "flex",
-            margin: "auto",
-          }}
+          style={dashboardStyle.logomenu}
         />
         <MenuDashboard />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+        {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
         <Content style={{ margin: "0 16px" }}>
           <div
-            style={{
-              marginTop: 16,
-              padding: 24,
-              minHeight: "100hv",
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
+            style={dashboardStyle.mainSector}
           >
             <Row gutter={16}>
               <Col span={6}>
@@ -73,7 +59,7 @@ const App = () => {
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
         </Footer>
       </Layout>
-      <FloatButton />
+      <FloatButton icon={<MoonOutlined />}/>
     </Layout>
   );
 };
