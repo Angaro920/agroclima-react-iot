@@ -17,7 +17,7 @@ const App = () => {
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
-        style={{ background: colorBgContainer }}
+        /* style={{ background: colorBgContainer }} */
       >
         <div
           style={{
@@ -30,11 +30,11 @@ const App = () => {
             display: "flex",
             margin: "auto",
           }}
-        />
+        >Logo</div>
         <MenuDashboard />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+        {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
         <Content style={{ margin: "0 16px" }}>
           <div
             style={{
