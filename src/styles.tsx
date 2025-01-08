@@ -13,6 +13,7 @@ export const dashboardStyle: Record<string, CSSProperties> = {
     alignContent: "center",
     display: "flex",
     margin: "auto",
+    marginTop: 16,
   },
   mainSector:{
     marginTop: 16,
