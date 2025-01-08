@@ -33,10 +33,10 @@ const items: MenuItem[] = [
     label: "Usuarios",
     icon: <TeamOutlined />,
     children: [
-      { key: "add", label: "Agregar", icon: <UserAddOutlined /> },
-      { key: "delete", label: "Eliminar", icon: <UserDeleteOutlined /> },
-      { key: "update", label: "Editar", icon: <UserSwitchOutlined /> },
-      { key: "read", label: "Listar", icon: <UserOutlined /> },
+      { key: Pages.ADD, label: "Agregar", icon: <UserAddOutlined /> },
+      { key: Pages.DELETE, label: "Eliminar", icon: <UserDeleteOutlined /> },
+      { key: Pages.UPDATE, label: "Editar", icon: <UserSwitchOutlined /> },
+      { key: Pages.LIST, label: "Listar", icon: <UserOutlined /> },
     ],
   },
   {
