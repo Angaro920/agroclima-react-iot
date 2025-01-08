@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Layout, theme, Card, Col, Row, FloatButton } from "antd";
+import { Layout, Card, Col, Row, FloatButton } from "antd";
 import { MenuDashboard } from "./components";
 import { MoonOutlined } from "@ant-design/icons";
  import { dashboardStyle } from "./styles"; 
@@ -8,9 +8,9 @@ const { /* Header, */ Content, Footer, Sider } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const {
+  /* const {
     token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  } = theme.useToken(); */
 
   return (
     <Layout style={dashboardStyle.globalLayoutStyle}>
@@ -18,7 +18,7 @@ const App = () => {
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
-        style={{ background: colorBgContainer }}
+        /* style={{ background: colorBgContainer }} */
       >
         <div
           style={dashboardStyle.logomenu}
