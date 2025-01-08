@@ -41,6 +41,6 @@ const items: MenuItem[] = [
 export const MenuDashboard = () => {
   
   return (
-    <Menu defaultSelectedKeys={['1']} items={items} theme="dark" mode='inline'/>
+    <Menu defaultSelectedKeys={['1']} items={items} theme="light" mode='inline'/>
   )
 }
