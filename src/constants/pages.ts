@@ -5,4 +5,8 @@ export enum Pages {
     DELETE = "DELETE",
     UPDATE = "UPDATE",
     LIST = "LIST",
+    LISTTEMP = "LISTTEMP",
+    LISTHUM = "LISTHUM",
+    LISTHIDRO = "LISTHIDRO",
+    LISTLUZ = "LISTLUZ",
   }

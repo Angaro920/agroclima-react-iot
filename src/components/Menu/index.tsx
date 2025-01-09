@@ -1,5 +1,7 @@
 import {
+  ControlOutlined,
   DashboardOutlined,
+  DatabaseOutlined,
   ExperimentOutlined,
   LogoutOutlined,
   TeamOutlined,
@@ -24,9 +26,20 @@ const items: MenuItem[] = [
     icon: <DashboardOutlined />,
   },
   {
+    key: "Reports",
+    label: "Reportes",
+    icon: <DatabaseOutlined />,
+    children: [
+      {key: Pages.LISTTEMP, label: "Temperatura", icon: <ExperimentOutlined />},
+      {key: Pages.LISTHUM, label: "Humedad", icon:<ExperimentOutlined /> },
+      {key: Pages.LISTHIDRO, label: "Gas", icon: <ExperimentOutlined />},
+      {key: Pages.LISTLUZ, label: "Luz", icon: <ExperimentOutlined />},
+    ]
+  },
+  {
     key: Pages.DEVICES,
-    label: "maquinas",
-    icon: <ExperimentOutlined />,
+    label: "Dispositivos",
+    icon: <ControlOutlined />,
   },
   {
     key: "users",
@@ -49,7 +62,7 @@ const items: MenuItem[] = [
   },
 ];
 
-export const MenuDashboard = ({setCurrentPage}) => {
+export const MenuDashboard = ({ setCurrentPage }: { setCurrentPage: (key: string) => void }) => {
   return (
     <Menu defaultSelectedKeys={['1']} items={items} theme="dark" mode='inline' onClick={(event) => {setCurrentPage(event.key)}}/>
   )
