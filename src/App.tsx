@@ -1,39 +1,58 @@
 import { useState } from "react";
-import { Layout, FloatButton } from "antd";
+import { Layout, FloatButton, Drawer } from "antd";
 import { MenuDashboard } from "./components";
-import { MoonOutlined, RocketOutlined } from "@ant-design/icons";
+import {
+  BulbOutlined,
+  MoonOutlined,
+  RocketOutlined,
+} from "@ant-design/icons";
 import { dashboardStyle } from "./styles";
-import { Dashboard ,Devices, ReportHidPage, ReportHumPage, ReportLightPage, ReportTempPage, UserAddPage, UserDeletePage, UserListPage, UserUpdatePage } from "./pages";
+import {
+  Dashboard,
+  Devices,
+  ReportHidPage,
+  ReportHumPage,
+  ReportLightPage,
+  ReportTempPage,
+  UsersPage,
+} from "./pages";
 import { Pages } from "./constants/pages";
 
-
-
-const { /* Header, */ Content, Footer, Sider } = Layout;
-
+const { Content, Footer, Sider } = Layout;
 
 const App = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsedMenu, setCollapsedMenu] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [currentPage, setCurrentPage] = useState(Pages.DASHBOARD);
 
-  /* const {
-    token: { colorBgContainer},
+  const showDrawer = () => {
+    setOpenDrawer(true);
+  };
+
+  const onClose = () => {
+    setOpenDrawer(false);
+  };
+
+  /*   const {
+    token: { colorBgContainer },
   } = theme.useToken(); */
 
   return (
     <Layout style={dashboardStyle.globalLayoutStyle}>
       <Sider
         collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
+        collapsed={collapsedMenu}
+        onCollapse={(value) => setCollapsedMenu(value)}
         /* style={{ background: colorBgContainer }} */
       >
         <div>
           <RocketOutlined />{" "}
         </div>
-        <MenuDashboard setCurrentPage={(key: string) => setCurrentPage(key as Pages)} />
+        <MenuDashboard
+          setCurrentPage={(key: string) => setCurrentPage(key as Pages)}
+        />
       </Sider>
       <Layout>
-        {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
         <Content style={{ margin: "0 16px" }}>
           {currentPage === Pages.DASHBOARD && <Dashboard />}
           {currentPage === Pages.DEVICES && <Devices />}
@@ -41,16 +60,22 @@ const App = () => {
           {currentPage === Pages.LISTHUM && <ReportHumPage />}
           {currentPage === Pages.LISTLUZ && <ReportLightPage />}
           {currentPage === Pages.LISTTEMP && <ReportTempPage />}
-          {currentPage === Pages.ADD && <UserAddPage /> }
-          {currentPage === Pages.DELETE && <UserDeletePage /> }
-          {currentPage === Pages.UPDATE && <UserUpdatePage /> }
-          {currentPage === Pages.LIST && <UserListPage /> }
+          {currentPage === Pages.USERS && <UsersPage />}
         </Content>
         <Footer style={{ textAlign: "center" }}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
         </Footer>
       </Layout>
-      <FloatButton icon={<MoonOutlined />} />
+      <FloatButton.Group shape="square">
+        <FloatButton icon={<BulbOutlined />} onClick={showDrawer} />
+        <FloatButton icon={<MoonOutlined />} />
+        <FloatButton.BackTop visibilityHeight={0} />
+      </FloatButton.Group>
+      <Drawer title="Basic Drawer" onClose={onClose} open={openDrawer}>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Drawer>
     </Layout>
   );
 };

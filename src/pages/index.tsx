@@ -4,7 +4,4 @@ export * from "./ReportHum";
 export * from "./ReportLight";
 export * from "./ReportTemp";
 export * from "./ReportHid";
-export * from "./UserAdd";
-export * from "./UserDelete";
-export * from "./UserUpdate";
-export * from "./UserList";
+export * from "./Users";	

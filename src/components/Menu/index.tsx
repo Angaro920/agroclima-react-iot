@@ -5,10 +5,6 @@ import {
   ExperimentOutlined,
   LogoutOutlined,
   TeamOutlined,
-  UserAddOutlined,
-  UserDeleteOutlined,
-  UserOutlined,
-  UserSwitchOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
@@ -42,15 +38,9 @@ const items: MenuItem[] = [
     icon: <ControlOutlined />,
   },
   {
-    key: "users",
+    key: Pages.USERS,
     label: "Usuarios",
     icon: <TeamOutlined />,
-    children: [
-      { key: Pages.ADD, label: "Agregar", icon: <UserAddOutlined /> },
-      { key: Pages.DELETE, label: "Eliminar", icon: <UserDeleteOutlined /> },
-      { key: Pages.UPDATE, label: "Editar", icon: <UserSwitchOutlined /> },
-      { key: Pages.LIST, label: "Listar", icon: <UserOutlined /> },
-    ],
   },
   {
     type: "divider",
