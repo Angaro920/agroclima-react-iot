@@ -1,29 +1,10 @@
-import React from "react";
+import {Key} from "react";
 import { Table } from "antd";
 import type { TableColumnsType } from "antd";
-import { createStyles } from "antd-style";
 import { dashboardStyle } from "../../styles";
 
-const useStyle = createStyles(({ css, token }) => {
-  const { antCls } = token;
-  return {
-    customTable: css`
-      ${antCls}-table {
-        ${antCls}-table-container {
-          ${antCls}-table-body,
-          ${antCls}-table-content {
-            scrollbar-width: thin;
-            scrollbar-color: #eaeaea transparent;
-            scrollbar-gutter: stable;
-          }
-        }
-      }
-    `,
-  };
-});
-
 interface DataType {
-  key: React.Key;
+  key: Key;
   name: string;
   age: number;
   address: string;
@@ -44,27 +25,28 @@ const columns: TableColumnsType<DataType> = [
     title: "Address",
     dataIndex: "address",
   },
+  { title: "Date", dataIndex: "date" },
 ];
-
+const date = new Date();
 const dataSource = Array.from({ length: 100 }).map<DataType>((_, i) => ({
   key: i,
   name: `Edward King ${i}`,
-  age: 32,
+  age: 1 + i,
   address: `London, Park Lane no. ${i}`,
+  date: date.toISOString(),
 }));
 
 export const ReportHidPage = () => {
-  const { styles } = useStyle();
   return (
     <div style={dashboardStyle.mainSector}>
       <h1>Reporte de Gases</h1>
       <div>
         <Table<DataType>
-          className={styles.customTable}
           columns={columns}
           dataSource={dataSource}
-          pagination={{ pageSize: 100 }}
-          scroll={{ y: 55 * 5 }}
+          /* pagination={{ pageSize: 100 }} */
+          style={{ height: "auto" }}
+          /* scroll={{ y: 150 * 5 }} */
         />
       </div>
     </div>

@@ -43,7 +43,6 @@ const App = () => {
         collapsible
         collapsed={collapsedMenu}
         onCollapse={(value) => setCollapsedMenu(value)}
-        /* style={{ background: colorBgContainer }} */
       >
         <div>
           <RocketOutlined />{" "}
@@ -53,7 +52,7 @@ const App = () => {
         />
       </Sider>
       <Layout>
-        <Content style={{ margin: "0 16px" }}>
+        <Content style={{ margin: "0 16px"}}>
           {currentPage === Pages.DASHBOARD && <Dashboard />}
           {currentPage === Pages.DEVICES && <Devices />}
           {currentPage === Pages.LISTHIDRO && <ReportHidPage />}
