@@ -1,8 +1,8 @@
-import { Button, Modal } from "antd";
+import { Button, Modal} from "antd";
 import { UsersTable } from "../../components/UsersTable";
 import { dashboardStyle } from "../../styles";
 import { useState } from "react";
-
+import { FormAddUsers } from "../../components";
 export const UsersPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -17,7 +17,7 @@ export const UsersPage = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  
+
   return (
     <div style={dashboardStyle.mainSector}>
       <h1 style={{ display: "flex", justifyContent: "center" }}>Usuarios</h1>
@@ -35,14 +35,25 @@ export const UsersPage = () => {
         <UsersTable />
       </div>
       <Modal
-        title="Basic Modal"
+        title="Agregar Usuario"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={[
+          <Button
+            key="enviar"
+            type="primary"
+            onClick={handleOk}
+            htmlType="submit"
+          >
+            Agregar
+          </Button>,
+          <Button key="cancelar" onClick={handleCancel}>
+            Cancelar
+          </Button>,
+        ]}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <FormAddUsers />
       </Modal>
     </div>
   );
