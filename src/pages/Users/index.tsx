@@ -1,8 +1,20 @@
-import { Button, Modal} from "antd";
+import { Button, Modal } from "antd";
 import { UsersTable } from "../../components/UsersTable";
 import { dashboardStyle } from "../../styles";
 import { useState } from "react";
 import { FormAddUsers } from "../../components";
+interface FieldType {
+
+  username?: string;
+  password?: string;
+  name?: string;
+  lastName?: string;
+  age?: number;
+  grade?: string;
+  type?: string;
+
+}
+
 export const UsersPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -16,6 +28,38 @@ export const UsersPage = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  const [formData, setFormData] = useState<FieldType>({
+    username : "",
+    password: "",
+    name: "",
+    lastName:"",
+    age: 0,
+    grade:"",
+    type:"",
+  })
+
+  const handleAgregar = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/addUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("Usuario agregado correctamente: " + JSON.stringify(data));
+        setIsModalOpen(false); // Cierra el modal
+      } else {
+        alert("Error al agregar el usuario.");
+      }
+    } catch (error) {
+      console.error("Error al agregar usuario:", error);
+    }
   };
 
   return (
@@ -43,7 +87,7 @@ export const UsersPage = () => {
           <Button
             key="enviar"
             type="primary"
-            onClick={handleOk}
+            onClick={handleAgregar}
             htmlType="submit"
           >
             Agregar
@@ -53,7 +97,7 @@ export const UsersPage = () => {
           </Button>,
         ]}
       >
-        <FormAddUsers />
+        <FormAddUsers formData={formData} setFormData={setFormData} />
       </Modal>
     </div>
   );

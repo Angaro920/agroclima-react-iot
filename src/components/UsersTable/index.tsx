@@ -1,17 +1,16 @@
-import { Key } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Row, Table, Tag } from "antd";
-import type { TableProps } from "antd";
-import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 interface DataType {
-  key: Key;
+  key: string;
   name: string;
   age: number;
   grado: string;
   tags: string[];
 }
 
-const columns: TableProps<DataType>["columns"] = [
+const columns = [
   {
     title: "Name",
     dataIndex: "name",
@@ -31,9 +30,11 @@ const columns: TableProps<DataType>["columns"] = [
     title: "Tags",
     key: "tags",
     dataIndex: "tags",
-    render: (_, { tags }) => (
+    
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    render: (_: any, { tags }: any) => (
       <>
-        {tags.map((tag) => {
+        {tags.map((tag: string) => {
           let color = tag;
           if (tag === "student") {
             color = "cyan";
@@ -53,24 +54,22 @@ const columns: TableProps<DataType>["columns"] = [
   },
   {
     title: "Accion",
+    width: 330,
     key: "action",
     render: () => (
       <>
         <Row>
-          <Col span={4}>
+          <Col span={4} style={{ margin: "auto" }}>
             <Button variant="outlined" color="green" icon={<EditOutlined />}>
               Editar
             </Button>
           </Col>
-          <Col span={4}>
+          <Col span={4} style={{ margin: "auto" }}>
             <Button variant="outlined" color="danger" icon={<DeleteOutlined />}>
               Eliminar
             </Button>
           </Col>
           <Col span={4}>
-            <Button variant="outlined" color="cyan" icon={<EyeOutlined />}>
-              Examinar
-            </Button>
           </Col>
         </Row>
       </>
@@ -78,38 +77,37 @@ const columns: TableProps<DataType>["columns"] = [
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    grado: "N/A",
-    tags: ["developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    grado: "Octavo",
-    tags: ["student"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    grado: "Once",
-    tags: ["teacher"],
-  },
-];
-
 export const UsersTable = () => {
+  const [data, setData] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/listUsers") 
+      .then((response) => response.json())
+      .then((data) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const formattedData = data.map((item: any) => ({
+          key: item._id,
+          name: item.name,
+          age: parseInt(item.age, 10),
+          grado: item.grade,
+          tags: [item.tag],
+        }));
+        setData(formattedData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error al obtener datos:", error);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <Table<DataType>
       columns={columns}
       dataSource={data}
-      /* pagination={{ pageSize: 100 }} */
+      loading={loading}
       style={{ height: "auto" }}
-      /* scroll={{ y: 150 * 5 }} */
     />
   );
 };

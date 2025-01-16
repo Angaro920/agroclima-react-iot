@@ -1,48 +1,54 @@
-import { Key } from "react";
 import { Table } from "antd";
-import type { TableColumnsType } from "antd";
+import { useEffect, useState } from "react";
 
 interface DataType {
-  key: Key;
-  name: string;
-  age: number;
-  address: string;
+  key: string;
+  temperatura: number;
+  date: string;
 }
 
-const columns: TableColumnsType<DataType> = [
+const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
+    title: "Registro",
+    dataIndex: "temperatura",
     width: 150,
   },
-  {
-    title: "Age",
-    dataIndex: "age",
-    width: 150,
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-  },
-  { title: "Date", dataIndex: "date" },
+  { title: "Date", dataIndex: "timestamp" },
 ];
-const date = new Date();
-const dataSource = Array.from({ length: 100 }).map<DataType>((_, i) => ({
-  key: i,
-  name: `Edward King ${i}`,
-  age: 1 + i,
-  address: `London, Park Lane no. ${i}`,
-  date: date.toISOString(),
-}));
 
 export const ReportTable = () => {
+  const [data, setData] = useState<DataType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/listData")
+      .then((response) => response.json())
+      .then((data) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const formattedData = data.map((item: any) => ({
+          key: item._id,
+          temperatura: item.temperatura,
+          timestamp: item.timestamp,
+        }));
+        setData(formattedData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error al obtener datos:", error);
+        setLoading(false);
+      });
+  }, []);
   return (
-      <><h1>Reporte de </h1><div>
-          <Table<DataType>
-              columns={columns}
-              dataSource={dataSource}
-              /* pagination={{ pageSize: 100 }} */
-              style={{ height: "auto" }} />
-      </div></>
+    <>
+      <h1>Reporte de </h1>
+      <div>
+        <Table<DataType>
+          columns={columns}
+          dataSource={data}
+          loading={loading}
+          style={{ height: "auto" }}
+        />
+      </div>
+    </>
   );
 };
