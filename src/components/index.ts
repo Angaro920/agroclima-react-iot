@@ -4,4 +4,4 @@ export * from './LinealChart';
 export * from './ComposedChart';	
 export * from './AreaChart';
 export * from './BarChart';	
-export * from './FormAddUsers';
+export * from './FormUser';

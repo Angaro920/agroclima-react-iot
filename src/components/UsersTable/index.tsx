@@ -1,111 +1,116 @@
-import { useEffect, useState } from "react";
-import { Button, Col, Row, Table, Tag } from "antd";
+import { Button, Col, Popconfirm, Row, Table, Tag } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { UserType } from "../../types";
+import { ColumnsType } from "antd/es/table";
 
-interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  grado: string;
-  tags: string[];
+interface UsersTableProps {
+  users: UserType[];
+  loading: boolean;
+  onPressDelete: (id: string) => void;
 }
 
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "Grado",
-    dataIndex: "grado",
-    key: "grado",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
+interface ColorByTag {
+  [key: string]: string;
+}
+
+const COLOR_BY_TAG: ColorByTag = {
+  estudiante: "cyan",
+  soporte: "gold",
+  docente: "green",
+  administrador: "red",
+  administrativo: "purple",
+};
+
+
+export const UsersTable = ({ users, loading, onPressDelete }: UsersTableProps) => {
+  const mappedUsers : Partial <UserType>[] = users.map((user) => ({
     
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    render: (_: any, { tags }: any) => (
-      <>
-        {tags.map((tag: string) => {
-          let color = tag;
-          if (tag === "student") {
-            color = "cyan";
-          } else if (tag === "developer") {
-            color = "gold";
-          } else if (tag === "teacher") {
-            color = "green";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: "Accion",
-    width: 330,
-    key: "action",
-    render: () => (
-      <>
-        <Row>
-          <Col span={4} style={{ margin: "auto" }}>
-            <Button variant="outlined" color="green" icon={<EditOutlined />}>
-              Editar
-            </Button>
-          </Col>
-          <Col span={4} style={{ margin: "auto" }}>
-            <Button variant="outlined" color="danger" icon={<DeleteOutlined />}>
-              Eliminar
-            </Button>
-          </Col>
-          <Col span={4}>
-          </Col>
-        </Row>
-      </>
-    ),
-  },
-];
+    key: user._id || "",
+    name: user.name,
+    lastName: user.lastName,
+    age: user.age,
+    grado : user.grade,
+    tag: user.tag,
+  }));
 
-export const UsersTable = () => {
-  const [data, setData] = useState<DataType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const columns : ColumnsType<Partial<UserType>>  = [
+    {
+      title: "Tipo",
+      width: 200,
+      key: "tag",
+      dataIndex: "tag",
+      render: (_, user  ) => (
+        <>
+          <Tag color={COLOR_BY_TAG[user.tag || ""]} key={user.tag}>
+            {user.tag?.toUpperCase()}
+          </Tag>
+        </>
+      ),
+    },
+    {
+      title: "Nombre",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Apellido",
+      dataIndex: "lastName",
+      key: "lastName",
+    },
+    {
+      title: "Edad",
+      dataIndex: "age",
+      key: "age",
+    },
+    {
+      title: "Grado",
+      dataIndex: "grado",
+      key: "grado",
+    },
 
-  useEffect(() => {
-    fetch("http://localhost:8000/api/listUsers") 
-      .then((response) => response.json())
-      .then((data) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const formattedData = data.map((item: any) => ({
-          key: item._id,
-          name: item.name,
-          age: parseInt(item.age, 10),
-          grado: item.grade,
-          tags: [item.tag],
-        }));
-        setData(formattedData);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error al obtener datos:", error);
-        setLoading(false);
-      });
-  }, []);
+    {
+      title: "Accion",
+      width: 330,
+      key: "action",
+      render: (record: { key: string }) => (
+        <>
+          <Row>
+            <Col span={4} style={{ margin: "auto" }}>
+              <Button variant="outlined" color="green" icon={<EditOutlined />}>
+                Editar
+              </Button>
+            </Col>
+            <Col span={4} style={{ margin: "auto" }}>
+              <Popconfirm
+                title="¿Estás seguro de eliminar este usuario? "
+                onConfirm={() => {
+                  onPressDelete(record.key);
+                }}
+                okText="Sí"
+                cancelText="No"
+              >
+                <Button
+                  variant="outlined"
+                  color="danger"
+                  icon={<DeleteOutlined />}
+                >
+                  Eliminar
+                </Button>
+              </Popconfirm>
+            </Col>
+            <Col span={4}></Col>
+          </Row>
+        </>
+      ),
+    },
+  ];
+
+  type PartialUser = Partial<UserType>;
 
   return (
-    <Table<DataType>
+    <Table <PartialUser>
       columns={columns}
-      dataSource={data}
+      dataSource={mappedUsers}
       loading={loading}
       style={{ height: "auto" }}
     />

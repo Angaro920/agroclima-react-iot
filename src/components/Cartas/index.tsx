@@ -4,8 +4,9 @@ import { CardStyle } from "./Cardstyle";
 interface Props {
   title: string;
   value: number;
+  sufix: string;
 }
-export const CartasDashboard = ({ title, value }: Props) => {
+export const CartasDashboard = ({ title, value, sufix }: Props) => {
   return (
     <Card bordered={false} style={CardStyle.GlobalCard} title={title}>
       <Statistic
@@ -14,7 +15,7 @@ export const CartasDashboard = ({ title, value }: Props) => {
         precision={2}
         valueStyle={{ color: "#3f8600" }}
         prefix=""
-        suffix=""
+        suffix={sufix}
       />
     </Card>
   );

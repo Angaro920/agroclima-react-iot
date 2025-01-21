@@ -1,20 +1,12 @@
 import { Form, Input, InputNumber, Select, TreeSelect } from "antd";
-type FieldType = {
-  userName?: string;
-  password?: string;
-  name?: string;
-  lastName?: string;
-  age?: number;
-  grade?: string;
-  type?: string;
-};
+import type { UserType } from "../../types";
 
 interface FormAddUsersProps {
-  formData: FieldType;
-  setFormData: React.Dispatch<React.SetStateAction<FieldType>>;
+  formData: UserType;
+  setFormData: React.Dispatch<React.SetStateAction<UserType>>;
 }
 
-export const FormAddUsers = ({ formData, setFormData }: FormAddUsersProps) => {
+export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
   const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
     console.log(`El campo ${event.target.name} a ${event.target.value}` )
@@ -32,7 +24,7 @@ export const FormAddUsers = ({ formData, setFormData }: FormAddUsersProps) => {
       variant="filled"
       size="small"
     >
-      <Form.Item<FieldType>
+      <Form.Item<UserType>
         label="Usuario"
         rules={[
           {
@@ -59,21 +51,21 @@ export const FormAddUsers = ({ formData, setFormData }: FormAddUsersProps) => {
       >
         <Input.Password value={formData.password} onChange={handleFieldChange} name="password" />
       </Form.Item>
-      <Form.Item<FieldType>
+      <Form.Item<UserType>
         label="Nombre"
         name="name"
         rules={[{ required: true, message: "Por favor escribe el nombre!" }]}
       >
         <Input value={formData.name} onChange={handleFieldChange} name="name"/>
       </Form.Item>
-      <Form.Item<FieldType>
+      <Form.Item<UserType>
         label="Apellido"
         name="lastName"
         rules={[{ required: true, message: "Por favor escribe el apellido!" }]}
       >
         <Input value={formData.lastName} onChange={handleFieldChange} name="lastName" />
       </Form.Item>
-      <Form.Item<FieldType>
+      <Form.Item<UserType>
         label="Edad"
         name="age"
         rules={[{ required: true, message: "Por favor escriba la edad" }]}
@@ -126,9 +118,10 @@ export const FormAddUsers = ({ formData, setFormData }: FormAddUsersProps) => {
           /* defaultValue="Seleccione" */
           options={[
             { value: "estudiante", label: "Estudiante" },
+            { value: "docente", label: "Docente" },
             { value: "administrativo", label: "Administrativo" },
             { value: "soporte", label: "Soporte" },
-            { value: "adminitrsador", label: "Administrador Sistema" },
+            { value: "administrador", label: "Administrador Sistema" },
           ]}
           value={formData.type} onChange={(selectedValue) => {
             updateFields("tag",selectedValue)
