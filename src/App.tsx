@@ -13,7 +13,7 @@ import {
   UsersPage,
 } from "./pages";
 import { Pages } from "./constants/pages";
-import { DataProvider } from "./contexts/DataContext";
+import { WeatherProvider } from "./contexts/DataContext";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -35,7 +35,7 @@ const App = () => {
   } = theme.useToken(); */
 
   return (
-    <DataProvider>
+    <WeatherProvider>
       <Layout style={dashboardStyle.globalLayoutStyle}>
         <Sider
           collapsible
@@ -74,7 +74,7 @@ const App = () => {
           <p>Some contents...</p>
         </Drawer>
       </Layout>
-    </DataProvider>
+    </WeatherProvider>
   );
 };
 

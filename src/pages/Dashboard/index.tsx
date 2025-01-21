@@ -7,26 +7,26 @@ import {
   ComposedChartComponent,
   BarChartComponent,
 } from "../../components";
-import { useDataContext } from "../../contexts/DataContext";
+import { useWeather } from "../../contexts/DataContext";
 
 
 export const Dashboard = () => {
-  const { currentData } = useDataContext();
+  const { weatherData } = useWeather();
   
   return (
     <div style={dashboardStyle.mainSector}>
       <Row gutter={16}>
         <Col span={6}>
-          <CartasDashboard title={"Temperatura"} value={currentData.temperature.value} />
+          <CartasDashboard title={"Temperatura"} value={weatherData.temperatura} />
         </Col>
         <Col span={6}>
-          <CartasDashboard title="Humedad"  value={currentData.humidity.value} />
+          <CartasDashboard title="Humedad"  value={weatherData.humedad} />
         </Col>
         <Col span={6}>
-          <CartasDashboard title="Gas"  value={currentData.gas.value} />
+          <CartasDashboard title="Gas"  value={weatherData.hidrogeno} />
         </Col>
         <Col span={6}>
-          <CartasDashboard title="Luz"   value={currentData.gas.value}/>
+          <CartasDashboard title="Luz"   value={weatherData.temperatura}/>
         </Col>
       </Row>
       <Row gutter={16}>

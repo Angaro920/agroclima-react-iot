@@ -1,28 +1,39 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import useGetESP32Data from "../hooks/useGetESP32Data";
+import { createContext, useContext, ReactNode, useEffect } from 'react';
+import useGetESP32Data from '../hooks/useGetESP32Data';
 
-const initialData = { currentTemperature: 0 };
-const DataContext = createContext(initialData);
+interface WeatherData {
+  temperatura: number;
+  humedad: number; 
+  hidrogeno: number;
+}
 
-export const DataProvider = ({ children }: any) => {
+interface WeatherContextProps {
+  weatherData: WeatherData;
+}
+
+const WeatherContext = createContext<WeatherContextProps | undefined>(undefined);
+
+export const WeatherProvider = ({ children }: { children: ReactNode }) => {
   const { data } = useGetESP32Data();
-  const [currentData, setCurrentData] = useState({
-    temperature: {value:0, unit:"°C"}, // Puedes cambiar a 'Fahrenheit' según sea necesario
-  });
   
-  useEffect(()=>{setCurrentTemperature({...currentTemperature, value: data.temperatura})},[data])
+  // Asumiendo que el websocket devuelve un objeto con la misma estructura
+  const weatherData: WeatherData = {
+    temperatura: data?.temperatura || 0,
+    humedad: data?.humedad || 0,
+    hidrogeno: data?.hidrogeno || 0
+  };
 
   return (
-    <DataContext.Provider value={{ currentTemperature, setCurrentTemperature }}>
+    <WeatherContext.Provider value={{ weatherData }}>
       {children}
-    </DataContext.Provider>
+    </WeatherContext.Provider>
   );
 };
 
-export const useDataContext = () => {
-  const context = useContext(DataContext);
-  if (!context) {
-    throw new Error("la kge :C");
+export const useWeather = () => {
+  const context = useContext(WeatherContext);
+  if (context === undefined) {
+    throw new Error('useWeather must be used within a WeatherProvider');
   }
   return context;
 };
