@@ -3,6 +3,7 @@ export interface UserType {
   _id?: string;
   userName: string;
   password: string;
+  confirmPassword: string;
   name: string;
   lastName: string;
   age: number;

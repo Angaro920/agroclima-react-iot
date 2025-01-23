@@ -23,6 +23,22 @@ export const useUsers = () => {
       setLoading(false);
     }
   };
+  // GET - Obtener usuario por ID
+  const getUserById = async (id: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:8000/api/users/${id}`);
+      if (!response.ok) throw new Error('Error al obtener usuario');
+      
+      const user = await response.json();
+      return user;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error desconocido');
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // POST - Crear usuario
   const createUser = async (userData: UserType) => {
@@ -53,7 +69,7 @@ export const useUsers = () => {
   const updateUser = async (id: string, userData: Partial<UserType>) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/users/${id}`, {
+      const response = await fetch(`http://localhost:8000/api/updateUser/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -104,6 +120,7 @@ export const useUsers = () => {
     loading,
     error,
     getUsers,
+    getUserById,
     createUser,
     updateUser,
     deleteUser,

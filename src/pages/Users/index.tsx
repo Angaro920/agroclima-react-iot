@@ -20,8 +20,9 @@ const INITIAL_FORM: UserType = {
 export const UsersPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState<UserType>(INITIAL_FORM);
-  const { createUser, deleteUser, loading, getUsers, users } = useUsers();
-  
+  const { createUser, deleteUser, updateUser, loading, getUsers, users } =
+    useUsers();
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -51,6 +52,14 @@ export const UsersPage = () => {
       message.error("Error al eliminar usuario: " + err);
     }
   };
+  const handleUpdate = async (id: string) => {
+    try {
+      await updateUser(id, formData);
+      message.success("Usuario actualizado exitosamente");
+    } catch (err) {
+      message.error("Error al actualizar usuario: " + err);
+    }
+  };
 
   return (
     <div style={dashboardStyle.mainSector}>
@@ -66,7 +75,12 @@ export const UsersPage = () => {
         </Button>
       </div>
       <div>
-        <UsersTable  users={users} loading={loading} onPressDelete={handleDelete}/>
+        <UsersTable
+          users={users}
+          loading={loading}
+          onPressDelete={handleDelete}
+          onPressUpdate={handleUpdate}
+        />
       </div>
       <Modal
         title="Agregar Usuario"
@@ -78,7 +92,7 @@ export const UsersPage = () => {
             key="enviar"
             type="primary"
             onClick={handleAgregar}
-            loading={loading}
+            /* loading={loading} */
             htmlType="submit"
           >
             Agregar

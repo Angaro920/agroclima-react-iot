@@ -1,50 +1,38 @@
 import { Table } from "antd";
-import { useEffect, useState } from "react";
+import { FC } from "react";
+import { DataType } from "../../types";
 
-interface DataType {
-  key: string;
-  temperatura: number;
-  date: string;
+interface DataTableProps {
+  title: string;
+  weather: DataType[];
+  loading: boolean;
+  sufijo: string;
 }
 
 const columns = [
   {
     title: "Registro",
-    dataIndex: "temperatura",
+    dataIndex: "data",
     width: 150,
   },
-  { title: "Date", dataIndex: "timestamp" },
+  { title: "Fecha", dataIndex: "time" },
 ];
 
-export const ReportTable = () => {
-  const [data, setData] = useState<DataType[]>([]);
-  const [loading, setLoading] = useState(true);
+export const ReportTable: FC<DataTableProps> = ({ title, weather, loading, sufijo }) => {
+  const mappedData: Partial <DataType>[] = weather.map((item) => ({
+    key: item._id || "",
+    _id: item._id,
+    data: item.data +" "+ sufijo,
+    time: item.time,    
+  }));
 
-  useEffect(() => {
-    fetch("http://localhost:8000/api/listData")
-      .then((response) => response.json())
-      .then((data) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const formattedData = data.map((item: any) => ({
-          key: item._id,
-          temperatura: item.temperatura,
-          timestamp: item.timestamp,
-        }));
-        setData(formattedData);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error al obtener datos:", error);
-        setLoading(false);
-      });
-  }, []);
   return (
     <>
-      <h1>Reporte de </h1>
+      <h1>Reporte de {title} </h1>
       <div>
         <Table<DataType>
           columns={columns}
-          dataSource={data}
+          dataSource={mappedData as DataType[]}
           loading={loading}
           style={{ height: "auto" }}
         />
