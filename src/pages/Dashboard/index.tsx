@@ -26,7 +26,7 @@ export const Dashboard = () => {
           <CartasDashboard title="Gas"  value={data.hidrogeno}  sufix={units.hidrogeno}/>
         </Col>
         <Col span={6}>
-          <CartasDashboard title="Luz"   value={data.temperatura} sufix={units.temperatura}/>
+          <CartasDashboard title="Luz"   value={data.luz} sufix={units.luz}/>
         </Col>
       </Row>
       <Row gutter={16}>

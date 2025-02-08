@@ -2,12 +2,14 @@ import { createContext, useContext, ReactNode } from "react";
 import useGetESP32Data from "../hooks/useGetESP32Data";
 
 interface WeatherData {
+  luz: number;
   temperatura: number;
   humedad: number;
   hidrogeno: number;
 }
 
 interface WeatherUnits {
+  luz: string;
   temperatura: string;
   humedad: string;
   hidrogeno: string;

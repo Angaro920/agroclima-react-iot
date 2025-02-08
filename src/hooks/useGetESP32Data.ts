@@ -5,6 +5,7 @@ interface WeatherData {
   temperatura: number;
   humedad: number;
   hidrogeno: number;
+  luz: number;
 }
 
 
@@ -13,7 +14,8 @@ const useGetESP32Data = () => {
   const [data, setData] = useState<WeatherData>({
     temperatura: 0,
     humedad: 0,
-    hidrogeno: 0
+    hidrogeno: 0,
+    luz: 0,
   });
   const { lastJsonMessage } = useWebSocket(socketUrl);
 

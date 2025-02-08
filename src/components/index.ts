@@ -5,3 +5,5 @@ export * from './ComposedChart';
 export * from './AreaChart';
 export * from './BarChart';	
 export * from './FormUser';
+export * from './FormLogIn'
+export * from './ProtectedRoutes'
