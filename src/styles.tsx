@@ -29,6 +29,14 @@ export const dashboardStyle: Record<string, CSSProperties> = {
     border: "2px solid #f0f0f0",
     borderRadius: "10px",
   },
+  logo:{
+    width: 75,
+    alignItems: "center",
+    alignContent: "center",
+    display: "flex",
+    margin: "auto",
+    marginTop: 16,
+  }
  /*  SiderStyle:{
     overflow: 'auto',
     height: '100vh',

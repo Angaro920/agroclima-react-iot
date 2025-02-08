@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Layout, FloatButton, Drawer } from "antd";
 import { MenuDashboard } from "./components";
-import { BulbOutlined, MoonOutlined, RocketOutlined } from "@ant-design/icons";
+import { BulbOutlined, MoonOutlined } from "@ant-design/icons";
 import { dashboardStyle } from "./styles";
 import {
   Dashboard,
@@ -49,9 +49,13 @@ const App = () => {
                     onCollapse={(value) => setCollapsedMenu(value)}
                   >
                     <div>
-                      <RocketOutlined />{" "}
+                      <div><img src="./agroclima.png" style={dashboardStyle.logo}/> </div>
                     </div>
-                    <MenuDashboard setCurrentPage={(key: string) => setCurrentPage(key as Pages)} />
+                    <MenuDashboard
+                      setCurrentPage={(key: string) =>
+                        setCurrentPage(key as Pages)
+                      }
+                    />
                   </Sider>
                   <Layout>
                     <Content style={{ margin: "0 16px" }}>
@@ -72,7 +76,11 @@ const App = () => {
                     <FloatButton icon={<MoonOutlined />} />
                     <FloatButton.BackTop visibilityHeight={0} />
                   </FloatButton.Group>
-                  <Drawer title="Basic Drawer" onClose={onClose} open={openDrawer}>
+                  <Drawer
+                    title="Basic Drawer"
+                    onClose={onClose}
+                    open={openDrawer}
+                  >
                     <p>Some contents...</p>
                     <p>Some contents...</p>
                     <p>Some contents...</p>
