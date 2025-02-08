@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface AuthResponse {
+/* interface AuthResponse {
   token: string;
   user: {
     id: string;
     userName: string;
     role: string;
   };
-}
+} */
 
 export const useAuth = () => {
   const [loading, setLoading] = useState(false);
@@ -27,14 +27,14 @@ export const useAuth = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ userName, password }),
-        credentials: "include", 
+        credentials: "include",
       });
 
       if (!response.ok) throw new Error("Credenciales inválidas");
 
-      const data: AuthResponse = await response.json();
-      localStorage.setItem("token", data.token); 
-      navigate("/"); 
+      await response.json();
+
+      navigate("/");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconocido");
       throw err;
@@ -48,13 +48,11 @@ export const useAuth = () => {
     try {
       await fetch("http://localhost:8000/api/logout", {
         method: "POST",
-        credentials: "include", 
+        credentials: "include", // Incluye las cookies en la solicitud
       });
-      localStorage.removeItem("token"); 
-      navigate("/login");
+      window.location.href = "/login"; // Redirige al login
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error desconocido");
-      throw err;
+      console.error("Error al cerrar sesión:", err);
     }
   };
 

@@ -9,10 +9,12 @@ import {
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { Pages } from "../../constants/pages";
-import { useUser } from "../../hooks/useAuthUser"; 
+import { useUser } from "../../hooks/useAuthUser";
+import { useAuth } from "../../hooks/useAuth"; 
 
 type MenuItem = Required<MenuProps>["items"][number];
 
+// Función para generar los elementos del menú según el tag
 const getMenuItems = (tag: string): MenuItem[] => {
   const baseItems: MenuItem[] = [
     {
@@ -68,12 +70,13 @@ const getMenuItems = (tag: string): MenuItem[] => {
 };
 
 export const MenuDashboard = ({ setCurrentPage }: { setCurrentPage: (key: string) => void }) => {
-  const { user, loading } = useUser(); // Obtén el usuario autenticado
+  const { user, loading } = useUser();
+  const { logout } = useAuth();  // Obtén el usuario autenticado
 
   if (loading) return <p>Cargando...</p>;
 
-  // Filtra los elementos del menú según el rol del usuario
-  const items = getMenuItems(user?.role || "estudiante");
+  // Filtra los elementos del menú según el tag del usuario
+  const items = getMenuItems(user?.tag || "estudiante");
 
   return (
     <Menu
@@ -83,7 +86,8 @@ export const MenuDashboard = ({ setCurrentPage }: { setCurrentPage: (key: string
       mode="inline"
       onClick={(event) => {
         if (event.key === "logout") {
-          window.location.href = "/login";
+          logout(); // Cierra la sesión
+          window.location.href = "/login"; // Redirige al login
         } else {
           setCurrentPage(event.key);
         }
