@@ -1,36 +1,55 @@
-import {FC} from "react";
-import { Button, Form, Input, message } from "antd";
-import { useAuth } from "../../hooks/useAuth";
 
-const Login: FC = () => {
-  const { login, loading, error } = useAuth();
+import { message } from "antd";
+import { useAuth } from "../../hooks/useAuth";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import "./styles.css";
+export const Login = () => {
+  const { login, error } = useAuth();
 
   const onFinish = async (values: { username: string; password: string }) => {
     try {
       await login(values.username, values.password);
       message.success("Inicio de sesión exitoso");
     } catch (err) {
-      message.error(error || "Credenciales inválidas");
+      message.error(error || "Credenciales inválidas"+err);
     }
   };
 
   return (
-    <div style={{ maxWidth: 300, margin: "100px auto" }}>
-      <Form onFinish={onFinish}>
-        <Form.Item name="username" rules={[{ required: true, message: "Ingresa tu usuario" }]}>
-          <Input placeholder="Usuario" />
-        </Form.Item>
-        <Form.Item name="password" rules={[{ required: true, message: "Ingresa tu contraseña" }]}>
-          <Input.Password placeholder="Contraseña" />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading} block>
-            Iniciar sesión
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+    <div className="loginContainer">
+      <form className="loginForm" onSubmit={(e) => {
+        e.preventDefault();
+        const form = e.target as HTMLFormElement;
+        onFinish({ username: form.userName.value, password: form.password.value });
+      }}>
+      <div className="wrapper">
+        <div className="loginBox">
+          <div className="loginHeader">
+            <span>Login</span>
+          </div>
+          <div className="inputBox">
+            <input type="text" id="userName" className="inputField" required/>
+            <label htmlFor="userName" className="label">Usuario</label>
+            <i className="icon"><UserOutlined /></i>
+          </div>
+          <div className="inputBox">
+            <input type="text" id="password" className="inputField" required/>
+            <label htmlFor="password" className="label">Contraseña</label>
+            <i className="icon"><LockOutlined /></i>
+          </div>
+          <div className="rememberForgot">
+            <div className="rememberMe">
+              <input type="checkbox" id="remember" />
+              <label htmlFor="remember"> Recuerdame</label>
+            </div>
+            <div className="forgot">
+              <a href="#">Olvide mi contraseña!</a>
+            </div>
+          </div>
+            <input type="submit" className="inputSubmit" value="login"/>
+          </div>
+        </div>
+        </form>
+      </div>
   );
 };
-
-export default Login;

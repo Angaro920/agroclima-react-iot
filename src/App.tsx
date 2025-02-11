@@ -15,7 +15,7 @@ import {
 import { Pages } from "./constants/pages";
 import { WeatherProvider } from "./contexts/DataContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./components/FormLogIn";
+import { Login } from "./components/FormLogIn";
 import ProtectedRoute from "./components/ProtectedRoutes";
 
 const { Content, Footer, Sider } = Layout;
@@ -49,7 +49,12 @@ const App = () => {
                     onCollapse={(value) => setCollapsedMenu(value)}
                   >
                     <div>
-                      <div><img src="./agroclima.png" style={dashboardStyle.logo}/> </div>
+                      <div>
+                        <img
+                          src="./agroclima.png"
+                          style={dashboardStyle.logo}
+                        />{" "}
+                      </div>
                     </div>
                     <MenuDashboard
                       setCurrentPage={(key: string) =>

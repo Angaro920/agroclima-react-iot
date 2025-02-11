@@ -11,22 +11,22 @@ import { useWeather } from "../../contexts/DataContext";
 
 
 export const Dashboard = () => {
-  const { data, units } = useWeather();
+  const { currentData, units } = useWeather();
   
   return (
     <div style={dashboardStyle.mainSector}>
       <Row gutter={16}>
         <Col span={6}>
-          <CartasDashboard title={"Temperatura"} value={data.temperatura} sufix={units.temperatura}/>
+          <CartasDashboard title={"Temperatura"} value={currentData.temperatura} sufix={units.temperatura}/>
         </Col>
         <Col span={6}>
-          <CartasDashboard title="Humedad"  value={data.humedad} sufix={units.humedad} />
+          <CartasDashboard title="Humedad"  value={currentData.humedad} sufix={units.humedad} />
         </Col>
         <Col span={6}>
-          <CartasDashboard title="Gas"  value={data.hidrogeno}  sufix={units.hidrogeno}/>
+          <CartasDashboard title="Gas"  value={currentData.hidrogeno}  sufix={units.hidrogeno}/>
         </Col>
         <Col span={6}>
-          <CartasDashboard title="Luz"   value={data.luz} sufix={units.luz}/>
+          <CartasDashboard title="Luz"   value={currentData.luz} sufix={units.luz}/>
         </Col>
       </Row>
       <Row gutter={16}>

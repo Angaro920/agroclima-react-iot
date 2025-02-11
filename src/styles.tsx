@@ -37,15 +37,5 @@ export const dashboardStyle: Record<string, CSSProperties> = {
     margin: "auto",
     marginTop: 16,
   }
- /*  SiderStyle:{
-    overflow: 'auto',
-    height: '100vh',
-    position: 'fixed',
-    insetInlineStart: 0,
-    top: 0,
-    bottom: 0,
-    scrollbarWidth: 'thin',
-    scrollbarGutter: 'stable',
-  }, */
 }
 
