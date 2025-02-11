@@ -11,8 +11,7 @@ import { useWeather } from "../../contexts/DataContext";
 
 
 export const Dashboard = () => {
-  const { currentData, units } = useWeather();
-  
+  const { currentData, units, historicalData } = useWeather();
   return (
     <div style={dashboardStyle.mainSector}>
       <Row gutter={16}>
@@ -32,27 +31,27 @@ export const Dashboard = () => {
       <Row gutter={16}>
         <Col span={6}>
           <div style={dashboardStyle.chartdiv}>
-            <LineChartComponent />
+            <LineChartComponent data={historicalData.Temperatura}/>
           </div>
         </Col>
         <Col span={6}>
           <div style={dashboardStyle.chartdiv}>
-            <AreaChartComponent />
+            <AreaChartComponent data={historicalData.Humedad}/>
           </div>
         </Col>
         <Col span={6}>
           <div style={dashboardStyle.chartdiv}>
-            <BarChartComponent />
+            <BarChartComponent data={historicalData.Gas}/>
           </div>
         </Col>
         <Col span={6}>
           <div style={dashboardStyle.chartdiv}>
-            <LineChartComponent />
+            <LineChartComponent data={historicalData.Luz}/>
           </div>
         </Col>
       </Row>
       <div style={dashboardStyle.chartdiv}>
-        <ComposedChartComponent />
+        <ComposedChartComponent data={historicalData}/>
       </div>
     </div>
   );

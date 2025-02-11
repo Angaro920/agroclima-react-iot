@@ -20,26 +20,26 @@ interface WeatherContextData {
   historicalData: WeatherHistoricalData;
   units: WeatherUnits;
 }
-interface MongoObject {
+export interface MongoObject {
   time: Date;
   data: string;
 }
 
-interface WeatherHistoricalData {
-  luz: MongoObject[];
-  temperatura: MongoObject[];
-  humedad: MongoObject[];
-  hidrogeno: MongoObject[];
+export interface WeatherHistoricalData {
+  Luz: MongoObject[];
+  Temperatura: MongoObject[];
+  Humedad: MongoObject[];
+  Gas: MongoObject[];
 }
 
 const WeatherContext = createContext<WeatherContextData | undefined>(undefined);
 
 export const WeatherProvider = ({ children }: { children: ReactNode }) => {
   const [historicalData, setHistoricalData] = useState<WeatherHistoricalData>({
-    luz: [],
-    temperatura: [],
-    humedad: [],
-    hidrogeno: [],
+    Luz: [],
+    Temperatura: [],
+    Humedad: [],
+    Gas: [],
   });
 
   const { data } = useGetESP32Data();
@@ -58,10 +58,15 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
   },[])
 
   const fetchHistoricalData = async () => {
+    try {
     const historicalData =  await fetch("http://localhost:8000/api/temperatura12")
-    const data = await historicalData.json()
-    /* console.log(data) */
+        const data = await historicalData.json()
+    console.log("Llegue del context:"+JSON.stringify(data))
     setHistoricalData(data)
+    }catch(error){
+      console.log(error)
+    }
+    
   }
   
   return (

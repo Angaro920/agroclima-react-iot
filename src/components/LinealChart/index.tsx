@@ -3,31 +3,19 @@ import {
   Line,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { MongoObject } from "../../contexts/DataContext";
 /* import { graph } from './linearstyle.tsx'; */
-const data = [
-  {
-    Temperatura: 1000,
-  },
-  {
-    name: "2 pm",
-    Temperatura: 4000,
-  },
-  {
-    name: "Page B",
-    Temperatura: 3000,
-  },
-  {
-    name: "Page C",
-    Temperatura: 2000,
-  }
-];
 
-export const LineChartComponent = () => {
+interface LineChartComponentProps {
+  data: MongoObject[];
+}
+
+export const LineChartComponent = ({data}: LineChartComponentProps) => {
+ /*  console.log("Llegue al componente:"+JSON.stringify(data)) */
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
@@ -35,18 +23,17 @@ export const LineChartComponent = () => {
         height={300}
         data={data}
         margin={{
-          top: 5,
+          top: 20,
           right: 30,
           left: 20,
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
-        <YAxis />
+        <YAxis domain={['auto', 'auto']} interval="preserveStartEnd" />
         <Tooltip />
         <Legend />
-        <Line name="lavrga" type="monotone" dataKey="Temperatura" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="data" stroke="#82ca9d" dot={false}/>
       </LineChart>
     </ResponsiveContainer>
   );
