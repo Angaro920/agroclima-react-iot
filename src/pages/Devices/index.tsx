@@ -4,7 +4,7 @@ import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useWebSocket } from "../../hooks/useWebSocket";
 
 export const Devices: React.FC = () => {
-    const { isConnected, sendMessage } = useWebSocket("ws://192.168.1.63:8080");
+    const { isConnected, sendMessage } = useWebSocket("ws://10.157.13.4:8080");
 
     const handleToggle = (device: string, state: boolean) => {
         sendMessage({ device, state: state ? "ON" : "OFF" });

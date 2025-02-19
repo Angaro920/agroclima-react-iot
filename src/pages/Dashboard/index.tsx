@@ -31,12 +31,12 @@ export const Dashboard = () => {
       <Row gutter={16}>
         <Col span={6}>
           <div style={dashboardStyle.chartdiv}>
-            <LineChartComponent data={historicalData.Temperatura}/>
+            <LineChartComponent data={historicalData.Temperatura} nombre="Temperatura"/>
           </div>
         </Col>
         <Col span={6}>
           <div style={dashboardStyle.chartdiv}>
-            <AreaChartComponent data={historicalData.Humedad}/>
+            <AreaChartComponent data={historicalData.Humedad} nombre="Humedad"/>
           </div>
         </Col>
         <Col span={6}>
@@ -46,7 +46,7 @@ export const Dashboard = () => {
         </Col>
         <Col span={6}>
           <div style={dashboardStyle.chartdiv}>
-            <LineChartComponent data={historicalData.Luz}/>
+            <LineChartComponent data={historicalData.Luz} nombre="Luz"/>
           </div>
         </Col>
       </Row>

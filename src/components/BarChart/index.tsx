@@ -4,7 +4,6 @@ import {
   Rectangle,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
@@ -28,11 +27,12 @@ export const BarChartComponent = ({ data }: LineChartComponentProps) => {
           bottom: 5,
         }}
       >
-        <XAxis dataKey="Hidrogeno" />
+        <XAxis dataKey="time" />
         <YAxis />
         <Tooltip />
         <Legend />
         <Bar
+          name={"Hidrogeno"}
           dataKey="data"
           fill="#82ca9d"
           activeBar={<Rectangle fill="gold" stroke="purple" />}

@@ -33,7 +33,7 @@ export const Login = () => {
             <i className="icon"><UserOutlined /></i>
           </div>
           <div className="inputBox">
-            <input type="text" id="password" className="inputField" required/>
+            <input type="password" id="password" className="inputField" required/>
             <label htmlFor="password" className="label">Contraseña</label>
             <i className="icon"><LockOutlined /></i>
           </div>
@@ -46,7 +46,7 @@ export const Login = () => {
               <a href="#">Olvide mi contraseña!</a>
             </div>
           </div>
-            <input type="submit" className="inputSubmit" value="login"/>
+            <input type="submit" className="inputSubmit" value="Iniciar sesion"/>
           </div>
         </div>
         </form>
