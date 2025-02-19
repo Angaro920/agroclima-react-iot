@@ -147,24 +147,13 @@ export const UsersTable: FC<UsersTableProps> = ({
             Reset
           </Button>
           <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({ closeDropdown: false });
-              setSearchText((selectedKeys as string[])[0]);
-              setSearchedColumn(dataIndex);
-            }}
-          >
-            Filter
-          </Button>
-          <Button
-            type="link"
+            type="dashed"
             size="small"
             onClick={() => {
               close();
             }}
           >
-            close
+            Cerrar
           </Button>
         </Space>
       </div>
@@ -173,9 +162,10 @@ export const UsersTable: FC<UsersTableProps> = ({
       <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
     ),
     onFilter: (value, record) =>
-      record[dataIndex]?.toString()
+      record[dataIndex]
+        ?.toString()
         ?.toLowerCase()
-        ?.includes((value as string).toLowerCase()) ?? false ,
+        ?.includes((value as string).toLowerCase()) ?? false,
     filterDropdownProps: {
       onOpenChange(open) {
         if (open) {
@@ -236,6 +226,21 @@ export const UsersTable: FC<UsersTableProps> = ({
       title: "Grado",
       dataIndex: "grade",
       key: "grade",
+      filters: [
+        { text: "Primero", value: "Primero" },
+        { text: "Segundo", value: "Segundo" },
+        { text: "Tercero", value: "Tercero" },
+        { text: "Cuarto", value: "Cuarto" },
+        { text: "Quinto", value: "Quinto" },
+        { text: "Sexto", value: "Sexto" },
+        { text: "Septimo", value: "Septimo" },
+        { text: "Octavo", value: "Octavo" },
+        { text: "Noveno", value: "Noveno" },
+        { text: "Decimo", value: "Decimo" },
+        { text: "Once", value: "Once" },
+        { text: "No aplica", value: "No aplica" },
+      ],
+      onFilter: (value, record) => record.grade?.indexOf(value as string) === 0,
     },
     {
       title: "Acción",

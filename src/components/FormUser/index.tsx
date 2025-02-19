@@ -101,31 +101,28 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
               title: "Primaria",
               value: "Primaria",
               children: [
-                { title: "Primero", value: "1" },
-                { title: "Segundo", value: "2" },
-                { title: "Tercero", value: "3" },
-                { title: "Cuarto", value: "4" },
-                { title: "Quinto", value: "5" },
+                { title: "Primero", value: "Primero" },
+                { title: "Segundo", value: "Segundo" },
+                { title: "Tercero", value: "Tercero" },
+                { title: "Cuarto", value: "Cuarto" },
+                { title: "Quinto", value: "Quinto" },
               ],
             },
             {
               title: "Secundaria",
               value: "Secundaria",
               children: [
-                {
-                  title: "Sexto",
-                  value: "6",
-                },
-                { title: "Septimo", value: "7" },
-                { title: "Octavo", value: "8" },
-                { title: "Noveno", value: "9" },
-                { title: "Decimo", value: "10" },
-                { title: "Once", value: "11" },
+                { title: "Sexto",value: "Sexto" },
+                { title: "Septimo", value: "Septimo" },
+                { title: "Octavo", value: "Octavo" },
+                { title: "Noveno", value: "Noveno" },
+                { title: "Decimo", value: "Decimo" },
+                { title: "Once", value: "Once" },
               ],
             },
             {
               title: "No aplica",
-              value: "N/A",
+              value: "No aplica",
             },
           ]}
           value={formData.grade}
