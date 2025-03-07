@@ -5,8 +5,9 @@ export interface UserType {
   password: string;
   confirmPassword: string;
   name: string;
-  lastName: string;
+  email: string;
+  documento: string;
   age: number;
   grade: string;
-  type: string;
+  type:string;
 }

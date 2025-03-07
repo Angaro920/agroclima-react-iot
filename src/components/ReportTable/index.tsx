@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Table, Button } from "antd";
 import { FC } from "react";
 import { DataType } from "../../types";
 
@@ -18,18 +18,26 @@ const columns = [
   { title: "Fecha", dataIndex: "time" },
 ];
 
-export const ReportTable: FC<DataTableProps> = ({ title, weather, loading, sufijo }) => {
-  const mappedData: Partial <DataType>[] = weather.map((item) => ({
+export const ReportTable: FC<DataTableProps> = ({
+  title,
+  weather,
+  loading,
+  sufijo,
+}) => {
+  const mappedData: Partial<DataType>[] = weather.map((item) => ({
     key: item._id || "",
     _id: item._id,
-    data: item.data +" "+ sufijo,
-    time: item.time,    
+    data: item.data + " " + sufijo,
+    time: item.time,
   }));
 
   return (
     <>
       <h1>Reporte de {title} </h1>
       <div>
+        <div style={{ marginBottom: 10 }}>
+          <Button>Generar Reporte</Button>
+        </div>
         <Table<DataType>
           columns={columns}
           dataSource={mappedData as DataType[]}

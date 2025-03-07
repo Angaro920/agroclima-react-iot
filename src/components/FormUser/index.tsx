@@ -63,6 +63,15 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
           name="confirmPassword"
         />
       </Form.Item>
+      <Form.Item
+        label="Documento"
+        rules={[{ required: true, message: "Por favor escribe el documento de identidad!" }]}>
+        <Input
+          value={formData.documento}
+          onChange={handleFieldChange}
+          name="documento"
+        />
+      </Form.Item>
       <Form.Item<UserType>
         label="Nombre"
         rules={[{ required: true, message: "Por favor escribe el nombre!" }]}
@@ -70,13 +79,13 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
         <Input value={formData.name} onChange={handleFieldChange} name="name" />
       </Form.Item>
       <Form.Item<UserType>
-        label="Apellido"
-        rules={[{ required: true, message: "Por favor escribe el apellido!" }]}
+        label="Correo"
+        rules={[{ required: true, message: "Por favor escribe un correo valido!" }]}
       >
         <Input
-          value={formData.lastName}
+          value={formData.email}
           onChange={handleFieldChange}
-          name="lastName"
+          name="email"
         />
       </Form.Item>
       <Form.Item<UserType>
@@ -136,9 +145,7 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
           options={[
             { value: "estudiante", label: "Estudiante" },
             { value: "docente", label: "Docente" },
-            { value: "administrativo", label: "Administrativo" },
-            { value: "soporte", label: "Soporte" },
-            { value: "administrador", label: "Administrador Sistema" },
+            { value: "administrador", label: "Administrador" },
           ]}
           value={formData.type}
           onChange={(selectedValue) => {
