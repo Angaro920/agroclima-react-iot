@@ -7,3 +7,4 @@ export * from './BarChart';
 export * from './FormUser';
 export * from './FormLogIn'
 export * from './ProtectedRoutes'
+export * from "./FormReport"

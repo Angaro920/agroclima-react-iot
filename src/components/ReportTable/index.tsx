@@ -1,6 +1,8 @@
 import { Table, Button } from "antd";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { DataType } from "../../types";
+import Modal from "antd/es/modal/Modal";
+import { FormReport } from "../FormReport";
 
 interface DataTableProps {
   title: string;
@@ -30,13 +32,20 @@ export const ReportTable: FC<DataTableProps> = ({
     data: item.data + " " + sufijo,
     time: item.time,
   }));
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <h1>Reporte de {title} </h1>
       <div>
         <div style={{ marginBottom: 10 }}>
-          <Button>Generar Reporte</Button>
+          <Button onClick={showModal}>Generar Reporte</Button>
         </div>
         <Table<DataType>
           columns={columns}
@@ -45,6 +54,10 @@ export const ReportTable: FC<DataTableProps> = ({
           style={{ height: "auto" }}
         />
       </div>
+
+      <Modal title="Generar Reporte" open={isModalOpen} onOk={handleCancel} onCancel={handleCancel}>
+        <FormReport/>
+      </Modal>
     </>
   );
 };

@@ -8,7 +8,7 @@ export const useGetData = () => {
 
   const getTemperatura = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/listTemperatura");
+      const response = await fetch("http://localhost:8000/api/listData/Temperatura");
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
       const data = await response.json();
@@ -24,7 +24,7 @@ export const useGetData = () => {
   };
   const getHumedad = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/listHumedad");
+      const response = await fetch("http://localhost:8000/api/listData/Humedad");
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
       const data = await response.json();
@@ -40,7 +40,7 @@ export const useGetData = () => {
   };
   const getGas = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/listGas");
+      const response = await fetch("http://localhost:8000/api/listData/Hidrogeno");
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
       const data = await response.json();
@@ -56,7 +56,7 @@ export const useGetData = () => {
   };
   const getLuz = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/listLuz");
+      const response = await fetch("http://localhost:8000/api/listData/Luz");
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
       const data = await response.json();

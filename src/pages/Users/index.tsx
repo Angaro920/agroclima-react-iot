@@ -7,10 +7,12 @@ import { useUsers } from "../../hooks/useUsers";
 import type { UserType } from "../../types";
 
 const INITIAL_FORM: UserType = {
+  documento: "",
   userName: "",
   password: "",
+  confirmPassword: "",
   name: "",
-  lastName: "",
+  email: "",
   age: 0,
   grade: "",
   type: "",
