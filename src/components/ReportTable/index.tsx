@@ -3,6 +3,10 @@ import { FC, useState } from "react";
 import { DataType } from "../../types";
 import Modal from "antd/es/modal/Modal";
 import { FormReport } from "../FormReport";
+import { es } from 'date-fns/locale'
+import { formatInTimeZone } from 'date-fns-tz'
+
+es.code= 'es-CO'
 
 interface DataTableProps {
   title: string;
@@ -17,7 +21,11 @@ const columns = [
     dataIndex: "data",
     width: 150,
   },
-  { title: "Fecha", dataIndex: "time" },
+  {
+    title: "Fecha",
+    dataIndex: "time",
+    render: (time: string) => formatInTimeZone(time, 'America/Bogota',  'yyyy-MMMM-dd HH:mm:ss', { locale: es }),
+  },
 ];
 
 export const ReportTable: FC<DataTableProps> = ({
@@ -55,8 +63,13 @@ export const ReportTable: FC<DataTableProps> = ({
         />
       </div>
 
-      <Modal title="Generar Reporte" open={isModalOpen} onOk={handleCancel} onCancel={handleCancel}>
-        <FormReport/>
+      <Modal
+        title="Generar Reporte"
+        open={isModalOpen}
+        onOk={handleCancel}
+        onCancel={handleCancel}
+      >
+        <FormReport />
       </Modal>
     </>
   );

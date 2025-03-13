@@ -1,5 +1,7 @@
 import { DatePicker, Form, Radio, Select } from "antd";
 
+const { RangePicker } = DatePicker;
+
 export const FormReport = () => {
   return (
     <Form>
@@ -15,14 +17,22 @@ export const FormReport = () => {
         />
       </Form.Item>
       <Form.Item label="Seleccione el rango de fechas:">
-      <DatePicker.RangePicker />
+        <RangePicker
+          onChange={(dates, dateStrings) => {
+            console.log("dates", dates);
+            console.log("dateStrings", dateStrings);
+          }}
+        />
       </Form.Item>
       <Form.Item label="Seleccione tipo de archivo:">
-        <Radio.Group block options={[
-          { label: "PDF", value: "PDF" },
-          { label: "Excel", value: "Excel" },
-          { label: "CSV", value: "CSV" },
-        ]} />
+        <Radio.Group
+          block
+          options={[
+            { label: "PDF", value: "PDF" },
+            { label: "Excel", value: "Excel" },
+            { label: "CSV", value: "CSV" },
+          ]}
+        />
       </Form.Item>
     </Form>
   );

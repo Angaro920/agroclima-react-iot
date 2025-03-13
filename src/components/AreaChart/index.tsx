@@ -4,7 +4,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer,
   Label,
 } from "recharts";
 import { MongoObject } from "../../contexts/DataContext";
@@ -18,10 +17,10 @@ export const AreaChartComponent = ({
   nombre,
 }: LineChartComponentProps) => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    
       <AreaChart
-        width={500}
-        height={400}
+        width={800}
+        height={200}
         data={data}
         margin={{
           top: 20,
@@ -30,19 +29,18 @@ export const AreaChartComponent = ({
           bottom: 5,
         }}
       >
-        <XAxis dataKey="time" name="Tiempo">
+        <XAxis dataKey="_id" name="Tiempo">
           <Label value={nombre} offset={0} position={"insideBottom"}/>
         </XAxis>
-        <YAxis name="Humedad" />
+        <YAxis name="promedio" />
         <Tooltip />
         <Area
           name={nombre}
           type="monotone"
-          dataKey="data"
+          dataKey="promedio"
           stroke="#8884d8"
           fill="#8884d8"
         />
       </AreaChart>
-    </ResponsiveContainer>
   );
 };

@@ -5,7 +5,7 @@ import {
   YAxis,
   Tooltip,
   Legend,
-  ResponsiveContainer,
+  CartesianGrid,
 } from "recharts";
 import { MongoObject } from "../../contexts/DataContext";
 /* import { graph } from './linearstyle.tsx'; */
@@ -16,12 +16,11 @@ interface LineChartComponentProps {
 }
 
 export const LineChartComponent = ({data, nombre}: LineChartComponentProps) => {
- /*  console.log("Llegue al componente:"+JSON.stringify(data)) */
+  console.log("Llegue al componente:"+JSON.stringify(data))
   return (
-    <ResponsiveContainer width="100%" height="100%">
       <LineChart
-        width={500}
-        height={300}
+        width={800}
+        height={200}
         data={data}
         margin={{
           top: 20,
@@ -30,12 +29,12 @@ export const LineChartComponent = ({data, nombre}: LineChartComponentProps) => {
           bottom: 5,
         }}
       >
-        <XAxis dataKey="time" />
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="_id" />
         <YAxis domain={['auto', 'auto']} interval="preserveStartEnd" />
         <Tooltip />
         <Legend />
-        <Line name={nombre} type="monotone" dataKey="data" stroke="#82ca9d" dot={false}/>
+        <Line name={nombre} type="monotone" dataKey="promedio" stroke="#82ca9d" dot={true}/>
       </LineChart>
-    </ResponsiveContainer>
   );
 };

@@ -6,19 +6,19 @@ import {
   YAxis,
   Tooltip,
   Legend,
-  ResponsiveContainer,
 } from "recharts";
 import { MongoObject } from "../../contexts/DataContext";
 interface LineChartComponentProps {
   data: MongoObject[];
+  nombre: string
 }
 
-export const BarChartComponent = ({ data }: LineChartComponentProps) => {
+export const BarChartComponent = ({ data, nombre }: LineChartComponentProps) => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
       <BarChart
-        width={500}
-        height={300}
+      title="Promedio del mes"
+        width={800}
+        height={200}
         data={data}
         margin={{
           top: 5,
@@ -27,17 +27,17 @@ export const BarChartComponent = ({ data }: LineChartComponentProps) => {
           bottom: 5,
         }}
       >
-        <XAxis dataKey="time" />
+        <XAxis dataKey="_id" />
         <YAxis />
         <Tooltip />
         <Legend />
         <Bar
-          name={"Hidrogeno"}
-          dataKey="data"
+        
+          name={nombre}
+          dataKey="promedio"
           fill="#82ca9d"
           activeBar={<Rectangle fill="gold" stroke="purple" />}
         />
       </BarChart>
-    </ResponsiveContainer>
   );
 };
