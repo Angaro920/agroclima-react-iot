@@ -8,16 +8,40 @@ type SensorDataType = {
 };
 
 type AmbientDataType = {
-  tempf?: number;
+  baromabsin?: number;
+  baromrelin?: number;
+  battout?: number;
+  dailyrainin?: number;
+  dateutc?: number;
+  dewPoint?: number;
+  dewPointin?: number;
+  eventrainin?: number;
+  feelsLike?: number;
+  feelsLikein?: number;
+  hourlyrainin?: number;
   humidity?: number;
+  humidityin?: number;
+  maxdailygust?: number;
+  monthlyrainin?: number;
   solarradiation?: number;
-  [key: string]: any;
+  tempf?: number;
+  tempinf?: number;
+  totalrainin?: number;
+  uv?: number;
+  weeklyrainin?: number;
+  winddir?: number;
+  windgustmph?: number;
+  windspeedmph?: number;
+  yearlyrainin?: number;
+  [key: string]: number | undefined;
 };
+
 
 export const useLiveSensorData = () => {
   const [sensorData, setSensorData] = useState<SensorDataType | null>(null);
   const [ambientData, setAmbientData] = useState<AmbientDataType | null>(null);
   const [isConnected, setIsConnected] = useState<boolean>(false);
+  const [ws, setWs] = useState<WebSocket | null>(null);
 
   useEffect(() => {
     const socket = new WebSocket('ws://localhost:8080');
@@ -38,7 +62,7 @@ export const useLiveSensorData = () => {
           console.log('📡 Sensor Data:', msg.data);
         }
       } catch (error) {
-        console.error('❌ Invalid WebSocket message:', event.data);
+        console.error('❌ Invalid WebSocket message:', error );
       }
     };
 
@@ -47,12 +71,26 @@ export const useLiveSensorData = () => {
       setIsConnected(false);
     };
 
+    socket.onerror = (error) => {
+      console.error('⚠️ WebSocket error:', error);
+    };
+
+    setWs(socket);
+
     return () => {
       socket.close();
     };
   }, []);
 
-  return { sensorData, ambientData, isConnected };
+  const sendMessage = (message: Record<string, string>) => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify(message));
+    } else {
+      console.warn('⚠️ WebSocket not connected, message not sent.');
+    }
+  };
+
+  return { sensorData, ambientData, isConnected, sendMessage };
 };
 
 export default useLiveSensorData;

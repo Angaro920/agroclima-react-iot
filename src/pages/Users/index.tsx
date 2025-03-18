@@ -41,7 +41,7 @@ export const UsersPage = () => {
     try {
       await createUser(formData);
       message.success("Usuario agregado correctamente");
-      handleCancel(); // Cierra el modal y limpia el formulario
+      handleCancel(); 
     } catch (error) {
       message.error("Error al agregar el usuario: " + error);
     }

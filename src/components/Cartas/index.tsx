@@ -47,9 +47,18 @@ export const CartasDashboard = ({
         onCancel={handleCancel}
         width={850}
       >
+        <div>
+          <h3>Diario</h3>
         <FetchDay frequency="listDay" parameter={parameter} />
+        </div>
+        <div>
+          <h3>Semanal</h3>
         <FetchWeek frequency="listWeek" parameter={parameter} />
+        </div>
+        <div>
+          <h3>Mensual</h3>
         <FetchMonth frequency="listMonth" parameter={parameter} />
+        </div>
       </Modal>
     </div>
   );

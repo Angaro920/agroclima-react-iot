@@ -68,6 +68,7 @@ export const ReportTable: FC<DataTableProps> = ({
         open={isModalOpen}
         onOk={handleCancel}
         onCancel={handleCancel}
+        footer={null}
       >
         <FormReport />
       </Modal>

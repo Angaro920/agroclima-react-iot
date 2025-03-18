@@ -16,7 +16,7 @@ interface LineChartComponentProps {
 }
 
 export const LineChartComponent = ({data, nombre}: LineChartComponentProps) => {
-  console.log("Llegue al componente:"+JSON.stringify(data))
+  /* console.log("Llegue al componente:"+JSON.stringify(data)) */
   return (
       <LineChart
         width={800}

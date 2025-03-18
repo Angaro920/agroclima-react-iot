@@ -1,10 +1,10 @@
 import { Card, Col, Row, Switch } from "antd";
 import { dashboardStyle } from "../../styles";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { useWebSocket } from "../../hooks/useWebSocket";
+import {useLiveSensorData} from "../../hooks/useLiveSensorData";  
 
 export const Devices: React.FC = () => {
-    const { isConnected, sendMessage } = useWebSocket("ws://10.157.13.4:8080");
+    const { isConnected, sendMessage } = useLiveSensorData();
 
     const handleToggle = (device: string, state: boolean) => {
         sendMessage({ device, state: state ? "ON" : "OFF" });
