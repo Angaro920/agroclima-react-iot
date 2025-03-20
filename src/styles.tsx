@@ -30,7 +30,7 @@ export const dashboardStyle: Record<string, CSSProperties> = {
     borderRadius: "10px",
   },
   logo:{
-    width: 75,
+    width: 120,
     alignItems: "center",
     alignContent: "center",
     display: "flex",
