@@ -7,8 +7,13 @@ import {
   Dashboard,
   Devices,
   ReportHidPage,
+  ReportHumIn,
+  ReportHumOut,
   ReportHumPage,
   ReportLightPage,
+  ReportRain,
+  ReportTempIn,
+  ReportTempOut,
   ReportTempPage,
   UsersPage,
 } from "./pages";
@@ -17,6 +22,9 @@ import { WeatherProvider } from "./contexts/DataContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Login } from "./components/FormLogIn";
 import ProtectedRoute from "./components/ProtectedRoutes";
+import { ReportBaromRel } from "./pages/ReportBaromRel";
+import { ReportSolarRad } from "./pages/ReportSolarRad";
+import { ReportUV } from "./pages/ReportUV";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -71,6 +79,14 @@ const App = () => {
                       {currentPage === Pages.LISTLUZ && <ReportLightPage />}
                       {currentPage === Pages.LISTTEMP && <ReportTempPage />}
                       {currentPage === Pages.USERS && <UsersPage />}
+                      {currentPage === Pages.LISTTEMPOUT && <ReportTempOut />}
+                    {currentPage === Pages.LISTTEMPIN && <ReportTempIn />}
+                      {currentPage === Pages.LISTHUMEIN && <ReportHumIn />}
+                      {currentPage === Pages.LISTHUMEOUT && <ReportHumOut />}
+                      {currentPage === Pages.LISTBAROMREL && <ReportBaromRel />}
+                      {currentPage === Pages.LISTSOLARRAD && <ReportSolarRad />}
+                      {currentPage === Pages.LISTUV && <ReportUV />}
+                      {currentPage === Pages.LISTEVENRAIN && <ReportRain/>}
                     </Content>
                     <Footer style={{ textAlign: "center" }}>
                       Ant Design ©{new Date().getFullYear()} Created by Ant UED

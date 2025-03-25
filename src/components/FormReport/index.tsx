@@ -74,6 +74,14 @@ export const FormReport = () => {
             { value: "Humedad", label: "Humedad" },
             { value: "Luz", label: "Luminosidad" },
             { value: "Hidrogeno", label: "Gas" },
+            { value: "Uv", label: "Radiación UV" },
+            { value: "RadiacionSolar", label: "Radiación Solar" },
+            { value: "Precipitaciones", label: "Precipitaciones" },
+            { value: "PresionBarometricaRelativa", label: "Presión Atmosférica Relativa" },
+            { value: "TemperaturaExterna", label: "Temperatura Externa" },
+            { value: "HumedadExterna", label: "Humedad Externa" },
+            { value: "TemperaturaInterna", label: "Temperatura Interna" },
+            { value: "HumedadInterna", label: "Humedad Interna" },
           ]}
         />
       </Form.Item>

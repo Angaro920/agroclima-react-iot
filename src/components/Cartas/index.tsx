@@ -48,6 +48,9 @@ export const CartasDashboard = ({
       </div>
     )}
   </div>
+  <Button onClick={showModal}>Ver más
+
+  </Button>
 
       </Card>
       <Modal
