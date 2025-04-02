@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ComposedChart,
   Line,
@@ -11,15 +12,15 @@ import {
   Scatter,
   ResponsiveContainer,
 } from "recharts";
-import { WeatherHistoricalData } from "../../contexts/DataContext";
+
 
 interface ComposedComponentProps {
-  data: WeatherHistoricalData;
+  data: any;
 }
 
 export const ComposedChartComponent = ({ data }: ComposedComponentProps) => {
-  const formatData = (jsonData: WeatherHistoricalData) => {
-    const formattedData = jsonData.Temperatura.map((temp, index) => ({
+  const formatData = (jsonData: any) => {
+    const formattedData = jsonData.Temperatura.map((temp: any, index: any) => ({
       name: `Page ${String.fromCharCode(65 + index)}`,
       Temperatura: temp.data,
       Humedad: jsonData.Humedad[index]?.data,

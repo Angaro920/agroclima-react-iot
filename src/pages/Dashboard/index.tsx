@@ -33,7 +33,6 @@ export const Dashboard = () => {
             title="Temperatura"
             value={liveSensorData.temperatura ?? 0}
             sufix={ambientData ? "°C" : units.temperatura}
-            frequency="listDay"
             parameter="Temperatura"
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
           />
@@ -43,7 +42,6 @@ export const Dashboard = () => {
             title="Humedad"
             value={liveSensorData.humedad ?? 0}
             sufix="%"
-            frequency="listDay"
             parameter="Humedad"
             icon={<BsMoisture size={44} color="#3f8600" />}
           />
@@ -53,7 +51,6 @@ export const Dashboard = () => {
             title="Luz"
             value={liveSensorData.luz ?? 0}
             sufix="%"
-            frequency="listDay"
             parameter="Luz"
             icon={<LuSun size={44} color="#3f8600" />}
           />
@@ -63,7 +60,6 @@ export const Dashboard = () => {
             title="Gas"
             value={liveSensorData.hidrogeno ?? 0}
             sufix={units.hidrogeno}
-            frequency="listDay"
             parameter="Hidrogeno"
           />
         </Col>
@@ -77,8 +73,7 @@ export const Dashboard = () => {
             title="Tempertaura Interna"
             value={ambientData?.tempinf ?? 0}
             sufix="°C"
-            frequency="listDay"
-            parameter="Temperatura"
+            parameter="TemperaturaInterna"
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
           />
         </Col>
@@ -87,8 +82,7 @@ export const Dashboard = () => {
             title="Humedad Interna"
             value={ambientData?.humidityin ?? 0}
             sufix="%"
-            frequency="listDay"
-            parameter="Temperatura"
+            parameter="HumedadInterna"
             icon={<BsMoisture size={44} color="#3f8600" />}
           />
         </Col>
@@ -100,10 +94,9 @@ export const Dashboard = () => {
         <Col span={6}>
           <CartasDashboard
             title="Tempertaura externa"
-            value={ambientData?.tempf ?? 0}
-            sufix="°F"
-            frequency="listDay"
-            parameter="Temperatura"
+            value={ambientData?.tempoutc ?? 0}
+            sufix="°C"
+            parameter="TemperaturaExterna"
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
           />
         </Col>
@@ -113,8 +106,7 @@ export const Dashboard = () => {
             title="Humedad externa"
             value={ambientData?.humidity ?? 0}
             sufix="%"
-            frequency="listDay"
-            parameter="Humedad"
+            parameter="HumedadExterna"
             icon={<BsMoisture size={44} color="#3f8600" />}
           />
         </Col>
@@ -123,8 +115,7 @@ export const Dashboard = () => {
             title="Presion atmosferica"
             value={ambientData?.baromabsin ?? 0}
             sufix="inHg"
-            frequency="listDay"
-            parameter="Luz"
+            parameter="PresionBarometricaRelativa"
             icon={<WiBarometer size={54} color="#3f8600" />}
           />
         </Col>
@@ -133,7 +124,6 @@ export const Dashboard = () => {
             title="Velocidad del viento"
             value={ambientData?.windspeedmph ?? 0}
             sufix="mph"
-            frequency="listDay"
             parameter="Hidrogeno"
             icon={<FiWind size={44} color="#3f8600" />}
           />
@@ -143,7 +133,6 @@ export const Dashboard = () => {
             title="Direccion del viento"
             value={ambientData?.winddir ?? 0}
             sufix="°"
-            frequency="listDay"
             parameter="Hidrogeno"
             icon={<LuCompass size={44} color="#3f8600" />}
           />
@@ -152,9 +141,8 @@ export const Dashboard = () => {
           <CartasDashboard
             title="Radiacion solar"
             value={ambientData?.solarradiation ?? 0}
-            sufix="W/m^2"
-            frequency="listDay"
-            parameter="Hidrogeno"
+            sufix="W/m²"
+            parameter="RadiacionSolar"
             icon={<LuSun size={44} color="#3f8600" />}
           />
         </Col>
@@ -163,8 +151,7 @@ export const Dashboard = () => {
             title="Radiacion UV"
             value={ambientData?.uv ?? 0}
             sufix="mJ/cm²"
-            frequency="listDay"
-            parameter="Hidrogeno"
+            parameter="Uv"
             icon={<LuSunDim size={44} color="#3f8600" />}
           />
         </Col>
@@ -173,8 +160,7 @@ export const Dashboard = () => {
             title="Precipitaciones - Hoy"
             value={ambientData?.eventrainin ?? 0}
             sufix="in"
-            frequency="listDay"
-            parameter="Hidrogeno"
+            parameter="Precipitaciones"
             icon={<LuCloudRainWind size={44} color="#3f8600" />}
           />
         </Col>

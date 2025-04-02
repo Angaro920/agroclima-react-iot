@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
-import { AreaChartComponent} from "../../components";
+import { AreaChartComponent } from "../../components";
+import { CollectionNameType } from "../../types";
 
 interface Props {
-  frequency: "listDay" | "listWeek" | "listMonth";
-  parameter: "Temperatura" | "Humedad" | "Hidrogeno" | "Luz";
+  parameter: CollectionNameType
 }
 interface MongoObject {
   _id: string;
   promedio: string;
 }
 
-export const FetchWeek = ({ frequency, parameter }: Props) => {
+export const FetchWeek = ({ parameter }: Props) => {
   const [promedio, setPromedio] = useState<MongoObject[]>([]);
 
-  const URL = `http://localhost:8000/api/${frequency}/${parameter}`;
+  const URL = `http://localhost:8000/api/listWeek/${parameter}`;
 
   useEffect(() => {
     fetch(URL)
