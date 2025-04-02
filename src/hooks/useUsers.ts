@@ -28,7 +28,7 @@ export const useUsers = () => {
   const getUserById = async (id: string) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://vulnerability-enb-die-builder.trycloudflare.com/api/users/${id}`);
+      const response = await fetch(BACKEND_URL+`api/users/${id}`);
       if (!response.ok) throw new Error('Error al obtener usuario');
       
       const user = await response.json();
@@ -45,7 +45,7 @@ export const useUsers = () => {
   const createUser = async (userData: UserType) => {
     setLoading(true);
     try {
-      const response = await fetch("https://vulnerability-enb-die-builder.trycloudflare.com/api/addUser", {
+      const response = await fetch(BACKEND_URL+"/api/addUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export const useUsers = () => {
   const updateUser = async (id: string, userData: Partial<UserType>) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://vulnerability-enb-die-builder.trycloudflare.com/api/updateUser/${id}`, {
+      const response = await fetch(BACKEND_URL+`/api/updateUser/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +98,7 @@ export const useUsers = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://vulnerability-enb-die-builder.trycloudflare.com/${id}`,
+        BACKEND_URL+`api/deleteUser/${id}`,
         {
           method: "DELETE",
         }

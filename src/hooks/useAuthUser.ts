@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { BACKEND_URL } from "../constants/urls";
 
 interface User {
   id: string;
@@ -13,7 +14,7 @@ export const useUser = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch("https://vulnerability-enb-die-builder.trycloudflare.com/api/getUser", {
+      const response = await fetch(BACKEND_URL+"/api/getUser", {
         credentials: "include",
       });
 

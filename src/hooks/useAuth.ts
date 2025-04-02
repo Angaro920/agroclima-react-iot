@@ -1,14 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../constants/urls";
 
-/* interface AuthResponse {
-  token: string;
-  user: {
-    id: string;
-    userName: string;
-    role: string;
-  };
-} */
 
 export const useAuth = () => {
   const [loading, setLoading] = useState(false);
@@ -21,7 +14,7 @@ export const useAuth = () => {
     setError(null);
 
     try {
-      const response = await fetch("https://vulnerability-enb-die-builder.trycloudflare.com/api/login", {
+      const response = await fetch(BACKEND_URL+"/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +39,7 @@ export const useAuth = () => {
   // Función para cerrar sesión
   const logout = async () => {
     try {
-      await fetch("https://vulnerability-enb-die-builder.trycloudflare.com/api/logout", {
+      await fetch(BACKEND_URL+"/api/logout", {
         method: "POST",
         credentials: "include", // Incluye las cookies en la solicitud
       });

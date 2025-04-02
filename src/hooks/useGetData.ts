@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DataType } from "../types";
+import { BACKEND_URL } from "../constants/urls";
 
 export const useGetData = () => {
   const [weather, setWeather] = useState<DataType[]>([]);
@@ -9,7 +10,7 @@ export const useGetData = () => {
   const getTemperatura = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/listData/Temperatura"
+        BACKEND_URL+"/api/listData/Temperatura"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -27,7 +28,7 @@ export const useGetData = () => {
   const getHumedad = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/listData/Humedad"
+        BACKEND_URL+"/api/listData/Humedad"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -45,7 +46,7 @@ export const useGetData = () => {
   const getGas = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/listData/Hidrogeno"
+        BACKEND_URL+"/api/listData/Hidrogeno"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -62,7 +63,7 @@ export const useGetData = () => {
   };
   const getLuz = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/listData/Luz");
+      const response = await fetch(BACKEND_URL+"/api/listData/Luz");
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
       const data = await response.json();
@@ -79,7 +80,7 @@ export const useGetData = () => {
   const getTempOut = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/listData/TemperaturaExterna"
+        BACKEND_URL+"/api/listData/TemperaturaExterna"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -97,7 +98,7 @@ export const useGetData = () => {
   const getHumeOut = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/listData/HumedadExterna"
+        BACKEND_URL+"/api/listData/HumedadExterna"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -115,7 +116,7 @@ export const useGetData = () => {
   const getTempIn = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/listData/TemperaturaInterna"
+        BACKEND_URL+"/api/listData/TemperaturaInterna"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -133,7 +134,7 @@ export const useGetData = () => {
   const getHumeIn = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/listData/HumedadInterna"
+        BACKEND_URL+"api/listData/HumedadInterna"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -151,7 +152,7 @@ export const useGetData = () => {
   const getBaromRel = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/listData/PresionBarometricaRelativa"
+        BACKEND_URL+"/api/listData/PresionBarometricaRelativa"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -169,7 +170,7 @@ export const useGetData = () => {
   const getSolarRad = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/listData/RadiacionSolar"
+        BACKEND_URL+"/api/listData/RadiacionSolar"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -186,7 +187,7 @@ export const useGetData = () => {
   };
   const getUv = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/listData/Uv");
+      const response = await fetch(BACKEND_URL+"/api/listData/Uv");
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
       const data = await response.json();
@@ -203,7 +204,7 @@ export const useGetData = () => {
   const getRain = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/listData/Precipitaciones"
+        BACKEND_URL+"/api/listData/Precipitaciones"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
