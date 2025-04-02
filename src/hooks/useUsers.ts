@@ -9,7 +9,7 @@ export const useUsers = () => {
   // GET - Obtener todos los usuarios
   const getUsers = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/listUsers");
+      const response = await fetch("https://vulnerability-enb-die-builder.trycloudflare.com/api/listUsers");
       if (!response.ok) throw new Error("Error al obtener usuarios");
 
       const data = await response.json();
@@ -27,7 +27,7 @@ export const useUsers = () => {
   const getUserById = async (id: string) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/users/${id}`);
+      const response = await fetch(`https://vulnerability-enb-die-builder.trycloudflare.com/api/users/${id}`);
       if (!response.ok) throw new Error('Error al obtener usuario');
       
       const user = await response.json();
@@ -44,7 +44,7 @@ export const useUsers = () => {
   const createUser = async (userData: UserType) => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8000/api/addUser", {
+      const response = await fetch("https://vulnerability-enb-die-builder.trycloudflare.com/api/addUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const useUsers = () => {
   const updateUser = async (id: string, userData: Partial<UserType>) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/updateUser/${id}`, {
+      const response = await fetch(`https://vulnerability-enb-die-builder.trycloudflare.com/api/updateUser/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export const useUsers = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:8000/api/deleteUser/${id}`,
+        `https://vulnerability-enb-die-builder.trycloudflare.com/${id}`,
         {
           method: "DELETE",
         }

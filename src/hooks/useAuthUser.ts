@@ -13,7 +13,7 @@ export const useUser = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/getUser", {
+      const response = await fetch("https://vulnerability-enb-die-builder.trycloudflare.com/api/getUser", {
         credentials: "include",
       });
 

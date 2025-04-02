@@ -21,7 +21,7 @@ export const useAuth = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:8000/api/login", {
+      const response = await fetch("https://vulnerability-enb-die-builder.trycloudflare.com/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export const useAuth = () => {
   // Función para cerrar sesión
   const logout = async () => {
     try {
-      await fetch("http://localhost:8000/api/logout", {
+      await fetch("https://vulnerability-enb-die-builder.trycloudflare.com/api/logout", {
         method: "POST",
         credentials: "include", // Incluye las cookies en la solicitud
       });
