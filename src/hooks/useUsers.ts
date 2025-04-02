@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { UserType } from "../types";
+import { BACKEND_URL } from "../constants/urls";
 
 export const useUsers = () => {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -9,7 +10,7 @@ export const useUsers = () => {
   // GET - Obtener todos los usuarios
   const getUsers = async () => {
     try {
-      const response = await fetch("https://vulnerability-enb-die-builder.trycloudflare.com/api/listUsers");
+      const response = await fetch(BACKEND_URL+"/api/listUsers");
       if (!response.ok) throw new Error("Error al obtener usuarios");
 
       const data = await response.json();

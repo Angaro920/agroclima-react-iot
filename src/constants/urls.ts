@@ -1,0 +1,1 @@
+export const BACKEND_URL = "https://hollywood-existence-son-suzuki.trycloudflare.com";
