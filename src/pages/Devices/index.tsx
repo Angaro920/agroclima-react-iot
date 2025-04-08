@@ -1,19 +1,19 @@
 import { Card, Col, Row, Switch } from "antd";
 import { dashboardStyle } from "../../styles";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import {useLiveSensorData} from "../../hooks/useLiveSensorData";  
+/* import {useLiveSensorData} from "../../hooks/useLiveSensorData";  */ 
 
 export const Devices: React.FC = () => {
-    const { isConnected, sendMessage } = useLiveSensorData();
+    /* const { isConnected, sendMessage } = useLiveSensorData(); */
 
-    const handleToggle = (device: string, state: boolean) => {
+  /*   const handleToggle = (device: string, state: boolean) => {
         sendMessage({ device, state: state ? "ON" : "OFF" });
-    };
+    }; */
 
     return (
         <div style={dashboardStyle.mainSector}>
             <h1 style={{ display: "flex", justifyContent: "center" }}>
-                Control sistemas invernadero {isConnected ? "🟢" : "🔴"}
+               {/*  Control sistemas invernadero {isConnected ? "🟢" : "🔴"} */}
             </h1>
             <div>
                 <Row gutter={16}>
@@ -22,7 +22,7 @@ export const Devices: React.FC = () => {
                             <Switch
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
-                                onChange={(checked) => handleToggle("ventilador", checked)}
+                               /*  onChange={(checked) => handleToggle("ventilador", checked)} */
                             />
                         </Card>
                     </Col>
@@ -32,13 +32,13 @@ export const Devices: React.FC = () => {
                                 checkedChildren="Encendido"
                                 unCheckedChildren="Apagado"
                                 style={{ display: "flex", justifyContent: "center" }}
-                                onChange={(checked) => handleToggle("bomba", checked)}
+                                /* onChange={(checked) => handleToggle("bomba", checked)} */
                             />
                         </Card>
                     </Col>
                     <Col span={8}>
                         <Card title="Modo Automático" bordered={false}>
-                            <Switch onChange={(checked) => handleToggle("modo_auto", checked)} />
+                           {/*  <Switch onChange={(checked) => handleToggle("modo_auto", checked)} /> */}
                         </Card>
                     </Col>
                 </Row>

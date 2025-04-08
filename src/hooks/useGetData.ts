@@ -10,7 +10,7 @@ export const useGetData = () => {
   const getTemperatura = async () => {
     try {
       const response = await fetch(
-        BACKEND_URL+"/api/listData/Temperatura"
+        BACKEND_URL+"/api/listData/TemperaturaSensor"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -28,7 +28,7 @@ export const useGetData = () => {
   const getHumedad = async () => {
     try {
       const response = await fetch(
-        BACKEND_URL+"/api/listData/Humedad"
+        BACKEND_URL+"/api/listData/HumedadSensor"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -46,7 +46,7 @@ export const useGetData = () => {
   const getGas = async () => {
     try {
       const response = await fetch(
-        BACKEND_URL+"/api/listData/Hidrogeno"
+        BACKEND_URL+"/api/listData/HidrogenoSensor"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -63,7 +63,7 @@ export const useGetData = () => {
   };
   const getLuz = async () => {
     try {
-      const response = await fetch(BACKEND_URL+"/api/listData/Luz");
+      const response = await fetch(BACKEND_URL+"/api/listData/LuzSensor");
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
       const data = await response.json();

@@ -1,6 +1,7 @@
-/* import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BarChartComponent } from "../../components";
 import { CollectionNameType } from "../../types";
+import { BACKEND_URL } from "../../constants/urls";
 
 interface Props {
   parameter: CollectionNameType;
@@ -13,7 +14,7 @@ interface MongoObject {
 export const FetchMonth = ({ parameter }: Props) => {
   const [promedio, setPromedio] = useState<MongoObject[]>([]);
 
-  const URL = `http://localhost:8000/api/listMonth/${parameter}`;
+  const URL = BACKEND_URL+`/api/listMonth/${parameter}`;
 
   useEffect(() => {
     fetch(URL)
@@ -27,4 +28,3 @@ export const FetchMonth = ({ parameter }: Props) => {
     </div>
   );
 };
- */

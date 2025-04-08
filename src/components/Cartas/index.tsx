@@ -1,9 +1,9 @@
 import { Button, Card, Modal, Statistic } from "antd";
 import { CardStyle } from "./Cardstyle";
-/* import { FetchDay } from "../FetchDay"; */
+import { FetchDay } from "../FetchDay"; 
 import { useState } from "react";
-/* import { FetchWeek } from "../FetchWeek";
-import { FetchMonth } from "../FetchMonth"; */
+import { FetchWeek } from "../FetchWeek";
+import { FetchMonth } from "../FetchMonth";
 import { CollectionNameType } from "../../types";
 
 interface Props {
@@ -12,13 +12,15 @@ interface Props {
   sufix: string;
   parameter: CollectionNameType
   icon?: React.ReactNode;
+  tipo: string
 }
 export const CartasDashboard = ({
   title,
   value,
   sufix,
- /*  parameter, */
+  parameter,
   icon,
+  tipo,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -30,7 +32,7 @@ export const CartasDashboard = ({
   };
   return (
     <div>
-      <Card bordered={false} style={CardStyle.GlobalCard} title={title}>
+      <Card bordered={true} style={CardStyle.GlobalCard} title={title}>
         <div
           style={{
             display: "flex",
@@ -53,6 +55,7 @@ export const CartasDashboard = ({
             <div style={{ minWidth: "32px", marginLeft: "12px" }}>{icon}</div>
           )}
         </div>
+       <FetchDay tipo={tipo} parameter={parameter} />
         <Button onClick={showModal}>Ver más</Button>
       </Card>
       <Modal
@@ -64,15 +67,15 @@ export const CartasDashboard = ({
       >
         <div>
           <h3>Diario</h3>
-         {/*  <FetchDay parameter={parameter} /> */}
+         <FetchDay tipo={tipo} parameter={parameter} /> 
         </div>
         <div>
           <h3>Semanal</h3>
-         {/*  <FetchWeek parameter={parameter} /> */}
+         <FetchWeek parameter={parameter} /> 
         </div>
         <div>
           <h3>Mensual</h3>
-         {/*  <FetchMonth parameter={parameter} /> */}
+         <FetchMonth parameter={parameter} />
         </div>
       </Modal>
     </div>

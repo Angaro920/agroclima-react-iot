@@ -71,10 +71,10 @@ export const FormReport = () => {
         <Select
           placeholder="Seleccione:"
           options={[
-            { value: "Temperatura", label: "Temperatura" },
-            { value: "Humedad", label: "Humedad" },
-            { value: "Luz", label: "Luminosidad" },
-            { value: "Hidrogeno", label: "Gas" },
+            { value: "TemperaturaSensor", label: "Temperatura" },
+            { value: "HumedadSensor", label: "Humedad" },
+            { value: "LuzSensor", label: "Luminosidad" },
+            { value: "HidrogenoSensor", label: "Gas" },
             { value: "Uv", label: "Radiación UV" },
             { value: "RadiacionSolar", label: "Radiación Solar" },
             { value: "Precipitaciones", label: "Precipitaciones" },
