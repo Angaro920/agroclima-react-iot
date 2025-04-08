@@ -7,21 +7,19 @@ import {
   Legend,
   CartesianGrid,
 } from "recharts";
-import { MongoObject } from "../../contexts/DataContext";
 /* import { graph } from './linearstyle.tsx'; */
 
 interface LineChartComponentProps {
-  data: MongoObject[];
   nombre: string;
 }
 
-export const LineChartComponent = ({data, nombre}: LineChartComponentProps) => {
+export const LineChartComponent = ({ nombre}: LineChartComponentProps) => {
   /* console.log("Llegue al componente:"+JSON.stringify(data)) */
   return (
       <LineChart
         width={800}
         height={200}
-        data={data}
+       
         margin={{
           top: 20,
           right: 30,

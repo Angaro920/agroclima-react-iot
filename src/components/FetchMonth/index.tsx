@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/* import { useState, useEffect } from "react";
 import { BarChartComponent } from "../../components";
 import { CollectionNameType } from "../../types";
 
@@ -27,3 +27,4 @@ export const FetchMonth = ({ parameter }: Props) => {
     </div>
   );
 };
+ */

@@ -1,9 +1,9 @@
 import { Button, Card, Modal, Statistic } from "antd";
 import { CardStyle } from "./Cardstyle";
-import { FetchDay } from "../FetchDay";
+/* import { FetchDay } from "../FetchDay"; */
 import { useState } from "react";
-import { FetchWeek } from "../FetchWeek";
-import { FetchMonth } from "../FetchMonth";
+/* import { FetchWeek } from "../FetchWeek";
+import { FetchMonth } from "../FetchMonth"; */
 import { CollectionNameType } from "../../types";
 
 interface Props {
@@ -17,7 +17,7 @@ export const CartasDashboard = ({
   title,
   value,
   sufix,
-  parameter,
+ /*  parameter, */
   icon,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,15 +64,15 @@ export const CartasDashboard = ({
       >
         <div>
           <h3>Diario</h3>
-          <FetchDay parameter={parameter} />
+         {/*  <FetchDay parameter={parameter} /> */}
         </div>
         <div>
           <h3>Semanal</h3>
-          <FetchWeek parameter={parameter} />
+         {/*  <FetchWeek parameter={parameter} /> */}
         </div>
         <div>
           <h3>Mensual</h3>
-          <FetchMonth parameter={parameter} />
+         {/*  <FetchMonth parameter={parameter} /> */}
         </div>
       </Modal>
     </div>

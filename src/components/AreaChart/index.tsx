@@ -6,14 +6,14 @@ import {
   Tooltip,
   Label,
 } from "recharts";
-import { MongoObject } from "../../contexts/DataContext";
+
 
 interface LineChartComponentProps {
-  data: MongoObject[];
+  /* data: MongoObject[]; */
   nombre: string;
 }
 export const AreaChartComponent = ({
-  data,
+  /* data, */
   nombre,
 }: LineChartComponentProps) => {
   return (
@@ -21,7 +21,7 @@ export const AreaChartComponent = ({
       <AreaChart
         width={800}
         height={200}
-        data={data}
+        /* data={data} */
         margin={{
           top: 20,
           right: 30,

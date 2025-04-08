@@ -7,19 +7,18 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { MongoObject } from "../../contexts/DataContext";
 interface LineChartComponentProps {
-  data: MongoObject[];
+  /* data: MongoObject[]; */
   nombre: string
 }
 
-export const BarChartComponent = ({ data, nombre }: LineChartComponentProps) => {
+export const BarChartComponent = ({ /* data */ nombre }: LineChartComponentProps) => {
   return (
       <BarChart
       title="Promedio del mes"
         width={800}
         height={200}
-        data={data}
+        /* data={data} */
         margin={{
           top: 5,
           right: 30,
