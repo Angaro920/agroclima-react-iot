@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Col, Row } from "antd";
 import { dashboardStyle } from "../../styles";
 import { CartasDashboard } from "../../components";
@@ -8,6 +8,7 @@ import { WiBarometer } from "react-icons/wi";
 import { LuSun, LuSunDim, LuCloudRainWind, LuCompass } from "react-icons/lu";
 import { BsMoisture } from "react-icons/bs";
 import { useGetLastData } from "../../hooks/useGetLastData";
+
 
 export const Dashboard = () => {
   const { loading, getLastData, weather } = useGetLastData();
@@ -20,6 +21,7 @@ export const Dashboard = () => {
 
     return () => clearInterval(interval);
   }, []);
+  
 
   return (
     <div style={dashboardStyle.mainSector}>
@@ -29,12 +31,13 @@ export const Dashboard = () => {
       <Row gutter={16}>
         <Col span={50}>
           <CartasDashboard
-            title="Tempertaura Interna"
+            title="Tempertaura Sensor"
             value={loading ? "Cargando..." : weather?.TemperaturaSensor.data}
             sufix="°C"
             parameter="TemperaturaInterna"
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
             tipo="area"
+            data={0}
           />
         </Col>
         <Col span={50}>
@@ -44,7 +47,8 @@ export const Dashboard = () => {
             sufix="%"
             parameter="HumedadSensor"
             icon={<BsMoisture size={44} color="#3f8600" />}
-            tipo="linear"
+            tipo="gauge"
+            data={weather?.HumedadSensor.data}
           />
         </Col>
       </Row>
@@ -57,6 +61,7 @@ export const Dashboard = () => {
             parameter="LuzSensor"
             icon={<LuSun size={44} color="#3f8600" />}
             tipo="bar"
+            data={0}
           />
         </Col>
         <Col span={50}>
@@ -65,8 +70,9 @@ export const Dashboard = () => {
             value={loading ? "Cargando..." : weather?.HidrogenoSensor.data}
             sufix="ppp"
             parameter="HidrogenoSensor"
-            tipo="linear"
+            tipo="line"
             icon={<LuSun size={44} color="#3f8600" />}
+            data={0}
           />
         </Col>
       </Row>
@@ -82,6 +88,7 @@ export const Dashboard = () => {
             parameter="TemperaturaInterna"
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
             tipo="area"
+            data={0}
           />
         </Col>
         <Col span={50}>
@@ -91,7 +98,8 @@ export const Dashboard = () => {
             sufix="%"
             parameter="HumedadInterna"
             icon={<BsMoisture size={44} color="#3f8600" />}
-            tipo="bar"
+            tipo="gauge"
+            data={weather?.HumedadInterna.data}
           />
         </Col>
       </Row>
@@ -106,7 +114,8 @@ export const Dashboard = () => {
             sufix="°C"
             parameter="TemperaturaExterna"
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
-            tipo="linear"
+            tipo="line"
+            data={0}
           />
         </Col>
 
@@ -117,7 +126,8 @@ export const Dashboard = () => {
             sufix="%"
             parameter="HumedadExterna"
             icon={<BsMoisture size={44} color="#3f8600" />}
-            tipo="area"
+            tipo="gauge"
+            data={weather?.HumedadExterna.data}
           />
         </Col>
       </Row>
@@ -132,6 +142,7 @@ export const Dashboard = () => {
             parameter="PresionBarometricaRelativa"
             icon={<WiBarometer size={54} color="#3f8600" />}
             tipo="bar"
+            data={0}
           />
         </Col>
         <Col span={50}>
@@ -141,7 +152,8 @@ export const Dashboard = () => {
             sufix="mph"
             parameter="VelocidadViento"
             icon={<FiWind size={44} color="#3f8600" />}
-            tipo="linear"
+            tipo="line"
+            data={0}
           />
         </Col>
         </Row>
@@ -153,7 +165,8 @@ export const Dashboard = () => {
             sufix="°"
             parameter="DireccionViento"
             icon={<LuCompass size={44} color="#3f8600" />}
-            tipo="area"
+            tipo="rose"
+            data={weather?.DireccionViento.data}
           />
         </Col>
         <Col span={50}>
@@ -164,6 +177,7 @@ export const Dashboard = () => {
             parameter="RadiacionSolar"
             icon={<LuSun size={44} color="#3f8600" />}
             tipo="bar"
+            data={0}
           />
         </Col>
         </Row>
@@ -175,7 +189,8 @@ export const Dashboard = () => {
             sufix="mJ/cm²"
             parameter="Uv"
             icon={<LuSunDim size={44} color="#3f8600" />}
-            tipo="linear"
+            tipo="line"
+            data={0}
           />
         </Col>
         <Col span={50}>
@@ -186,6 +201,7 @@ export const Dashboard = () => {
             parameter="Precipitaciones"
             icon={<LuCloudRainWind size={44} color="#3f8600" />}
             tipo="area"
+            data={0}
           />
         </Col>
       </Row>

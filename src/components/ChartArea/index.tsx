@@ -2,12 +2,11 @@ import { Chart } from '@antv/g2';
 import { useEffect, useRef } from 'react';
 import { MongoObject } from '../../constants/MongoObject';
 
-interface LineChartComponentProps {
+interface ChartComponentProps {
   data: MongoObject[];
-  nombre: string;
 }
 
-export const AreaChartComponent = ({ data }: LineChartComponentProps) => {
+export const AreaChartComponent = ({ data }: ChartComponentProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<Chart | null>(null); // 👉 guardamos el Chart también
 

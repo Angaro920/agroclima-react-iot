@@ -1,55 +1,14 @@
-/* import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  CartesianGrid,
-} from "recharts";
-import { MongoObject } from "../../constants/MongoObject.ts";
-
-interface LineChartComponentProps {
-  data: MongoObject[];
-  nombre: string;
-}
-
-export const LineChartComponent = ({ data, nombre}: LineChartComponentProps) => {
-  console.log("Llegue al componente:"+JSON.stringify(data)) 
-  return (
-      <LineChart
-        width={800}
-        height={200}
-        data={data}
-        margin={{
-          top: 20,
-          right: 70,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="_id" />
-        <YAxis domain={['auto', 'auto']} interval="preserveStartEnd" />
-        <Tooltip />
-        <Legend />
-        <Line name={nombre} type="monotone" dataKey="promedio" stroke="#82ca9d" dot={true}/>
-      </LineChart>
-  );
-};
- */
 import { Chart } from '@antv/g2';
 import { useEffect, useRef } from 'react';
 import { MongoObject } from '../../constants/MongoObject';
 
-interface LineChartComponentProps {
+interface ChartComponentProps {
   data: MongoObject[];
-  nombre: string;
 }
 
-export const LineChartComponent = ({ data}: LineChartComponentProps) => {
+export const LineChartComponent = ({ data}: ChartComponentProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<Chart | null>(null); // 👉 guardamos el Chart también
+  const chartRef = useRef<Chart | null>(null);
 
   useEffect(() => {
     if (chartContainerRef.current) {
@@ -68,13 +27,13 @@ export const LineChartComponent = ({ data}: LineChartComponentProps) => {
 
       chart.render();
 
-      chartRef.current = chart; // guardamos referencia
+      chartRef.current = chart; 
     }
 
     return () => {
-      chartRef.current?.destroy(); // ✅ destruimos el chart cuando se desmonte
+      chartRef.current?.destroy(); 
     };
-  }, [data]); // 👉 se vuelve a correr si data cambia
+  }, [data]);
 
   return <div ref={chartContainerRef} style={{ height: 400 }} />;
 }

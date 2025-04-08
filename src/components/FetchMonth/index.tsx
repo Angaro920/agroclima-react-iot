@@ -24,7 +24,7 @@ export const FetchMonth = ({ parameter }: Props) => {
 
   return (
     <div>
-      <BarChartComponent data={promedio} nombre={parameter} />
+      <BarChartComponent data={promedio} />
     </div>
   );
 };

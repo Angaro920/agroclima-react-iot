@@ -1,11 +1,10 @@
 import {Chart} from "@antv/g2"
 import { MongoObject } from "../../constants/MongoObject";
 import { useEffect, useRef } from "react";
-interface LineChartComponentProps {
+interface ChartComponentProps {
   data: MongoObject[]; 
-  nombre: string
 }
-export const BarChartComponent = ({ data }: LineChartComponentProps) => {
+export const BarChartComponent = ({ data }: ChartComponentProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<Chart | null>(null);
   useEffect(() => {
@@ -26,7 +25,7 @@ export const BarChartComponent = ({ data }: LineChartComponentProps) => {
       chartRef.current = chart;
     }
     return () => {
-      chartRef.current?.destroy(); // ✅ destruimos el chart cuando se desmonte
+      chartRef.current?.destroy();
     }
   }, [data]);
 

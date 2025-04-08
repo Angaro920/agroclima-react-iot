@@ -7,4 +7,6 @@ export * from './ChartBar';
 export * from './FormUser';
 export * from './FormLogIn'
 export * from './ProtectedRoutes'
-export * from "./FormReport"
+export * from './FormReport'
+export * from './ChartGauge'
+export * from './ChartCompassRose'

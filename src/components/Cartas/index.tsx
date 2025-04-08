@@ -1,24 +1,29 @@
 import { Button, Card, Modal, Statistic } from "antd";
 import { CardStyle } from "./Cardstyle";
-import { FetchDay } from "../FetchDay"; 
+import { FetchDay } from "../FetchDay";
 import { useState } from "react";
 import { FetchWeek } from "../FetchWeek";
 import { FetchMonth } from "../FetchMonth";
 import { CollectionNameType } from "../../types";
+import { ChartType } from "../../types/ChartType";
+import { GaugeChartComponent } from "../ChartGauge";
+import {RosaVientos} from "../ChartCompassRose";
 
 interface Props {
   title: string;
   value: number | string | undefined;
   sufix: string;
-  parameter: CollectionNameType
+  parameter: CollectionNameType;
   icon?: React.ReactNode;
-  tipo: string
+  tipo: ChartType;
+  data: number | undefined;
 }
 export const CartasDashboard = ({
   title,
   value,
   sufix,
   parameter,
+  data,
   icon,
   tipo,
 }: Props) => {
@@ -55,7 +60,19 @@ export const CartasDashboard = ({
             <div style={{ minWidth: "32px", marginLeft: "12px" }}>{icon}</div>
           )}
         </div>
-       <FetchDay tipo={tipo} parameter={parameter} />
+        <FetchDay tipo={tipo} parameter={parameter} />
+        {}
+        {tipo === "gauge" ? (
+          <GaugeChartComponent data={data} />
+        ) : tipo === "rose" ? (
+          <div className="p-6 max-w-lg mx-auto">
+            <h1 className="text-2xl font-bold text-center mb-6">
+              Rosa de los Vientos
+            </h1>
+            <RosaVientos direccion={data} />
+          </div>
+        ) : null}
+
         <Button onClick={showModal}>Ver más</Button>
       </Card>
       <Modal
@@ -67,15 +84,15 @@ export const CartasDashboard = ({
       >
         <div>
           <h3>Diario</h3>
-         <FetchDay tipo={tipo} parameter={parameter} /> 
+          <FetchDay tipo={tipo} parameter={parameter} />
         </div>
         <div>
           <h3>Semanal</h3>
-         <FetchWeek parameter={parameter} /> 
+          <FetchWeek parameter={parameter} />
         </div>
         <div>
           <h3>Mensual</h3>
-         <FetchMonth parameter={parameter} />
+          <FetchMonth parameter={parameter} />
         </div>
       </Modal>
     </div>

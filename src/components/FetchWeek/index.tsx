@@ -24,7 +24,7 @@ export const FetchWeek = ({ parameter }: Props) => {
 
   return (
     <div>
-      <AreaChartComponent data={promedio} nombre={parameter} />
+      <AreaChartComponent data={promedio}/>
     </div>
   );
 };
