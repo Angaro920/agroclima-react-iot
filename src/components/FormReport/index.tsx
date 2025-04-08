@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DatePicker, Form, Radio, Select, Button, message } from "antd";
 import moment from "moment";
+import { BACKEND_URL } from "../../constants/urls";
 
 const { RangePicker } = DatePicker;
 
@@ -28,7 +29,7 @@ export const FormReport = () => {
     const startDate = dateRange[0].format("YYYY-MM-DD");
     const endDate = dateRange[1].format("YYYY-MM-DD");
 
-    const url = `http://localhost:8000/api/${tipoReporte}/${Variable}?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z`;
+    const url = BACKEND_URL+`/api/${tipoReporte}/${Variable}?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z`;
 
     console.log("Realizando petición a:", url);
     setLoading(true);

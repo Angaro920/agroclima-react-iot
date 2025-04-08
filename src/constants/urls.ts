@@ -1,1 +1,1 @@
-export const BACKEND_URL = "https://offshore-issues-poems-impaired.trycloudflare.com";;
+export const BACKEND_URL = "https://commissioner-wheat-salaries-behavioral.trycloudflare.com";

@@ -8,10 +8,9 @@ import { CollectionNameType } from "../../types";
 
 interface Props {
   title: string;
-  value: number;
+  value: number | string | undefined;
   sufix: string;
   parameter: CollectionNameType
-
   icon?: React.ReactNode;
 }
 export const CartasDashboard = ({
