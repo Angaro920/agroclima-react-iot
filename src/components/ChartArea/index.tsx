@@ -22,7 +22,7 @@ export const AreaChartComponent = ({ data }: ChartComponentProps) => {
         .data(data)
         .encode('x', '_id')
         .encode('y', 'promedio')
-        .style({fill: '#82ca9d', stroke: '#82ca9d'})
+        .style({fill: '#C70039', stroke: '#82ca9d'})
 
       chart.render();
 

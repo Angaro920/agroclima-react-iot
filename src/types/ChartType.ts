@@ -7,3 +7,5 @@ export type ChartType =
   | "pie"
   | "radar"
   | "rose"
+  | "liquid"
+  | "bullet"

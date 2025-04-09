@@ -19,7 +19,7 @@ export const BarChartComponent = ({ data }: ChartComponentProps) => {
         .data(data)
         .encode('x', '_id')
         .encode('y', 'promedio')
-        .style({fill: 'grey'})
+        .style({fill: '#ca6f1e'})
 
       chart.render();
       chartRef.current = chart;

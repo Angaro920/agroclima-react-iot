@@ -1,12 +1,12 @@
-import { Chart } from '@antv/g2';
-import { useEffect, useRef } from 'react';
-import { MongoObject } from '../../constants/MongoObject';
+import { Chart } from "@antv/g2";
+import { useEffect, useRef } from "react";
+import { MongoObject } from "../../constants/MongoObject";
 
 interface ChartComponentProps {
   data: MongoObject[];
 }
 
-export const LineChartComponent = ({ data}: ChartComponentProps) => {
+export const LineChartComponent = ({ data }: ChartComponentProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<Chart | null>(null);
 
@@ -18,22 +18,30 @@ export const LineChartComponent = ({ data}: ChartComponentProps) => {
       });
 
       chart
-        .line()
         .data(data)
-        .encode('x', '_id')
-        .encode('y', 'promedio')
-        .style({stroke:'skyblue', lineWidth: 2, opacity: 0.5});
-        
+        .encode("x", "_id")
+        .encode("y", "promedio")
+        .scale("x", {
+          range: [0, 1],
+        })
+        .scale("y", {
+          domainMin: 0,
+          nice: true,
+        });
+
+      chart.line()
+
+      chart.point().style("fill", "white").tooltip(false);
 
       chart.render();
 
-      chartRef.current = chart; 
+      chartRef.current = chart;
     }
 
     return () => {
-      chartRef.current?.destroy(); 
+      chartRef.current?.destroy();
     };
   }, [data]);
 
   return <div ref={chartContainerRef} style={{ height: 400 }} />;
-}
+};

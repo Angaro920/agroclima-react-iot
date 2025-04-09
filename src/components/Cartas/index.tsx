@@ -7,7 +7,10 @@ import { FetchMonth } from "../FetchMonth";
 import { CollectionNameType } from "../../types";
 import { ChartType } from "../../types/ChartType";
 import { GaugeChartComponent } from "../ChartGauge";
-import {RosaVientos} from "../ChartCompassRose";
+import { RosaVientos } from "../ChartCompassRose";
+import { FluidChartComponent } from "../ChartFluid";
+import { PieChartComponent } from "../ChartPie";
+import { BulletChartComponent } from "../ChartBullet";
 
 interface Props {
   title: string;
@@ -61,17 +64,17 @@ export const CartasDashboard = ({
           )}
         </div>
         <FetchDay tipo={tipo} parameter={parameter} />
-        {}
+        
         {tipo === "gauge" ? (
           <GaugeChartComponent data={data} />
         ) : tipo === "rose" ? (
-          <div className="p-6 max-w-lg mx-auto">
-            <h1 className="text-2xl font-bold text-center mb-6">
-              Rosa de los Vientos
-            </h1>
-            <RosaVientos direccion={data} />
-          </div>
-        ) : null}
+          <RosaVientos direccion={data} />
+        ) : tipo === "liquid" ? (
+          <FluidChartComponent data={data} />
+        ) : tipo === "pie" ? (
+          <PieChartComponent data={data} />
+        ) : tipo === "bullet" ? (
+          <BulletChartComponent data={data}/>) : null}
 
         <Button onClick={showModal}>Ver más</Button>
       </Card>

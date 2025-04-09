@@ -14,7 +14,6 @@ export const Dashboard = () => {
   const { loading, getLastData, weather } = useGetLastData();
   useEffect(() => {
     getLastData();
-    console.log("Peticion realizada");
     const interval = setInterval(() => {
       getLastData();
     }, 60000);
@@ -22,7 +21,7 @@ export const Dashboard = () => {
     return () => clearInterval(interval);
   }, []);
   
-
+  console.log(weather, "Peticion realizada")
   return (
     <div style={dashboardStyle.mainSector}>
       <h2 style={{ display: "flex", justifyContent: "center" }}>
@@ -36,7 +35,7 @@ export const Dashboard = () => {
             sufix="°C"
             parameter="TemperaturaInterna"
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
-            tipo="area"
+            tipo="line"
             data={0}
           />
         </Col>
@@ -152,7 +151,7 @@ export const Dashboard = () => {
             sufix="mph"
             parameter="VelocidadViento"
             icon={<FiWind size={44} color="#3f8600" />}
-            tipo="line"
+            tipo="area"
             data={0}
           />
         </Col>
@@ -189,8 +188,8 @@ export const Dashboard = () => {
             sufix="mJ/cm²"
             parameter="Uv"
             icon={<LuSunDim size={44} color="#3f8600" />}
-            tipo="line"
-            data={0}
+            tipo="bullet"
+            data={weather?.Uv.data}
           />
         </Col>
         <Col span={50}>
@@ -200,9 +199,10 @@ export const Dashboard = () => {
             sufix="in"
             parameter="Precipitaciones"
             icon={<LuCloudRainWind size={44} color="#3f8600" />}
-            tipo="area"
-            data={0}
+            tipo="liquid"
+            data={weather?.Precipitaciones.data}
           />
+      
         </Col>
       </Row>
     </div>
