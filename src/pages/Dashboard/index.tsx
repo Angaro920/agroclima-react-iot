@@ -8,9 +8,12 @@ import { WiBarometer } from "react-icons/wi";
 import { LuSun, LuSunDim, LuCloudRainWind, LuCompass } from "react-icons/lu";
 import { BsMoisture } from "react-icons/bs";
 import { useGetLastData } from "../../hooks/useGetLastData";
+import { Pages } from "../../constants/pages";
+interface DashboardProps {
+  setCurrentPage: (page: Pages) => void;
+}
 
-
-export const Dashboard = () => {
+export const Dashboard = (setCurrentPage : DashboardProps) => {
   const { loading, getLastData, weather } = useGetLastData();
   useEffect(() => {
     getLastData();
@@ -37,6 +40,7 @@ export const Dashboard = () => {
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
             tipo="line"
             data={0}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
         <Col span={50}>
@@ -48,6 +52,7 @@ export const Dashboard = () => {
             icon={<BsMoisture size={44} color="#3f8600" />}
             tipo="gauge"
             data={weather?.HumedadSensor.data}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
       </Row>
@@ -61,6 +66,7 @@ export const Dashboard = () => {
             icon={<LuSun size={44} color="#3f8600" />}
             tipo="bar"
             data={0}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
         <Col span={50}>
@@ -72,6 +78,7 @@ export const Dashboard = () => {
             tipo="line"
             icon={<LuSun size={44} color="#3f8600" />}
             data={0}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
       </Row>
@@ -88,6 +95,7 @@ export const Dashboard = () => {
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
             tipo="area"
             data={0}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
         <Col span={50}>
@@ -99,6 +107,7 @@ export const Dashboard = () => {
             icon={<BsMoisture size={44} color="#3f8600" />}
             tipo="gauge"
             data={weather?.HumedadInterna.data}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
       </Row>
@@ -115,6 +124,7 @@ export const Dashboard = () => {
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
             tipo="line"
             data={0}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
 
@@ -127,6 +137,7 @@ export const Dashboard = () => {
             icon={<BsMoisture size={44} color="#3f8600" />}
             tipo="gauge"
             data={weather?.HumedadExterna.data}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
       </Row>
@@ -142,6 +153,7 @@ export const Dashboard = () => {
             icon={<WiBarometer size={54} color="#3f8600" />}
             tipo="bar"
             data={0}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
         <Col span={50}>
@@ -153,6 +165,7 @@ export const Dashboard = () => {
             icon={<FiWind size={44} color="#3f8600" />}
             tipo="area"
             data={0}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
         </Row>
@@ -166,6 +179,7 @@ export const Dashboard = () => {
             icon={<LuCompass size={44} color="#3f8600" />}
             tipo="rose"
             data={weather?.DireccionViento.data}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
         <Col span={50}>
@@ -177,6 +191,7 @@ export const Dashboard = () => {
             icon={<LuSun size={44} color="#3f8600" />}
             tipo="bar"
             data={0}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
         </Row>
@@ -190,6 +205,7 @@ export const Dashboard = () => {
             icon={<LuSunDim size={44} color="#3f8600" />}
             tipo="bullet"
             data={weather?.Uv.data}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
         <Col span={50}>
@@ -201,6 +217,7 @@ export const Dashboard = () => {
             icon={<LuCloudRainWind size={44} color="#3f8600" />}
             tipo="liquid"
             data={weather?.Precipitaciones.data}
+            setCurrentPage={setCurrentPage.setCurrentPage}
           />
       
         </Col>

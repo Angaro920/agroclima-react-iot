@@ -70,7 +70,7 @@ const App = () => {
                   </Sider>
                   <Layout>
                     <Content style={{ margin: "0 16px" }}>
-                      {currentPage === Pages.DASHBOARD && <Dashboard />}
+                      {currentPage === Pages.DASHBOARD && <Dashboard setCurrentPage={setCurrentPage}/>}
                       {currentPage === Pages.DEVICES && <Devices />}
                       {currentPage === Pages.LISTHIDRO && <ReportHidPage />}
                       {currentPage === Pages.LISTHUM && <ReportHumPage />}

@@ -1,9 +1,6 @@
-import { Button, Card, Modal, Statistic } from "antd";
+import { Button, Card, Statistic } from "antd";
 import { CardStyle } from "./Cardstyle";
 import { FetchDay } from "../FetchDay";
-import { useState } from "react";
-import { FetchWeek } from "../FetchWeek";
-import { FetchMonth } from "../FetchMonth";
 import { CollectionNameType } from "../../types";
 import { ChartType } from "../../types/ChartType";
 import { GaugeChartComponent } from "../ChartGauge";
@@ -11,6 +8,7 @@ import { RosaVientos } from "../ChartCompassRose";
 import { FluidChartComponent } from "../ChartFluid";
 import { PieChartComponent } from "../ChartPie";
 import { BulletChartComponent } from "../ChartBullet";
+import { Pages } from "../../constants/pages";
 
 interface Props {
   title: string;
@@ -20,7 +18,9 @@ interface Props {
   icon?: React.ReactNode;
   tipo: ChartType;
   data: number | undefined;
+  setCurrentPage: (page: Pages) => void;
 }
+
 export const CartasDashboard = ({
   title,
   value,
@@ -29,15 +29,52 @@ export const CartasDashboard = ({
   data,
   icon,
   tipo,
+  setCurrentPage
 }: Props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  function handleViewMore() {
+    switch (parameter) {
+      case "TemperaturaSensor":
+        setCurrentPage(Pages.LISTTEMP);
+        break;
+      case "HumedadSensor":
+        setCurrentPage(Pages.LISTHUM);
+        break;
+      case "LuzSensor":
+        setCurrentPage(Pages.LISTLUZ);
+        break;
+      case "HidrogenoSensor":
+        setCurrentPage(Pages.LISTHIDRO);
+        break;
+      case "TemperaturaExterna":
+        setCurrentPage(Pages.LISTTEMPOUT);
+        break;
+      case "TemperaturaInterna":
+        setCurrentPage(Pages.LISTTEMPIN);
+        break;
+      case "HumedadInterna":
+        setCurrentPage(Pages.LISTHUMEIN);
+        break;
+      case "HumedadExterna":
+        setCurrentPage(Pages.LISTHUMEOUT);
+        break;
+      case "PresionBarometricaRelativa":
+        setCurrentPage(Pages.LISTBAROMREL);
+        break;
+      case "RadiacionSolar":
+        setCurrentPage(Pages.LISTSOLARRAD);
+        break;
+      case "Uv":
+        setCurrentPage(Pages.LISTUV);
+        break;
+      case "Precipitaciones":
+        setCurrentPage(Pages.LISTEVENRAIN);
+        break;
+      default:
+        console.error("Página no definida para el parámetro:", parameter);
+    }
+  }
+
   return (
     <div>
       <Card bordered={true} style={CardStyle.GlobalCard} title={title}>
@@ -49,7 +86,6 @@ export const CartasDashboard = ({
             padding: "8px 0",
           }}
         >
-          {/* Value Left */}
           <Statistic
             title="Actual"
             value={value}
@@ -57,14 +93,13 @@ export const CartasDashboard = ({
             valueStyle={{ color: "#3f8600" }}
             suffix={sufix}
           />
-
-          {/* Icon Right */}
           {icon && (
             <div style={{ minWidth: "32px", marginLeft: "12px" }}>{icon}</div>
           )}
         </div>
+
         <FetchDay tipo={tipo} parameter={parameter} />
-        
+
         {tipo === "gauge" ? (
           <GaugeChartComponent data={data} />
         ) : tipo === "rose" ? (
@@ -74,30 +109,11 @@ export const CartasDashboard = ({
         ) : tipo === "pie" ? (
           <PieChartComponent data={data} />
         ) : tipo === "bullet" ? (
-          <BulletChartComponent data={data}/>) : null}
+          <BulletChartComponent data={data} />
+        ) : null}
 
-        <Button onClick={showModal}>Ver más</Button>
+        <Button onClick={handleViewMore}>Ver más</Button>
       </Card>
-      <Modal
-        title={title}
-        open={isModalOpen}
-        onOk={handleCancel}
-        onCancel={handleCancel}
-        width={850}
-      >
-        <div>
-          <h3>Diario</h3>
-          <FetchDay tipo={tipo} parameter={parameter} />
-        </div>
-        <div>
-          <h3>Semanal</h3>
-          <FetchWeek parameter={parameter} />
-        </div>
-        <div>
-          <h3>Mensual</h3>
-          <FetchMonth parameter={parameter} />
-        </div>
-      </Modal>
     </div>
   );
 };

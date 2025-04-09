@@ -23,6 +23,7 @@ export const AreaChartComponent = ({ data }: ChartComponentProps) => {
         .encode('x', '_id')
         .encode('y', 'promedio')
         .style({fill: '#C70039', stroke: '#82ca9d'})
+        .animate('enter', { type: 'pathIn', duration: 1000 });
 
       chart.render();
 

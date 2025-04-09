@@ -32,7 +32,7 @@ export const LineChartComponent = ({ data }: ChartComponentProps) => {
       chart.line()
 
       chart.point().style("fill", "white").tooltip(false);
-
+      chart.animate('enter', { type: 'pathIn', duration: 1000 });
       chart.render();
 
       chartRef.current = chart;

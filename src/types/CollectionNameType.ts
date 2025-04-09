@@ -5,6 +5,7 @@ export type CollectionNameType =
   | "HumedadSensor"
   | "TemperaturaInterna"
   | "TemperaturaExterna"
+  | "HumedadSensor"
   | "HumedadInterna"
   | "HumedadExterna"
   | "RadiacionUV"

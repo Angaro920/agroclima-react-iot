@@ -1,8 +1,8 @@
-import {Chart} from "@antv/g2"
+import { Chart } from "@antv/g2";
 import { MongoObject } from "../../constants/MongoObject";
 import { useEffect, useRef } from "react";
 interface ChartComponentProps {
-  data: MongoObject[]; 
+  data: MongoObject[];
 }
 export const BarChartComponent = ({ data }: ChartComponentProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -17,16 +17,17 @@ export const BarChartComponent = ({ data }: ChartComponentProps) => {
       chart
         .interval()
         .data(data)
-        .encode('x', '_id')
-        .encode('y', 'promedio')
-        .style({fill: '#ca6f1e'})
-
+        .encode("x", "_id")
+        .encode("y", "promedio")
+        .style({ fill: "#ca6f1e" })
+        .animate("enter", { type: "scaleInY", duration: 1000 })
+        .animate("exit", { type: "scaleOutY", duration: 2000 });
       chart.render();
       chartRef.current = chart;
     }
     return () => {
       chartRef.current?.destroy();
-    }
+    };
   }, [data]);
 
   return <div ref={chartContainerRef} style={{ height: 400 }} />;

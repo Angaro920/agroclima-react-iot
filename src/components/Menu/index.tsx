@@ -1,20 +1,21 @@
+import { useState } from "react"; // <-- Importante
+import { Modal, Menu } from "antd"; // Modal agregado
+import { useUser } from "../../hooks/useAuthUser";
+import { useAuth } from "../../hooks/useAuth"; 
+import { Pages } from "../../constants/pages";
 import {
   ControlOutlined,
   DashboardOutlined,
   DatabaseOutlined,
-  ExperimentOutlined,
   LogoutOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Menu } from "antd";
-import { Pages } from "../../constants/pages";
-import { useUser } from "../../hooks/useAuthUser";
-import { useAuth } from "../../hooks/useAuth"; 
+import { FormReport } from "../FormReport";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
-// Función para generar los elementos del menú según el tag
+// Ahora "Reportes" no tendrá hijos
 const getMenuItems = (tag: string): MenuItem[] => {
   const baseItems: MenuItem[] = [
     {
@@ -23,23 +24,9 @@ const getMenuItems = (tag: string): MenuItem[] => {
       icon: <DashboardOutlined />,
     },
     {
-      key: "Reports",
+      key: "Reports", // Mantienes este
       label: "Reportes",
       icon: <DatabaseOutlined />,
-      children: [
-        { key: Pages.LISTTEMP, label: "Temperatura", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTHUM, label: "Humedad", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTHIDRO, label: "Gas", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTLUZ, label: "Luz", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTTEMPOUT, label: "Temperatura exterior", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTHUMEOUT, label: "Humedad exterior", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTTEMPIN, label: "Temperatura interior", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTHUMEIN, label: "Humedad interior", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTBAROMREL, label: "Presión atmosférica", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTSOLARRAD, label: "Radiación solar", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTUV, label: "Índice UV", icon: <ExperimentOutlined /> },
-        { key: Pages.LISTEVENRAIN, label: "Precipitaciones", icon: <ExperimentOutlined /> },
-      ],
     },
   ];
 
@@ -64,7 +51,6 @@ const getMenuItems = (tag: string): MenuItem[] => {
     });
   }
 
-  // Agregar el botón de cerrar sesión para todos los roles
   baseItems.push(
     { type: "divider" },
     {
@@ -79,27 +65,43 @@ const getMenuItems = (tag: string): MenuItem[] => {
 
 export const MenuDashboard = ({ setCurrentPage }: { setCurrentPage: (key: string) => void }) => {
   const { user, loading } = useUser();
-  const { logout } = useAuth();  // Obtén el usuario autenticado
+  const { logout } = useAuth();
+
+  const [isReportsModalOpen, setIsReportsModalOpen] = useState(false); // <-- Modal para Reportes
 
   if (loading) return <p>Cargando...</p>;
 
-  // Filtra los elementos del menú según el tag del usuario
   const items = getMenuItems(user?.tag || "estudiante");
 
   return (
-    <Menu
-      defaultSelectedKeys={["1"]}
-      items={items}
-      theme="dark"
-      mode="inline"
-      onClick={(event) => {
-        if (event.key === "logout") {
-          logout(); // Cierra la sesión
-          window.location.href = "/login"; // Redirige al login
-        } else {
-          setCurrentPage(event.key);
-        }
-      }}
-    />
+    <>
+      <Menu
+        defaultSelectedKeys={["1"]}
+        items={items}
+        theme="dark"
+        mode="inline"
+        onClick={(event) => {
+          if (event.key === "logout") {
+            logout();
+            window.location.href = "/";
+          } else if (event.key === "Reports") {
+            setIsReportsModalOpen(true); // <-- Mostrar modal si es "Reports"
+          } else {
+            setCurrentPage(event.key);
+          }
+        }}
+      />
+      
+      {/* Modal de Reportes */}
+      <Modal
+        title="Generar Reporte"
+        open={isReportsModalOpen}
+        onOk={() => setIsReportsModalOpen(false)}
+        onCancel={() => setIsReportsModalOpen(false)}
+        width={700}
+      >
+        <FormReport />
+      </Modal>
+    </>
   );
 };

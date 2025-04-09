@@ -16,13 +16,12 @@ export const FluidChartComponent = ({ data }: ChartComponentProps) => {
         autoFit: true,
       });
 
-      chart.liquid().data(data).style({
+      chart.liquid().data(0.75).style({
         shape: "circle",
         contentFill: "black",
         outlineBorder: 4,
         outlineDistance: 8,
         waveLength: 128,
-        backgroundFill: 'pink',
       });
       chart.render();
       chartRef.current = chart;
