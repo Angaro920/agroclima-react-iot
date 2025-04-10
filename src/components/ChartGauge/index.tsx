@@ -2,7 +2,7 @@ import { Chart } from "@antv/g2";
 import { useEffect, useRef } from "react";
 
 interface ChartComponentProps {
-  data: number | undefined;
+  data: number;
 }
 
 export const GaugeChartComponent = ({ data }: ChartComponentProps) => {
@@ -21,7 +21,7 @@ useEffect(() => {
         value: {
           target: data,
           total: 100,
-          name: "score",
+          name: "data",
           thresholds: [25, 50, 100],
         },
       })

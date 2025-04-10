@@ -51,7 +51,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             parameter="HumedadSensor"
             icon={<BsMoisture size={44} color="#3f8600" />}
             tipo="gauge"
-            data={weather?.HumedadSensor.data}
+            data={weather?.HumedadSensor.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
@@ -64,7 +64,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             sufix="%"
             parameter="LuzSensor"
             icon={<LuSun size={44} color="#3f8600" />}
-            tipo="bar"
+            tipo="area"
             data={0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
@@ -75,7 +75,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             value={loading ? "Cargando..." : weather?.HidrogenoSensor.data}
             sufix="ppp"
             parameter="HidrogenoSensor"
-            tipo="line"
+            tipo="bar"
             icon={<LuSun size={44} color="#3f8600" />}
             data={0}
             setCurrentPage={setCurrentPage.setCurrentPage}
@@ -93,7 +93,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             sufix="°C"
             parameter="TemperaturaInterna"
             icon={<FaTemperatureHigh size={44} color="#3f8600" />}
-            tipo="area"
+            tipo="line"
             data={0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
@@ -106,7 +106,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             parameter="HumedadInterna"
             icon={<BsMoisture size={44} color="#3f8600" />}
             tipo="gauge"
-            data={weather?.HumedadInterna.data}
+            data={weather?.HumedadInterna.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
@@ -136,7 +136,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             parameter="HumedadExterna"
             icon={<BsMoisture size={44} color="#3f8600" />}
             tipo="gauge"
-            data={weather?.HumedadExterna.data}
+            data={weather?.HumedadExterna.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
@@ -151,8 +151,8 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             sufix="inHg"
             parameter="PresionBarometricaRelativa"
             icon={<WiBarometer size={54} color="#3f8600" />}
-            tipo="bar"
-            data={0}
+            tipo="gauge"
+            data={weather?.PresionBarometricaRelativa.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
@@ -178,7 +178,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             parameter="DireccionViento"
             icon={<LuCompass size={44} color="#3f8600" />}
             tipo="rose"
-            data={weather?.DireccionViento.data}
+            data={weather?.DireccionViento.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
@@ -204,7 +204,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             parameter="Uv"
             icon={<LuSunDim size={44} color="#3f8600" />}
             tipo="bullet"
-            data={weather?.Uv.data}
+            data={weather?.Uv.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
@@ -216,7 +216,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             parameter="Precipitaciones"
             icon={<LuCloudRainWind size={44} color="#3f8600" />}
             tipo="liquid"
-            data={weather?.Precipitaciones.data}
+            data={weather?.Precipitaciones.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
       

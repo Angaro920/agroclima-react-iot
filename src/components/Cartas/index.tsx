@@ -17,7 +17,7 @@ interface Props {
   parameter: CollectionNameType;
   icon?: React.ReactNode;
   tipo: ChartType;
-  data: number | undefined;
+  data: number;
   setCurrentPage: (page: Pages) => void;
 }
 

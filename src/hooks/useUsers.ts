@@ -98,7 +98,7 @@ export const useUsers = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        BACKEND_URL+`api/deleteUser/${id}`,
+        BACKEND_URL+`/api/deleteUser/${id}`,
         {
           method: "DELETE",
         }

@@ -16,7 +16,7 @@ export const FluidChartComponent = ({ data }: ChartComponentProps) => {
         autoFit: true,
       });
 
-      chart.liquid().data(0.75).style({
+      chart.liquid().data(data).style({
         shape: "circle",
         contentFill: "black",
         outlineBorder: 4,

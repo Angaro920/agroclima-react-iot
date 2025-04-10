@@ -2,7 +2,7 @@ import { Chart } from "@antv/g2";
 import { useEffect, useRef } from "react";
 
 interface ChartComponentProps {
-  data: number | undefined;
+  data: number;
 }
 /*ESTE CHART AUN NO FUNCIONA*/ 
 export const PieChartComponent = ({ data }: ChartComponentProps) => {
