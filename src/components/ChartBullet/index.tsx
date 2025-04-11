@@ -9,9 +9,9 @@ export const BulletChartComponent = ({ data }: ChartComponentProps) => {
   const dataBullet = [
     {
       title: 'Uv',
-      ranges: 100,
+      ranges: 14,
       measures: data,
-      target: 100,
+      target: 14,
     },
   ];
   useEffect(() => {

@@ -50,7 +50,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             sufix="%"
             parameter="HumedadSensor"
             icon={<BsMoisture size={44} color="#3f8600" />}
-            tipo="gauge"
+            tipo="line"
             data={weather?.HumedadSensor.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
@@ -105,7 +105,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             sufix="%"
             parameter="HumedadInterna"
             icon={<BsMoisture size={44} color="#3f8600" />}
-            tipo="gauge"
+            tipo="line"
             data={weather?.HumedadInterna.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
@@ -135,7 +135,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             sufix="%"
             parameter="HumedadExterna"
             icon={<BsMoisture size={44} color="#3f8600" />}
-            tipo="gauge"
+            tipo="line"
             data={weather?.HumedadExterna.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
