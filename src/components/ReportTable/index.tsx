@@ -1,9 +1,7 @@
 import { Table  } from "antd";
 import { FC } from "react";
 import { DataType } from "../../types";
-
 import { es } from 'date-fns/locale'
-import { formatInTimeZone } from 'date-fns-tz'
 
 es.code= 'es-CO'
 
@@ -17,13 +15,12 @@ interface DataTableProps {
 const columns = [
   {
     title: "Registro",
-    dataIndex: "data",
-    width: 150,
+    dataIndex: "promedio",
+    width: 300,
   },
   {
     title: "Fecha",
-    dataIndex: "time",
-    render: (time: string) => formatInTimeZone(time, 'America/Bogota',  'dd MMMM yyyy  HH:mm:ss', { locale: es }),
+    dataIndex: "fecha",
   },
 ];
 
@@ -36,8 +33,8 @@ export const ReportTable: FC<DataTableProps> = ({
   const mappedData: Partial<DataType>[] = weather.map((item) => ({
     key: item._id || "",
     _id: item._id,
-    data: item.data + " " + sufijo,
-    time: item.time,
+    promedio: item.promedio + " " + sufijo,
+    fecha: item.fecha,
   }));
   
 
