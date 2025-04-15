@@ -29,9 +29,8 @@ export const CartasDashboard = ({
   data,
   icon,
   tipo,
-  setCurrentPage
+  setCurrentPage,
 }: Props) => {
-
   function handleViewMore() {
     switch (parameter) {
       case "TemperaturaSensor":
@@ -69,6 +68,12 @@ export const CartasDashboard = ({
         break;
       case "Precipitaciones":
         setCurrentPage(Pages.LISTEVENRAIN);
+        break;
+      case "DireccionViento":
+        setCurrentPage(Pages.LISTDIRWIND);
+        break;
+      case "VelocidadViento":
+        setCurrentPage(Pages.LISTVELWIND);
         break;
       default:
         console.error("Página no definida para el parámetro:", parameter);

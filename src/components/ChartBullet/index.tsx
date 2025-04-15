@@ -42,7 +42,7 @@ export const BulletChartComponent = ({ data }: ChartComponentProps) => {
       .interval()
       .encode('x', 'title')
       .encode('y', 'measures')
-      .encode('color', '#5B8FF9')
+      .encode('color', '#64DD17')
       .style('maxWidth', 20)
       .label({
         text: 'measures',

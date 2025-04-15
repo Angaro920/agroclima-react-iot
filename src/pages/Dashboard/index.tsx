@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { Col, Row } from "antd";
+import { Card, Col, Row } from "antd";
 import { dashboardStyle } from "../../styles";
-import { CartasDashboard } from "../../components";
+import { CartasDashboard, FetchDualDay } from "../../components";
 import { FaTemperatureHigh } from "react-icons/fa";
 import { FiWind } from "react-icons/fi";
 import { WiBarometer } from "react-icons/wi";
@@ -13,7 +13,7 @@ interface DashboardProps {
   setCurrentPage: (page: Pages) => void;
 }
 
-export const Dashboard = (setCurrentPage : DashboardProps) => {
+export const Dashboard = (setCurrentPage: DashboardProps) => {
   const { loading, getLastData, weather } = useGetLastData();
   useEffect(() => {
     getLastData();
@@ -23,8 +23,8 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
 
     return () => clearInterval(interval);
   }, []);
-  
-  console.log(weather, "Peticion realizada")
+
+  console.log(weather, "Peticion realizada");
   return (
     <div style={dashboardStyle.mainSector}>
       <h2 style={{ display: "flex", justifyContent: "center" }}>
@@ -111,6 +111,30 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
           />
         </Col>
       </Row>
+      <Row gutter={16}>
+        <Col span={50}>
+          <Card
+            title="Temperatura Externa vs Interna"
+            style={{ marginTop: 20, width: 800 }}
+          >
+            <FetchDualDay
+              parameter="TemperaturaExterna"
+              parameter2="TemperaturaInterna"
+            ></FetchDualDay>
+          </Card>
+        </Col>
+        <Col span={50}>
+        <Card
+            title="Humedad Externa vs Interna"
+            style={{ marginTop: 20, width: 800 }}
+          >
+            <FetchDualDay
+              parameter="HumedadExterna"
+              parameter2="HumedadInterna"
+            ></FetchDualDay>
+          </Card>
+        </Col>
+      </Row>
       <h2 style={{ display: "flex", justifyContent: "center" }}>
         Estacion Meteorologica Cielo Abierto
       </h2>
@@ -127,7 +151,6 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
-
         <Col span={50}>
           <CartasDashboard
             title="Humedad externa"
@@ -148,7 +171,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             value={
               loading ? "Cargando..." : weather?.PresionBarometricaRelativa.data
             }
-            sufix="inHg"
+            sufix="mmHg"
             parameter="PresionBarometricaRelativa"
             icon={<WiBarometer size={54} color="#3f8600" />}
             tipo="gauge"
@@ -160,7 +183,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
           <CartasDashboard
             title="Velocidad del viento"
             value={loading ? "Cargando..." : weather?.VelocidadViento.data}
-            sufix="mph"
+            sufix="kph"
             parameter="VelocidadViento"
             icon={<FiWind size={44} color="#3f8600" />}
             tipo="area"
@@ -168,7 +191,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
-        </Row>
+      </Row>
       <Row gutter={16}>
         <Col span={50}>
           <CartasDashboard
@@ -194,7 +217,7 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
         </Col>
-        </Row>
+      </Row>
       <Row gutter={16}>
         <Col span={50}>
           <CartasDashboard
@@ -212,14 +235,13 @@ export const Dashboard = (setCurrentPage : DashboardProps) => {
           <CartasDashboard
             title="Precipitaciones - Hoy"
             value={loading ? "Cargando..." : weather?.Precipitaciones.data}
-            sufix="in"
+            sufix="mm"
             parameter="Precipitaciones"
             icon={<LuCloudRainWind size={44} color="#3f8600" />}
             tipo="liquid"
             data={weather?.Precipitaciones.data ?? 0}
             setCurrentPage={setCurrentPage.setCurrentPage}
           />
-      
         </Col>
       </Row>
     </div>

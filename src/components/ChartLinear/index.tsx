@@ -19,7 +19,7 @@ export const LineChartComponent = ({ data }: ChartComponentProps) => {
 
       chart
         .data(data)
-        .encode("x", "_id")
+        .encode("x", "fecha")
         .encode("y", "promedio")
         .scale("x", {
           range: [0, 1],
@@ -29,9 +29,9 @@ export const LineChartComponent = ({ data }: ChartComponentProps) => {
           nice: true,
         });
 
-      chart.line()
-
-      chart.point().style("fill", "white").tooltip(false);
+      chart.line().style({stroke: "#2979FF", lineWidth: 4});
+      
+      chart.point().style("fill", "#2979FF").tooltip(false);
       chart.animate('enter', { type: 'pathIn', duration: 1000 });
       chart.render();
 

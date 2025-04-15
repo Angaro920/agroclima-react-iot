@@ -20,9 +20,9 @@ export const AreaChartComponent = ({ data }: ChartComponentProps) => {
       chart
         .area()
         .data(data)
-        .encode('x', '_id')
+        .encode('x', 'fecha')
         .encode('y', 'promedio')
-        .style({fill: '#C70039', stroke: '#82ca9d'})
+        .style({fill: '#82B1FF80', stroke: '#82ca9d'})
         .animate('enter', { type: 'pathIn', duration: 1000 });
 
       chart.render();

@@ -134,7 +134,7 @@ export const useGetData = () => {
   const getHumeIn = async () => {
     try {
       const response = await fetch(
-        BACKEND_URL+"api/listData/HumedadInterna"
+        BACKEND_URL+"/api/listData/HumedadInterna"
       );
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
@@ -220,6 +220,43 @@ export const useGetData = () => {
     }
   };
 
+  const getDirViento = async () => {
+    try {
+      const response = await fetch(
+        BACKEND_URL+"/api/listData/DireccionViento"
+      );
+      if (!response.ok) throw new Error("Error al obtener la temperatura");
+
+      const data = await response.json();
+      setWeather(data);
+      setLoading(false);
+      return data;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error desconocido");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }
+  const getVelWind = async () => {
+    try {
+      const response = await fetch(
+        BACKEND_URL+"/api/listData/VelocidadViento"
+      );
+      if (!response.ok) throw new Error("Error al obtener la temperatura");
+
+      const data = await response.json();
+      setWeather(data);
+      setLoading(false);
+      return data;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error desconocido");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return {
     weather,
     error,
@@ -236,6 +273,8 @@ export const useGetData = () => {
     getSolarRad,
     getUv,
     getRain,
+    getDirViento,
+    getVelWind,
   };
 };
 export default useGetData;

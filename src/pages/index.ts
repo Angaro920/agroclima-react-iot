@@ -13,3 +13,5 @@ export * from "./ReportBaromRel";
 export * from "./ReportSolarRad";
 export * from "./ReportUV";
 export * from "./ReportRain";
+export * from "./ReportDirViento";
+export * from "./ReportVelViento"

@@ -21,6 +21,7 @@ export const dashboardStyle: Record<string, CSSProperties> = {
     minHeight: 360,
     background: "white",
     borderRadius: "10px",
+    backgroundColor: "#F9FAFB",
   },
   chartdiv:{
     height: "300px",

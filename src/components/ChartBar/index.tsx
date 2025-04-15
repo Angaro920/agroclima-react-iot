@@ -17,9 +17,9 @@ export const BarChartComponent = ({ data }: ChartComponentProps) => {
       chart
         .interval()
         .data(data)
-        .encode("x", "_id")
+        .encode("x", "fecha")
         .encode("y", "promedio")
-        .style({ fill: "#ca6f1e" })
+        .style({ fill: "#455A64" })
         .animate("enter", { type: "scaleInY", duration: 1000 })
         .animate("exit", { type: "scaleOutY", duration: 2000 });
       chart.render();

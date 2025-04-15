@@ -20,13 +20,13 @@ useEffect(() => {
       .data({
         value: {
           target: data,
-          total: 100,
+          total: 1000,
           name: "data",
-          thresholds: [25, 50, 100],
+          thresholds: [800, 900, 1000],
         },
       })
       .scale("color", {
-        range: ['#F4664A', '#FAAD14', 'green'],
+        range: ['#43A047', '#FDD835', '#E53935'],
       })
       .style("textContent", (target: string) => `Total:${target}%`)
       .style({

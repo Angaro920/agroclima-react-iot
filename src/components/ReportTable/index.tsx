@@ -23,7 +23,7 @@ const columns = [
   {
     title: "Fecha",
     dataIndex: "time",
-    render: (time: string) => formatInTimeZone(time, 'America/Bogota',  'yyyy-MMMM-dd HH:mm:ss', { locale: es }),
+    render: (time: string) => formatInTimeZone(time, 'America/Bogota',  'dd MMMM yyyy  HH:mm:ss', { locale: es }),
   },
 ];
 
