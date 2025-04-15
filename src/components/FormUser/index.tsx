@@ -1,108 +1,90 @@
-import { Form, Input, InputNumber, Select, TreeSelect } from "antd";
+import { Form, Input, InputNumber, Select, TreeSelect, FormInstance } from "antd";
+import { useEffect } from "react";
 import type { UserType } from "../../types";
 
 interface FormAddUsersProps {
-  formData: UserType;
-  setFormData: React.Dispatch<React.SetStateAction<UserType>>;
+  form: FormInstance; // ✅ Agrega esta propiedad para recibir el form
+
 }
 
-export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
-  const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-    console.log(`El campo ${event.target.name} a ${event.target.value}`);
-  };
-
-  const updateFields = (name: string, value: string) => {
-    setFormData({ ...formData, [name]: value });
-    console.log(`El campo ${name} a ${value}`);
-  };
+export const FormUser = ({ form, formData, setFormData }: FormAddUsersProps) => {
+  // ✅ Sincronizar datos al abrir modal
+  useEffect(() => {
+    form.setFieldsValue(formData);
+  }, [formData, form]);
 
   return (
     <Form
+      form={form}
       name="AgregarUsuarios"
       autoComplete="off"
       layout="horizontal"
       variant="filled"
       size="small"
-      initialValues={formData} // Asignar valores iniciales al formulario
+      onValuesChange={(changedValues, allValues) => {
+        setFormData(allValues); // 🔄 actualiza el estado con todos los datos modificados
+      }}
     >
       <Form.Item<UserType>
         label="Usuario"
-        rules={[
-          {
-            required: true,
-            message: "Por favor escribe un nombre de usuario!",
-          },
-        ]}
+        name="userName"
+        rules={[{ required: true, message: "Por favor escribe un nombre de usuario!" }]}
       >
-        <Input
-          value={formData.userName}
-          onChange={handleFieldChange}
-          name="userName"
-        />
+        <Input />
       </Form.Item>
+
       <Form.Item
         label="Contraseña"
+        name="password"
         rules={[{ required: true, message: "Por favor digite la contraseña" }]}
       >
-        <Input.Password
-          value={formData.password}
-          onChange={handleFieldChange}
-          name="password"
-        />
+        <Input.Password />
       </Form.Item>
+
       <Form.Item
         label="Confirmar Contraseña"
-        rules={[
-          { required: true, message: "Por favor confirme la contraseña!" },
-        ]}
+        name="confirmPassword"
+        rules={[{ required: true, message: "Por favor confirme la contraseña!" }]}
       >
-        <Input.Password
-          value={formData.confirmPassword}
-          onChange={handleFieldChange}
-          name="confirmPassword"
-        />
+        <Input.Password />
       </Form.Item>
+
       <Form.Item
         label="Documento"
-        rules={[{ required: true, message: "Por favor escribe el documento de identidad!" }]}>
-        <Input
-          value={formData.documento}
-          onChange={handleFieldChange}
-          name="documento"
-        />
+        name="documento"
+        rules={[{ required: true, message: "Por favor escribe el documento de identidad!" }]}
+      >
+        <Input />
       </Form.Item>
+
       <Form.Item<UserType>
         label="Nombre"
+        name="name"
         rules={[{ required: true, message: "Por favor escribe el nombre!" }]}
       >
-        <Input value={formData.name} onChange={handleFieldChange} name="name" />
+        <Input />
       </Form.Item>
+
       <Form.Item<UserType>
         label="Correo"
-        rules={[{ required: true, message: "Por favor escribe un correo valido!" }]}
+        name="email"
+        rules={[{ required: true, message: "Por favor escribe un correo válido!" }]}
       >
-        <Input
-          value={formData.email}
-          onChange={handleFieldChange}
-          name="email"
-        />
+        <Input />
       </Form.Item>
+
       <Form.Item<UserType>
         label="Edad"
-        rules={[{ required: true, message: "Por favor escriba la edad" }]}
+        name="age"
+        rules={[{ required: true, message: "Por favor escribe la edad" }]}
       >
-        <InputNumber
-          value={formData.age}
-          onChange={(newAge) => {
-            updateFields("age", newAge?.toString() || "");
-          }}
-          name="age"
-        />
+        <InputNumber />
       </Form.Item>
+
       <Form.Item
         label="Grado"
-        rules={[{ required: true, message: "Por favor seleccione una opcion" }]}
+        name="grade"
+        rules={[{ required: true, message: "Por favor selecciona una opción" }]}
       >
         <TreeSelect
           treeData={[
@@ -121,7 +103,7 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
               title: "Secundaria",
               value: "Secundaria",
               children: [
-                { title: "Sexto",value: "Sexto" },
+                { title: "Sexto", value: "Sexto" },
                 { title: "Septimo", value: "Septimo" },
                 { title: "Octavo", value: "Octavo" },
                 { title: "Noveno", value: "Noveno" },
@@ -134,23 +116,20 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
               value: "No aplica",
             },
           ]}
-          value={formData.grade}
-          onChange={(selectedValue) => {
-            updateFields("grade", selectedValue);
-          }}
         />
       </Form.Item>
-      <Form.Item label="Tipo" name={"tag"} rules={[{ required: true }]}>
+
+      <Form.Item
+        label="Tipo"
+        name="tag"
+        rules={[{ required: true, message: "Por favor selecciona un tipo de usuario" }]}
+      >
         <Select
           options={[
             { value: "estudiante", label: "Estudiante" },
             { value: "docente", label: "Docente" },
             { value: "administrador", label: "Administrador" },
           ]}
-          value={formData.type}
-          onChange={(selectedValue) => {
-            updateFields("tag", selectedValue);
-          }}
         />
       </Form.Item>
     </Form>

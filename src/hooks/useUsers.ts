@@ -14,6 +14,9 @@ export const useUsers = () => {
       if (!response.ok) throw new Error("Error al obtener usuarios");
 
       const data = await response.json();
+
+      console.log("🔍 Usuarios recibidos:", data);
+
       setUsers(data);
       setLoading(false);
       return data;
@@ -50,6 +53,7 @@ export const useUsers = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(userData),
       });
 
@@ -67,14 +71,17 @@ export const useUsers = () => {
   };
 
   // PUT - Actualizar usuario
-  const updateUser = async (id: string, userData: Partial<UserType>) => {
+  const updateUser = async (id: string, userData: UserType) => {
     setLoading(true);
     try {
+      console.log("📤 Enviando datos para actualizar:", userData);
+
       const response = await fetch(BACKEND_URL+`/api/updateUser/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(userData),
       });
 
@@ -101,6 +108,7 @@ export const useUsers = () => {
         BACKEND_URL+`/api/deleteUser/${id}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
 

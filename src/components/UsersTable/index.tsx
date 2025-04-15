@@ -11,6 +11,8 @@ import {
   Table,
   TableColumnType,
   Tag,
+  Form,
+  message
 } from "antd";
 import {
   DeleteOutlined,
@@ -69,6 +71,8 @@ export const UsersTable: FC<UsersTableProps> = ({
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
+  const [form] = Form.useForm();
+
   const handleSearch = (
     selectedKeys: string[],
     confirm: FilterDropdownProps["confirm"],
@@ -83,16 +87,22 @@ export const UsersTable: FC<UsersTableProps> = ({
     clearFilters();
     setSearchText("");
   };
+
   const showModal = (userId: string, userData: UserType) => {
     setSelectedUserId(userId);
-    setFormData(userData);
+    setFormData(userData); // se sincroniza vía useEffect en FormUser
+    setTimeout(() => {
+      form.setFieldsValue(userData); // asegura sincronización
+    }, 0);
     setIsModalOpen(true);
   };
+  
 
   const handleCancel = () => {
     setIsModalOpen(false);
     setSelectedUserId(null);
     setFormData(INITIAL_FORM);
+    form.resetFields();
   };
 
   const mappedUsers: Partial<UserType>[] = users.map((user) => ({
@@ -164,10 +174,7 @@ export const UsersTable: FC<UsersTableProps> = ({
       <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
     ),
     onFilter: (value, record) =>
-      record[dataIndex]
-        ?.toString()
-        ?.toLowerCase()
-        ?.includes((value as string).toLowerCase()) ?? false,
+      record[dataIndex]?.toString()?.toLowerCase()?.includes((value as string).toLowerCase()) ?? false,
     filterDropdownProps: {
       onOpenChange(open) {
         if (open) {
@@ -187,6 +194,7 @@ export const UsersTable: FC<UsersTableProps> = ({
         text
       ),
   });
+
   const columns: ColumnsType<Partial<UserType>> = [
     {
       title: "Tipo",
@@ -261,9 +269,14 @@ export const UsersTable: FC<UsersTableProps> = ({
               variant="outlined"
               color="green"
               icon={<EditOutlined />}
-              onClick={() =>
-                showModal(record._id as string, record as UserType)
-              }
+              onClick={() => {
+                const fullUser = users.find((u) => u._id === record._id);
+                if (fullUser) {
+                  showModal(fullUser._id as string, fullUser);
+                } else {
+                  console.error("⚠️ Usuario no encontrado:", record._id);
+                }
+              }}
             >
               Editar
             </Button>
@@ -290,7 +303,7 @@ export const UsersTable: FC<UsersTableProps> = ({
       ),
     },
   ];
-
+  
   return (
     <>
       <Modal
@@ -300,7 +313,26 @@ export const UsersTable: FC<UsersTableProps> = ({
           <Button
             key="enviar"
             variant="solid"
-            onClick={() => onPressUpdate(selectedUserId as string, formData)}
+            onClick={async () => {
+              try {
+                const values = await form.validateFields(); // ✅ obtiene todos los campos válidos
+  
+                if (!values.confirmPassword || values.confirmPassword.trim() === "") {
+                  delete values.password;
+                  delete values.confirmPassword;
+                }
+  
+                if (values.password && values.password !== values.confirmPassword) {
+                  alert("Las contraseñas no coinciden");
+                  return;
+                }
+  
+                console.log("🟢 Datos enviados al backend:", values);
+                onPressUpdate(selectedUserId as string, values);
+              } catch (errorInfo) {
+                console.error("❌ Error al validar el formulario:", errorInfo);
+              }
+            }}
             loading={loading}
             htmlType="submit"
             color="green"
@@ -312,15 +344,14 @@ export const UsersTable: FC<UsersTableProps> = ({
           </Button>,
         ]}
       >
-        <FormUser formData={formData} setFormData={setFormData}></FormUser>
+        <FormUser form={form} formData={formData} setFormData={setFormData} /> {/* ✅ pasa el form */}
       </Modal>
       <Table<Partial<UserType>>
         columns={columns}
         dataSource={mappedUsers}
         loading={loading}
         style={{ height: "auto" }}
-        /* onChange={onChange} */
       />
     </>
   );
-};
+}
