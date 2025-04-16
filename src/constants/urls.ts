@@ -1,1 +1,1 @@
-export const BACKEND_URL = "https://f4f4ca92d52928cbdb2cd334143eac0d.serveo.net";
+export const BACKEND_URL = "http://localhost:8080";
