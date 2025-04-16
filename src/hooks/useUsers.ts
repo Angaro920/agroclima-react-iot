@@ -75,6 +75,7 @@ export const useUsers = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials:"include",
         body: JSON.stringify(userData),
       });
 
@@ -101,6 +102,7 @@ export const useUsers = () => {
         BACKEND_URL+`/api/deleteUser/${id}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
 
