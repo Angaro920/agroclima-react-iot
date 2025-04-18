@@ -12,6 +12,9 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { FormReport } from "../FormReport";
+import { FileSearchOutlined } from "@ant-design/icons"; // nuevo ícono
+import { FormAuditReport } from "../FormAuditReport";
+
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -41,6 +44,11 @@ const getMenuItems = (tag: string): MenuItem[] => {
         key: Pages.USERS,
         label: "Usuarios",
         icon: <TeamOutlined />,
+      },
+      {
+        key: "AuditReport", 
+        label: "Auditoría",
+        icon: <DatabaseOutlined />,
       }
     );
   } else if (tag === "docente") {
@@ -68,6 +76,7 @@ export const MenuDashboard = ({ setCurrentPage }: { setCurrentPage: (key: string
   const { logout } = useAuth();
 
   const [isReportsModalOpen, setIsReportsModalOpen] = useState(false); // <-- Modal para Reportes
+  const [isAuditModalOpen, setIsAuditModalOpen] = useState(false); // NUEVO
 
   if (loading) return <p>Cargando...</p>;
 
@@ -86,6 +95,8 @@ export const MenuDashboard = ({ setCurrentPage }: { setCurrentPage: (key: string
             window.location.href = "/";
           } else if (event.key === "Reports") {
             setIsReportsModalOpen(true); // <-- Mostrar modal si es "Reports"
+          } else  if (event.key === "AuditReport") {
+            setIsAuditModalOpen(true);
           } else {
             setCurrentPage(event.key);
           }
@@ -101,6 +112,17 @@ export const MenuDashboard = ({ setCurrentPage }: { setCurrentPage: (key: string
         width={700}
       >
         <FormReport />
+      </Modal>
+
+            {/* Modal de Reporte de Auditoría */}
+      <Modal
+        title="Reporte de Auditoría"
+        open={isAuditModalOpen}
+        onOk={() => setIsAuditModalOpen(false)}
+        onCancel={() => setIsAuditModalOpen(false)}
+        width={700}
+      >
+        <FormAuditReport />
       </Modal>
     </>
   );

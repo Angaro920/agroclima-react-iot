@@ -26,6 +26,7 @@ import { Pages } from "./constants/pages";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Login } from "./components/FormLogIn";
 import ProtectedRoute from "./components/ProtectedRoutes";
+import AuditsPage  from "./pages/Audits";
 
 
 const { Content, Footer, Sider } = Layout;
@@ -89,6 +90,8 @@ const App = () => {
                     {currentPage === Pages.LISTEVENRAIN && <ReportRain />}
                     {currentPage === Pages.LISTDIRWIND && <ReportDirViento />}
                     {currentPage === Pages.LISTVELWIND && <ReportVelViento />}
+                    {currentPage === Pages.AUDITS && <AuditsPage />}
+
                   </Content>
                   <Footer style={{ textAlign: "center" }}>
                     Ant Design ©{new Date().getFullYear()} Created by Ant UED
