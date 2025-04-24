@@ -1,8 +1,8 @@
 import { Card, Col, Row, Switch, message } from "antd";
 import { dashboardStyle } from "../../styles";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { FC } from "react";
 import axios from "axios";
+import { BACKEND_URL } from "../../constants/urls";
 
 export const Devices: FC = () => {
   const handleToggle = async (device: string, checked: boolean) => {
@@ -10,7 +10,7 @@ export const Devices: FC = () => {
       const token = localStorage.getItem("token"); // 🔐 Obtenemos el token
   
       await axios.post(
-        "http://localhost:8080/api/control",
+       BACKEND_URL+"/api/control",
         {
           device,
           state: checked ? "ON" : "OFF",

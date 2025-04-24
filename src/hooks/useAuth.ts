@@ -14,7 +14,7 @@ export const useAuth = () => {
     setError(null);
 
     try {
-      const response = await fetch(BACKEND_URL+"/api/login", {
+      const response = await fetch(BACKEND_URL + "/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,11 +39,20 @@ export const useAuth = () => {
   // Función para cerrar sesión
   const logout = async () => {
     try {
-      await fetch(BACKEND_URL+"/api/logout", {
+      const response = await fetch(BACKEND_URL + "/api/logout", {
         method: "POST",
         credentials: "include", // Incluye las cookies en la solicitud
       });
-      window.location.href = "/login"; // Redirige al login
+
+      if (response.ok) {
+        // Limpia cualquier estado de usuario en el localStorage si lo hubiera
+        localStorage.removeItem("userAuth"); // Si almacenas algo relacionado con la autenticación
+
+        // Usa navigate en lugar de window.location para evitar recargas completas
+        navigate("/login", { replace: true });
+      } else {
+        console.error("Error al cerrar sesión:", response.statusText);
+      }
     } catch (err) {
       console.error("Error al cerrar sesión:", err);
     }

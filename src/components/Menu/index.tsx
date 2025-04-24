@@ -1,4 +1,5 @@
-import { useState } from "react"; // <-- Importante
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Modal, Menu } from "antd"; // Modal agregado
 import { useUser } from "../../hooks/useAuthUser";
 import { useAuth } from "../../hooks/useAuth"; 
@@ -91,6 +92,7 @@ const getMenuItems = (tag: string): MenuItem[] => {
 export const MenuDashboard = ({ setCurrentPage }: { setCurrentPage: (key: string) => void }) => {
   const { user, loading } = useUser();
   const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const [isReportsModalOpen, setIsReportsModalOpen] = useState(false); // <-- Modal para Reportes
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false); // NUEVO
@@ -99,6 +101,23 @@ export const MenuDashboard = ({ setCurrentPage }: { setCurrentPage: (key: string
 
   const items = getMenuItems(user?.tag || "estudiante");
 
+  const handleMenuClick = (event: { key: string }) => {
+    if (event.key === "logout") {
+      // Llama al logout y maneja la redirección dentro de la función logout
+      logout().catch(error => {
+        console.error("Error durante logout:", error);
+        // Redirección de respaldo en caso de error
+        navigate("/login", { replace: true });
+      });
+    } else if (event.key === "Reports") {
+      setIsReportsModalOpen(true);
+    } else if (event.key === "AuditReport") {
+      setIsAuditModalOpen(true);
+    } else {
+      setCurrentPage(event.key);
+    }
+  };
+
   return (
     <>
       <Menu
@@ -106,18 +125,7 @@ export const MenuDashboard = ({ setCurrentPage }: { setCurrentPage: (key: string
         items={items}
         theme="dark"
         mode="inline"
-        onClick={(event) => {
-          if (event.key === "logout") {
-            logout();
-            window.location.href = "/";
-          } else if (event.key === "Reports") {
-            setIsReportsModalOpen(true); // <-- Mostrar modal si es "Reports"
-          } else  if (event.key === "AuditReport") {
-            setIsAuditModalOpen(true);
-          } else {
-            setCurrentPage(event.key);
-          }
-        }}
+        onClick={handleMenuClick}
       />
       
       {/* Modal de Reportes */}
