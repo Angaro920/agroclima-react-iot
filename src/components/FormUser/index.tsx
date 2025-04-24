@@ -1,5 +1,6 @@
 import { Form, Input, InputNumber, Select, TreeSelect } from "antd";
 import type { UserType } from "../../types";
+import { useEffect } from "react";
 
 interface FormAddUsersProps {
   formData: UserType;
@@ -7,27 +8,30 @@ interface FormAddUsersProps {
 }
 
 export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
-  const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-    console.log(`El campo ${event.target.name} a ${event.target.value}`);
-  };
+  const [form] = Form.useForm();
 
-  const updateFields = (name: string, value: string) => {
-    setFormData({ ...formData, [name]: value });
-    console.log(`El campo ${name} a ${value}`);
+  useEffect(() => {
+    form.setFieldsValue(formData);
+  }, [formData, form]);
+
+  const handleValuesChange = (changedValues: any, allValues: any) => {
+    setFormData(allValues);
   };
 
   return (
     <Form
+      form={form}
       name="AgregarUsuarios"
       autoComplete="off"
       layout="horizontal"
       variant="filled"
       size="small"
-      initialValues={formData} // Asignar valores iniciales al formulario
+      initialValues={formData}
+      onValuesChange={handleValuesChange}
     >
-      <Form.Item<UserType>
+      <Form.Item
         label="Usuario"
+        name="userName"
         rules={[
           {
             required: true,
@@ -35,73 +39,55 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
           },
         ]}
       >
-        <Input
-          value={formData.userName}
-          onChange={handleFieldChange}
-          name="userName"
-        />
+        <Input />
       </Form.Item>
       <Form.Item
         label="Contraseña"
+        name="password"
         rules={[{ required: true, message: "Por favor digite la contraseña" }]}
       >
-        <Input.Password
-          value={formData.password}
-          onChange={handleFieldChange}
-          name="password"
-        />
+        <Input.Password />
       </Form.Item>
       <Form.Item
         label="Confirmar Contraseña"
+        name="confirmPassword"
         rules={[
           { required: true, message: "Por favor confirme la contraseña!" },
         ]}
       >
-        <Input.Password
-          value={formData.confirmPassword}
-          onChange={handleFieldChange}
-          name="confirmPassword"
-        />
+        <Input.Password />
       </Form.Item>
       <Form.Item
         label="Documento"
-        rules={[{ required: true, message: "Por favor escribe el documento de identidad!" }]}>
-        <Input
-          value={formData.documento}
-          onChange={handleFieldChange}
-          name="documento"
-        />
+        name="documento"
+        rules={[{ required: true, message: "Por favor escribe el documento de identidad!" }]}
+      >
+        <Input />
       </Form.Item>
-      <Form.Item<UserType>
+      <Form.Item
         label="Nombre"
+        name="name"
         rules={[{ required: true, message: "Por favor escribe el nombre!" }]}
       >
-        <Input value={formData.name} onChange={handleFieldChange} name="name" />
+        <Input />
       </Form.Item>
-      <Form.Item<UserType>
+      <Form.Item
         label="Correo"
+        name="email"
         rules={[{ required: true, message: "Por favor escribe un correo valido!" }]}
       >
-        <Input
-          value={formData.email}
-          onChange={handleFieldChange}
-          name="email"
-        />
+        <Input />
       </Form.Item>
-      <Form.Item<UserType>
+      <Form.Item
         label="Edad"
+        name="age"
         rules={[{ required: true, message: "Por favor escriba la edad" }]}
       >
-        <InputNumber
-          value={formData.age}
-          onChange={(newAge) => {
-            updateFields("age", newAge?.toString() || "");
-          }}
-          name="age"
-        />
+        <InputNumber />
       </Form.Item>
       <Form.Item
         label="Grado"
+        name="grade"
         rules={[{ required: true, message: "Por favor seleccione una opcion" }]}
       >
         <TreeSelect
@@ -121,7 +107,7 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
               title: "Secundaria",
               value: "Secundaria",
               children: [
-                { title: "Sexto",value: "Sexto" },
+                { title: "Sexto", value: "Sexto" },
                 { title: "Septimo", value: "Septimo" },
                 { title: "Octavo", value: "Octavo" },
                 { title: "Noveno", value: "Noveno" },
@@ -134,23 +120,19 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
               value: "No aplica",
             },
           ]}
-          value={formData.grade}
-          onChange={(selectedValue) => {
-            updateFields("grade", selectedValue);
-          }}
         />
       </Form.Item>
-      <Form.Item label="Tipo" name={"tag"} rules={[{ required: true }]}>
+      <Form.Item 
+        label="Tipo" 
+        name="tag" 
+        rules={[{ required: true }]}
+      >
         <Select
           options={[
             { value: "estudiante", label: "Estudiante" },
             { value: "docente", label: "Docente" },
             { value: "administrador", label: "Administrador" },
           ]}
-          value={formData.type}
-          onChange={(selectedValue) => {
-            updateFields("tag", selectedValue);
-          }}
         />
       </Form.Item>
     </Form>

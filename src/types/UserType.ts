@@ -9,5 +9,4 @@ export interface UserType {
   documento: string;
   age: number;
   grade: string;
-  type:string;
 }

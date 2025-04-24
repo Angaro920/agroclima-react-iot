@@ -19,8 +19,8 @@ export const LineChartComponent = ({ data }: ChartComponentProps) => {
 
       chart
         .data(data)
-        .encode("x", "fecha")
-        .encode("y", "promedio")
+        .encode("x", "Fecha")
+        .encode("y", "Promedio")
         .scale("x", {
           range: [0, 1],
         })

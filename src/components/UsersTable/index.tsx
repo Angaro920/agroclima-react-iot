@@ -51,7 +51,6 @@ const INITIAL_FORM: UserType = {
   documento: "",
   age: 0,
   grade: "",
-  type: "",
   tag: "",
 };
 
@@ -85,7 +84,13 @@ export const UsersTable: FC<UsersTableProps> = ({
   };
   const showModal = (userId: string, userData: UserType) => {
     setSelectedUserId(userId);
-    setFormData(userData);
+    const completeUserData: UserType = {
+      ...INITIAL_FORM,
+      ...userData,
+      password: "",
+      confirmPassword: "",
+    };
+    setFormData(completeUserData);
     setIsModalOpen(true);
   };
 
@@ -119,7 +124,7 @@ export const UsersTable: FC<UsersTableProps> = ({
       <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
         <Input
           ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={`Buscar ${dataIndex}`}
           value={selectedKeys[0]}
           onChange={(e) =>
             setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -139,14 +144,14 @@ export const UsersTable: FC<UsersTableProps> = ({
             size="small"
             style={{ width: 90 }}
           >
-            Search
+            Buscar
           </Button>
           <Button
             onClick={() => clearFilters && handleReset(clearFilters)}
             size="small"
             style={{ width: 90 }}
           >
-            Reset
+            Reiniciar
           </Button>
           <Button
             type="dashed"
@@ -194,7 +199,6 @@ export const UsersTable: FC<UsersTableProps> = ({
       key: "tag",
       dataIndex: "tag",
       filters: [
-        { text: "Soporte", value: "soporte" },
         { text: "Administrador", value: "administrador" },
         { text: "Estudiante", value: "estudiante" },
         { text: "Docente", value: "docente" },
@@ -294,6 +298,7 @@ export const UsersTable: FC<UsersTableProps> = ({
   return (
     <>
       <Modal
+        title="Editar Usuario"
         open={isModalOpen}
         onCancel={handleCancel}
         footer={[

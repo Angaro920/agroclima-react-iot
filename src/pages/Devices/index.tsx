@@ -7,11 +7,20 @@ import axios from "axios";
 export const Devices: FC = () => {
   const handleToggle = async (device: string, checked: boolean) => {
     try {
-      await axios.post("http://localhost:8080/api/control", {
-        device,
-        state: checked ? "ON" : "OFF",
-      });
-      message.success(`Se envió comando para ${device}: ${checked ? "ON" : "OFF"}`);
+      const token = localStorage.getItem("token"); // 🔐 Obtenemos el token
+  
+      await axios.post(
+        "http://localhost:8080/api/control",
+        {
+          device,
+          state: checked ? "ON" : "OFF",
+        },
+        {
+          withCredentials: true 
+        }
+      );
+  
+      message.success(`Se envió comando para ${device}: ${checked ? "Encendido" : "Apagado"}`);
     } catch (error) {
       message.error("Error al enviar comando");
     }
@@ -27,8 +36,8 @@ export const Devices: FC = () => {
           <Col span={8}>
             <Card title="Ventiladores" bordered={false}>
               <Switch
-                checkedChildren={<CheckOutlined />}
-                unCheckedChildren={<CloseOutlined />}
+                checkedChildren="Encendido"
+                unCheckedChildren="Apagado"
                 onChange={(checked) => handleToggle("ventilador", checked)}
               />
             </Card>
@@ -44,10 +53,10 @@ export const Devices: FC = () => {
             </Card>
           </Col>
           <Col span={8}>
-            <Card title="Modo Automático" bordered={false}>
+            <Card title="Cortinas" bordered={false}>
               <Switch
-                checkedChildren="Auto"
-                unCheckedChildren="Manual"
+                checkedChildren="Encendido"
+                unCheckedChildren="Apagado"
                 onChange={(checked) => handleToggle("modo_auto", checked)}
               />
             </Card>

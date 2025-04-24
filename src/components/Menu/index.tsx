@@ -12,8 +12,8 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { FormReport } from "../FormReport";
-import { FileSearchOutlined } from "@ant-design/icons"; // nuevo ícono
 import { FormAuditReport } from "../FormAuditReport";
+import { GiGreenhouse, GiSunCloud, GiHouse} from "react-icons/gi";
 
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -22,9 +22,26 @@ type MenuItem = Required<MenuProps>["items"][number];
 const getMenuItems = (tag: string): MenuItem[] => {
   const baseItems: MenuItem[] = [
     {
-      key: Pages.DASHBOARD,
+      key: "Dashboard",
       label: "Dashboard",
       icon: <DashboardOutlined />,
+      children: [
+        {
+          key: Pages.DASHBOARD,
+          label: "Inicio",
+          icon: <GiHouse />,
+        },
+        {
+          key: Pages.DASHBOARDINTERNO,
+          label: "Interno",
+          icon: <GiGreenhouse />,
+        },
+        {
+          key: Pages.DASHBOARDEXTERNO,
+          label: "Externo",
+          icon: <GiSunCloud />,
+        },
+      ],
     },
     {
       key: "Reports", // Mantienes este

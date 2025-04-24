@@ -21,6 +21,8 @@ import {
   ReportSolarRad,
   ReportBaromRel,
   ReportVelViento,
+  DashboardInterno,
+  DashboardExterno,
 } from "./pages";
 import { Pages } from "./constants/pages";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -91,10 +93,14 @@ const App = () => {
                     {currentPage === Pages.LISTDIRWIND && <ReportDirViento />}
                     {currentPage === Pages.LISTVELWIND && <ReportVelViento />}
                     {currentPage === Pages.AUDITS && <AuditsPage />}
+                    {currentPage === Pages.DASHBOARDINTERNO && <DashboardInterno setCurrentPage={setCurrentPage} />}
+                    {currentPage === Pages.DASHBOARDEXTERNO && <DashboardExterno setCurrentPage={setCurrentPage} />}
+
 
                   </Content>
                   <Footer style={{ textAlign: "center" }}>
-                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    <p>D. Angarita G. Cardenas J. Monzaide {new Date().getFullYear()} </p>
+                    <p>Creado en colaboración con UdeC y el colegio Policarpa Salavarrieta</p>
                   </Footer>
                 </Layout>
                 <FloatButton.Group shape="square">

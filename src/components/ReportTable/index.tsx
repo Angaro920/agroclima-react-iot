@@ -15,12 +15,12 @@ interface DataTableProps {
 const columns = [
   {
     title: "Registro",
-    dataIndex: "promedio",
+    dataIndex: "Promedio",
     width: 300,
   },
   {
     title: "Fecha",
-    dataIndex: "fecha",
+    dataIndex: "Fecha",
   },
 ];
 
@@ -33,8 +33,8 @@ export const ReportTable: FC<DataTableProps> = ({
   const mappedData: Partial<DataType>[] = weather.map((item) => ({
     key: item._id || "",
     _id: item._id,
-    promedio: item.promedio + " " + sufijo,
-    fecha: item.fecha,
+    Promedio: item.Promedio + " " + sufijo,
+    Fecha: item.Fecha,
   }));
   
 

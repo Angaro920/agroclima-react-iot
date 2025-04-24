@@ -16,9 +16,10 @@ export const FluidChartComponent = ({ data }: ChartComponentProps) => {
         autoFit: true,
       });
 
-      chart.liquid().data(data).style({
+      chart.liquid().data(data ? data/100 : 0).style({
         shape: "circle",
         contentFill: "black",
+        contentText: data +"mm",
         outlineBorder: 4,
         outlineDistance: 8,
         waveLength: 128,

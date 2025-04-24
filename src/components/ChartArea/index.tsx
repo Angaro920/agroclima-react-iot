@@ -20,8 +20,8 @@ export const AreaChartComponent = ({ data }: ChartComponentProps) => {
       chart
         .area()
         .data(data)
-        .encode('x', 'fecha')
-        .encode('y', 'promedio')
+        .encode('x', 'Fecha')
+        .encode('y', 'Promedio')
         .style({fill: '#82B1FF80', stroke: '#82ca9d'})
         .animate('enter', { type: 'pathIn', duration: 1000 });
 

@@ -9,8 +9,8 @@ export const BulletChartComponent = ({ data }: ChartComponentProps) => {
   const dataBullet = [
     {
       title: 'Uv',
-      ranges: 14,
-      measures: data,
+      Rango: 14,
+      Medida: data,
       target: 14,
     },
   ];
@@ -25,7 +25,7 @@ export const BulletChartComponent = ({ data }: ChartComponentProps) => {
       chart
       .interval()
       .encode('x', 'title')
-      .encode('y', 'ranges')
+      .encode('y', 'Rango')
       .encode('color', '#f0efff')
       .style('maxWidth', 30)
       .axis({
@@ -41,11 +41,11 @@ export const BulletChartComponent = ({ data }: ChartComponentProps) => {
     chart
       .interval()
       .encode('x', 'title')
-      .encode('y', 'measures')
+      .encode('y', 'Medida')
       .encode('color', '#64DD17')
       .style('maxWidth', 20)
       .label({
-        text: 'measures',
+        text: 'Medida',
         position: 'right',
         textAlign: 'left',
         dx: 5,

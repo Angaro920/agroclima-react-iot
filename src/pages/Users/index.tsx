@@ -15,7 +15,6 @@ const INITIAL_FORM: UserType = {
   email: "",
   age: 0,
   grade: "",
-  type: "",
   tag: "",
 };
 
@@ -31,21 +30,25 @@ export const UsersPage = () => {
 
   const showModal = () => {
     setIsModalOpen(true);
+    setFormData(INITIAL_FORM);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
     setFormData(INITIAL_FORM);
   };
+
   const handleAgregar = async () => {
     try {
       await createUser(formData);
       message.success("Usuario agregado correctamente");
-      handleCancel(); 
+      setIsModalOpen(false);
+      setFormData(INITIAL_FORM);
     } catch (error) {
       message.error("Error al agregar el usuario: " + error);
     }
   };
+
   const handleDelete = async (id: string) => {
     try {
       await deleteUser(id);
@@ -54,6 +57,7 @@ export const UsersPage = () => {
       message.error("Error al eliminar usuario: " + err);
     }
   };
+
   const handleUpdate = async (id: string) => {
     try {
       await updateUser(id, formData);
@@ -94,7 +98,7 @@ export const UsersPage = () => {
             key="enviar"
             type="primary"
             onClick={handleAgregar}
-            /* loading={loading} */
+            loading={loading}
             htmlType="submit"
           >
             Agregar
