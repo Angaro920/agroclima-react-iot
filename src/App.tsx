@@ -99,7 +99,7 @@ const App = () => {
 
                   </Content>
                   <Footer style={{ textAlign: "center" }}>
-                    <p>D. Angarita G. Cardenas J. Monzaide {new Date().getFullYear()} </p>
+                    <p>D. Angarita G. Cardenas J. Alvarez - {new Date().getFullYear()} </p>
                     <p>Creado en colaboración con UdeC y el colegio Policarpa Salavarrieta</p>
                   </Footer>
                 </Layout>

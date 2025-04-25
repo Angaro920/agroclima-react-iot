@@ -26,7 +26,7 @@ export const DashboardInterno = (setCurrentPage: DashboardProps) => {
   return (
     <div style={dashboardStyle.mainSector}>
       <h2 style={{ display: "flex", justifyContent: "center" }}>
-        Variables Climáticas Ambiente Cerrado INTERNO
+        Variables Climáticas Ambiente Cerrado
       </h2>
       <Row gutter={16}>
         <Col span={50}>
@@ -43,7 +43,7 @@ export const DashboardInterno = (setCurrentPage: DashboardProps) => {
         </Col>
         <Col span={50}>
           <CartasDashboard
-            title="Humedad"
+            title="Humedad Sensor"
             value={loading ? "Cargando..." : weather?.HumedadSensor.data}
             sufix="%"
             parameter="HumedadSensor"
@@ -57,7 +57,7 @@ export const DashboardInterno = (setCurrentPage: DashboardProps) => {
       <Row gutter={16}>
         <Col span={50}>
           <CartasDashboard
-            title="Luz"
+            title="Lumens"
             value={loading ? "Cargando..." : weather?.LuzSensor.data}
             sufix="%"
             parameter="LuzSensor"
@@ -69,7 +69,7 @@ export const DashboardInterno = (setCurrentPage: DashboardProps) => {
         </Col>
         <Col span={50}>
           <CartasDashboard
-            title="Gas"
+            title="Co2"
             value={loading ? "Cargando..." : weather?.HidrogenoSensor.data}
             sufix="ppp"
             parameter="HidrogenoSensor"
@@ -81,7 +81,7 @@ export const DashboardInterno = (setCurrentPage: DashboardProps) => {
         </Col>
       </Row>
       <h2 style={{ display: "flex", justifyContent: "center" }}>
-        Estacion Meteorologica Sensores internos
+        Estacion Meteorológica Sensores internos
       </h2>
       <Row gutter={16}>
         <Col span={50}>

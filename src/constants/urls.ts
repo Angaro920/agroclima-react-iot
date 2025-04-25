@@ -1,1 +1,1 @@
-export const BACKEND_URL = "https://average-frog-95.telebit.io";
+export const BACKEND_URL = "http://localhost:8080";
