@@ -29,22 +29,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Login } from "./components/FormLogIn";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import AuditsPage  from "./pages/Audits";
+import { ClimaNotifications } from "./components/Alerts";
 
 
 const { Content, Footer, Sider } = Layout;
 
 const App = () => {
   const [collapsedMenu, setCollapsedMenu] = useState(false);
-  const [openDrawer, setOpenDrawer] = useState(false);
   const [currentPage, setCurrentPage] = useState(Pages.DASHBOARD);
-
-  const showDrawer = () => {
-    setOpenDrawer(true);
-  };
-
-  const onClose = () => {
-    setOpenDrawer(false);
-  };
 
   return (
     <Router>
@@ -54,6 +46,7 @@ const App = () => {
           path="/*"
           element={
             <ProtectedRoute>
+              <ClimaNotifications />
               <Layout style={dashboardStyle.globalLayoutStyle}>
                 <Sider
                   collapsible
@@ -104,19 +97,9 @@ const App = () => {
                   </Footer>
                 </Layout>
                 <FloatButton.Group shape="square">
-                  <FloatButton icon={<BulbOutlined />} onClick={showDrawer} />
-                  <FloatButton icon={<MoonOutlined />} />
                   <FloatButton.BackTop visibilityHeight={0} />
                 </FloatButton.Group>
-                <Drawer
-                  title="AgroClima"
-                  onClose={onClose}
-                  open={openDrawer}
-                >
-                  <p>Some contents...</p>
-                  <p>Some contents...</p>
-                  <p>Some contents...</p>
-                </Drawer>
+      
               </Layout>
             </ProtectedRoute>
           }

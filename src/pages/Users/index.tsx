@@ -21,31 +21,116 @@ const INITIAL_FORM: UserType = {
 export const UsersPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState<UserType>(INITIAL_FORM);
-  const { createUser, deleteUser, updateUser, loading, getUsers, users } =
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState<string>("");
+  const { createUser, deleteUser, updateUser, loading, getUsers, users, getUserById } =
     useUsers();
 
   useEffect(() => {
     getUsers();
   }, []);
 
-  const showModal = () => {
-    setIsModalOpen(true);
+  const showModalForAdd = () => {
+    setIsEditing(false);
+    setSelectedUserId("");
     setFormData(INITIAL_FORM);
+    setIsModalOpen(true);
+  };
+
+  const showModalForUpdate = async (id: string) => {
+    try {
+      setIsEditing(true);
+      setSelectedUserId(id);
+      
+      // Buscar el usuario en el estado actual primero
+      const userToEdit = users.find(user => user._id === id);
+      
+      if (userToEdit) {
+        // Si encontramos el usuario en el estado, lo usamos directamente
+        setFormData({
+          ...userToEdit,
+          // Mantener los campos de contraseña vacíos al editar
+          password: "",
+          confirmPassword: "",
+        });
+      } else {
+        // Si no está en el estado, lo buscamos por API
+        const userFromApi = await getUserById(id);
+        if (userFromApi) {
+          setFormData({
+            ...userFromApi,
+            password: "",
+            confirmPassword: "",
+          });
+        }
+      }
+      
+      setIsModalOpen(true);
+    } catch (error) {
+      message.error("Error al cargar los datos del usuario: " + error);
+    }
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
     setFormData(INITIAL_FORM);
+    setIsEditing(false);
+    setSelectedUserId("");
   };
 
-  const handleAgregar = async () => {
+  const handleSubmit = async () => {
     try {
-      await createUser(formData);
-      message.success("Usuario agregado correctamente");
+      // Validar que los datos no estén vacíos
+      if (!formData.documento || !formData.name || !formData.email) {
+        message.error("Por favor completa los campos requeridos");
+        return;
+      }
+
+      // Validar que las contraseñas coincidan si se están proporcionando
+      if (formData.password && formData.password !== formData.confirmPassword) {
+        message.error("Las contraseñas no coinciden");
+        return;
+      }
+
+      if (isEditing && selectedUserId) {
+        // Para actualización, creamos un objeto con solo las propiedades que queremos actualizar
+        const dataToUpdate: Partial<UserType> = {
+          documento: formData.documento,
+          name: formData.name,
+          email: formData.email,
+          age: formData.age,
+          grade: formData.grade,
+          tag: formData.tag,
+        };
+        
+        // Solo incluimos la contraseña si se proporcionó una nueva
+        if (formData.password && formData.password.trim() !== '') {
+          dataToUpdate.password = formData.password;
+        }
+        
+        await updateUser(selectedUserId, dataToUpdate);
+        message.success("Usuario actualizado exitosamente");
+      } else {
+        // Validar que todos los campos requeridos estén presentes para la creación
+        if (!formData.password) {
+          message.error("La contraseña es requerida para crear un usuario");
+          return;
+        }
+        
+        await createUser(formData);
+        message.success("Usuario agregado correctamente");
+      }
+      
       setIsModalOpen(false);
       setFormData(INITIAL_FORM);
+      setIsEditing(false);
+      setSelectedUserId("");
+      
+      // Recargar la lista de usuarios
+      getUsers();
     } catch (error) {
-      message.error("Error al agregar el usuario: " + error);
+      const action = isEditing ? "actualizar" : "agregar";
+      message.error(`Error al ${action} el usuario: ${error}`);
     }
   };
 
@@ -58,15 +143,6 @@ export const UsersPage = () => {
     }
   };
 
-  const handleUpdate = async (id: string) => {
-    try {
-      await updateUser(id, formData);
-      message.success("Usuario actualizado exitosamente");
-    } catch (err) {
-      message.error("Error al actualizar usuario: " + err);
-    }
-  };
-
   return (
     <div style={dashboardStyle.mainSector}>
       <h1 style={{ display: "flex", justifyContent: "center" }}>Usuarios</h1>
@@ -75,7 +151,7 @@ export const UsersPage = () => {
           style={{ marginBottom: "10px" }}
           variant="solid"
           color="blue"
-          onClick={showModal}
+          onClick={showModalForAdd}
         >
           Agregar Usuario
         </Button>
@@ -85,30 +161,34 @@ export const UsersPage = () => {
           users={users}
           loading={loading}
           onPressDelete={handleDelete}
-          onPressUpdate={handleUpdate}
+          onPressUpdate={showModalForUpdate}
         />
       </div>
       <Modal
-        title="Agregar Usuario"
+        title={isEditing ? "Actualizar Usuario" : "Agregar Usuario"}
         open={isModalOpen}
-        onOk={handleAgregar}
+        onOk={handleSubmit}
         onCancel={handleCancel}
         footer={[
           <Button
             key="enviar"
             type="primary"
-            onClick={handleAgregar}
+            onClick={handleSubmit}
             loading={loading}
             htmlType="submit"
           >
-            Agregar
+            {isEditing ? "Actualizar" : "Agregar"}
           </Button>,
           <Button key="cancelar" onClick={handleCancel}>
             Cancelar
           </Button>,
         ]}
       >
-        <FormUser formData={formData} setFormData={setFormData} />
+        <FormUser 
+          formData={formData} 
+          setFormData={setFormData} 
+          isEditing={isEditing} 
+        />
       </Modal>
     </div>
   );

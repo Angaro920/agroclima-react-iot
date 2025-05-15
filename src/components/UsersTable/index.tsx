@@ -4,7 +4,6 @@ import {
   Col,
   Input,
   InputRef,
-  Modal,
   Popconfirm,
   Row,
   Space,
@@ -19,7 +18,6 @@ import {
 } from "@ant-design/icons";
 import { UserType } from "../../types";
 import { ColumnsType } from "antd/es/table";
-import { FormUser } from "../FormUser";
 import Highlighter from "react-highlight-words";
 import { FilterDropdownProps } from "antd/es/table/interface";
 
@@ -27,7 +25,7 @@ interface UsersTableProps {
   users: UserType[];
   loading: boolean;
   onPressDelete: (id: string) => void;
-  onPressUpdate: (id: string, data: UserType) => void;
+  onPressUpdate: (id: string) => void; // Ahora solo recibe el ID
 }
 
 interface ColorByTag {
@@ -42,18 +40,6 @@ const COLOR_BY_TAG: ColorByTag = {
   administrativo: "purple",
 };
 
-const INITIAL_FORM: UserType = {
-  userName: "",
-  password: "",
-  confirmPassword: "",
-  name: "",
-  email: "",
-  documento: "",
-  age: 0,
-  grade: "",
-  tag: "",
-};
-
 type DataIndex = keyof UserType;
 
 export const UsersTable: FC<UsersTableProps> = ({
@@ -62,12 +48,10 @@ export const UsersTable: FC<UsersTableProps> = ({
   onPressDelete,
   onPressUpdate,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState<UserType>(INITIAL_FORM);
-  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
+  
   const handleSearch = (
     selectedKeys: string[],
     confirm: FilterDropdownProps["confirm"],
@@ -81,23 +65,6 @@ export const UsersTable: FC<UsersTableProps> = ({
   const handleReset = (clearFilters: () => void) => {
     clearFilters();
     setSearchText("");
-  };
-  const showModal = (userId: string, userData: UserType) => {
-    setSelectedUserId(userId);
-    const completeUserData: UserType = {
-      ...INITIAL_FORM,
-      ...userData,
-      password: "",
-      confirmPassword: "",
-    };
-    setFormData(completeUserData);
-    setIsModalOpen(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-    setSelectedUserId(null);
-    setFormData(INITIAL_FORM);
   };
 
   const mappedUsers: Partial<UserType>[] = users.map((user) => ({
@@ -265,9 +232,7 @@ export const UsersTable: FC<UsersTableProps> = ({
               variant="outlined"
               color="green"
               icon={<EditOutlined />}
-              onClick={() =>
-                showModal(record._id as string, record as UserType)
-              }
+              onClick={() => onPressUpdate(record._id as string)}
             >
               Editar
             </Button>
@@ -296,36 +261,11 @@ export const UsersTable: FC<UsersTableProps> = ({
   ];
 
   return (
-    <>
-      <Modal
-        title="Editar Usuario"
-        open={isModalOpen}
-        onCancel={handleCancel}
-        footer={[
-          <Button
-            key="enviar"
-            variant="solid"
-            onClick={() => onPressUpdate(selectedUserId as string, formData)}
-            loading={loading}
-            htmlType="submit"
-            color="green"
-          >
-            Editar
-          </Button>,
-          <Button key="cancelar" onClick={handleCancel}>
-            Cancelar
-          </Button>,
-        ]}
-      >
-        <FormUser formData={formData} setFormData={setFormData}></FormUser>
-      </Modal>
-      <Table<Partial<UserType>>
-        columns={columns}
-        dataSource={mappedUsers}
-        loading={loading}
-        style={{ height: "auto" }}
-        /* onChange={onChange} */
-      />
-    </>
+    <Table<Partial<UserType>>
+      columns={columns}
+      dataSource={mappedUsers}
+      loading={loading}
+      style={{ height: "auto" }}
+    />
   );
 };

@@ -5,58 +5,35 @@ import { useEffect } from "react";
 interface FormAddUsersProps {
   formData: UserType;
   setFormData: React.Dispatch<React.SetStateAction<UserType>>;
+  isEditing?: boolean;
 }
 
-export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
+export const FormUser = ({ formData, setFormData, isEditing = false }: FormAddUsersProps) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    form.setFieldsValue(formData);
+    // Actualizar los campos del formulario cuando cambia formData
+    if (formData) {
+      form.setFieldsValue(formData);
+    }
   }, [formData, form]);
 
   const handleValuesChange = (changedValues: any, allValues: any) => {
+    // Actualizar el estado con los nuevos valores
     setFormData(allValues);
   };
 
   return (
     <Form
       form={form}
-      name="AgregarUsuarios"
+      name="UserForm"
       autoComplete="off"
       layout="horizontal"
       variant="filled"
-      size="small"
       initialValues={formData}
       onValuesChange={handleValuesChange}
+      preserve={false} // No preservar valores al desmontar
     >
-      <Form.Item
-        label="Usuario"
-        name="userName"
-        rules={[
-          {
-            required: true,
-            message: "Por favor escribe un nombre de usuario!",
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label="Contraseña"
-        name="password"
-        rules={[{ required: true, message: "Por favor digite la contraseña" }]}
-      >
-        <Input.Password />
-      </Form.Item>
-      <Form.Item
-        label="Confirmar Contraseña"
-        name="confirmPassword"
-        rules={[
-          { required: true, message: "Por favor confirme la contraseña!" },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
       <Form.Item
         label="Documento"
         name="documento"
@@ -64,6 +41,47 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
       >
         <Input />
       </Form.Item>
+      
+      {/* Campo userName oculto en la interfaz pero presente en el modelo */}
+      <Form.Item
+        name="userName"
+        hidden={true}
+      >
+        <Input />
+      </Form.Item>
+      
+      <Form.Item
+        label="Contraseña"
+        name="password"
+        rules={[{ 
+          required: !isEditing, 
+          message: "Por favor digite la contraseña" 
+        }]}
+      >
+        <Input.Password placeholder={isEditing ? "Dejar en blanco para mantener la contraseña actual" : ""} />
+      </Form.Item>
+      
+      <Form.Item
+        label="Confirmar Contraseña"
+        name="confirmPassword"
+        rules={[
+          { 
+            required: !isEditing, 
+            message: "Por favor confirme la contraseña!" 
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('¡Las contraseñas no coinciden!'));
+            },
+          }),
+        ]}
+      >
+        <Input.Password placeholder={isEditing ? "Dejar en blanco para mantener la contraseña actual" : ""} />
+      </Form.Item>
+      
       <Form.Item
         label="Nombre"
         name="name"
@@ -71,20 +89,26 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
       >
         <Input />
       </Form.Item>
+      
       <Form.Item
         label="Correo"
         name="email"
-        rules={[{ required: true, message: "Por favor escribe un correo valido!" }]}
+        rules={[
+          { required: true, message: "Por favor escribe un correo" },
+          { type: 'email', message: 'Por favor ingresa un correo válido!' }
+        ]}
       >
         <Input />
       </Form.Item>
+      
       <Form.Item
         label="Edad"
         name="age"
         rules={[{ required: true, message: "Por favor escriba la edad" }]}
       >
-        <InputNumber />
+        <InputNumber min={0} max={120} />
       </Form.Item>
+      
       <Form.Item
         label="Grado"
         name="grade"
@@ -122,10 +146,11 @@ export const FormUser = ({ formData, setFormData }: FormAddUsersProps) => {
           ]}
         />
       </Form.Item>
+      
       <Form.Item 
         label="Tipo" 
         name="tag" 
-        rules={[{ required: true }]}
+        rules={[{ required: true, message: "Por favor seleccione un tipo de usuario" }]}
       >
         <Select
           options={[

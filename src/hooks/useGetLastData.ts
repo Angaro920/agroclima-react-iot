@@ -1,16 +1,15 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { BACKEND_URL } from "../constants/urls";
 import { LastDataType } from "../types/LastDataType";
 
-
 export const useGetLastData = () => {
-  const [weather, setWeather] = useState<LastDataType| null>(null);
+  const [weather, setWeather] = useState<LastDataType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const getLastData = async () => {
+  const getLastData = useCallback(async () => {
     try {
-      const response = await fetch(BACKEND_URL+"/api/getLastData");
+      const response = await fetch(BACKEND_URL + "/api/getLastData");
       if (!response.ok) throw new Error("Error al obtener la temperatura");
 
       const data = await response.json();
@@ -23,7 +22,9 @@ export const useGetLastData = () => {
     } finally {
       setLoading(false);
     }
-  };
-  return {weather, loading, error, getLastData};
-}
+  }, []);
+
+  return { weather, loading, error, getLastData };
+};
+
 export default useGetLastData;
