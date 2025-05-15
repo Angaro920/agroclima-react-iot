@@ -1,5 +1,4 @@
 import { CSSProperties } from "react";
-
 export const dashboardStyle: Record<string, CSSProperties> = {
   globalLayoutStyle:{
     minHeight: "100vh",
@@ -22,6 +21,7 @@ export const dashboardStyle: Record<string, CSSProperties> = {
     background: "white",
     borderRadius: "10px",
     backgroundColor: "#F9FAFB",
+    fontFamily:""
   },
   chartdiv:{
     height: "300px",

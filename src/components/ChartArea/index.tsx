@@ -1,6 +1,6 @@
-import { Chart } from '@antv/g2';
-import { useEffect, useRef } from 'react';
-import { MongoObject } from '../../constants/MongoObject';
+import { Chart } from "@antv/g2";
+import { useEffect, useRef } from "react";
+import { MongoObject } from "../../constants/MongoObject";
 
 interface ChartComponentProps {
   data: MongoObject[];
@@ -20,10 +20,10 @@ export const AreaChartComponent = ({ data }: ChartComponentProps) => {
       chart
         .area()
         .data(data)
-        .encode('x', 'Fecha')
-        .encode('y', 'Promedio')
-        .style({fill: '#82B1FF80', stroke: '#82ca9d'})
-        .animate('enter', { type: 'pathIn', duration: 1000 });
+        .encode("x", "Fecha")
+        .encode("y", "Promedio")
+        .style({ fill: "#82B1FF80", stroke: "#82ca9d" })
+        .animate("enter", { type: "growInX", duration: 3000});
 
       chart.render();
 

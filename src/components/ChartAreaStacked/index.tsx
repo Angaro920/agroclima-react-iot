@@ -20,19 +20,20 @@ export const AreaStakedChartComponent = ({ data }: ChartComponentProps) => {
         .encode("x", "hora")
         .encode("y", "value")
         .encode("color", "lugar")
-        .axis("x", { title: false })
-        .axis("y", { title: false });
+        .axis("x", { title: true })
+        .axis("y", { title: true })
+        .animate("enter", { type: "growInX" });
 
-      chart.area().style("fillOpacity", 0.1);
+      chart.area().style("fillOpacity", 0.1).animate('enter', { type: 'growInX', duration: 2000 });
 
-      chart.line().style("strokeWidth", 2).tooltip(false);
+      chart.line().style("strokeWidth", 2).tooltip(false).animate('enter', { type: 'growInX', duration: 2000 });
 
       chart.render();
       chartRef.current = chart;
     }
     return () => {
-      chartRef.current?.destroy(); 
+      chartRef.current?.destroy();
     };
-  },[data]);
-    return <div ref={chartContainerRef} style={{ height: 400 }} />;
+  }, [data]);
+  return <div ref={chartContainerRef} style={{ height: 400 }} />;
 };

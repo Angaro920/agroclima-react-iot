@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Layout, FloatButton, Drawer } from "antd";
+import { Layout, FloatButton } from "antd";
 import { MenuDashboard } from "./components";
-import { BulbOutlined, MoonOutlined } from "@ant-design/icons";
 import { dashboardStyle } from "./styles";
 import {
   Dashboard,

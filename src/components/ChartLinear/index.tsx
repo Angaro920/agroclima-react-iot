@@ -29,10 +29,10 @@ export const LineChartComponent = ({ data }: ChartComponentProps) => {
           nice: true,
         });
 
-      chart.line().style({stroke: "#2979FF", lineWidth: 4});
-      
-      chart.point().style("fill", "#2979FF").tooltip(false);
-      chart.animate('enter', { type: 'pathIn', duration: 1000 });
+      chart.line().style({ stroke: "#2979FF", lineWidth: 2 }).animate('enter', { type: 'pathIn', duration: 3000 });
+
+      chart.point().style("fill", "#2979FF").tooltip(false).animate('enter', { duration: 300 });
+
       chart.render();
 
       chartRef.current = chart;
