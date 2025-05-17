@@ -4,7 +4,7 @@ import { BACKEND_URL } from "../constants/urls";
 
 export const useUsers = () => {
   const [users, setUsers] = useState<UserType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // GET - Obtener todos los usuarios
@@ -26,24 +26,28 @@ export const useUsers = () => {
   };
   // GET - Obtener usuario por ID
   const getUserById = async (id: string) => {
+    if (!id || id === "undefined") throw new Error("ID no válido");
+
     setLoading(true);
     try {
-      const response = await fetch(BACKEND_URL+`api/users/${id}`);
-      if (!response.ok) throw new Error('Error al obtener usuario');
-      
-      const user = await response.json();
-      return user;
+      const response = await fetch(`${BACKEND_URL}/api/listUser/${id}`, {
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error("Error al obtener usuario");
+
+      return await response.json();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error desconocido');
+      setError(err instanceof Error ? err.message : "Error desconocido");
       throw err;
     } finally {
       setLoading(false);
     }
   };
 
+
   // POST - Crear usuario
   const createUser = async (userData: UserType) => {
-    setLoading(true);
+    setLoading(false);
     try {
       const response = await fetch(BACKEND_URL+"/api/addUser", {
         method: "POST",
@@ -68,7 +72,7 @@ export const useUsers = () => {
 
   // PUT - Actualizar usuario
   const updateUser = async (id: string, userData: Partial<UserType>) => {
-    setLoading(true);
+    setLoading(false);
     try {
       const response = await fetch(BACKEND_URL+`/api/updateUser/${id}`, {
         method: "PUT",
@@ -83,7 +87,7 @@ export const useUsers = () => {
 
       const updatedUser = await response.json();
       setUsers((prev) =>
-        prev.map((user) => (user.id === id ? updatedUser : user))
+        prev.map((user) => (user._id === id ? updatedUser : user))
       );
       return updatedUser;
     } catch (err) {
@@ -108,7 +112,7 @@ export const useUsers = () => {
 
       if (!response.ok) throw new Error("Error al eliminar usuario");
 
-      setUsers((prev) => prev.filter((user) => user.id !== id));
+      setUsers((prev) => prev.filter((user) => user._id !== id));
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconocido");
