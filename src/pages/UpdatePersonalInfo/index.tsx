@@ -7,7 +7,8 @@ import { useUser } from "../../hooks/useAuthUser"; // Tu hook ya configurado
 import type { UserType } from "../../types";
 
 const INITIAL_FORM: UserType = {
-  id: "",
+  id :"",
+  _id: "",
   documento: "",
   userName: "",
   password: "",
@@ -62,7 +63,7 @@ export const InfoUpdate = () => {
         dataToUpdate.password = formData.password;
       }
 
-      await updateUser(authUser!.id, dataToUpdate);
+      await updateUser(authUser!._id, dataToUpdate);
       message.success("Información actualizada correctamente");
       setIsModalOpen(false);
     } catch (error) {
@@ -105,6 +106,7 @@ export const InfoUpdate = () => {
         ]}
       >
         <FormUser
+          authUserTag={authUser?.tag || ""}
           formData={formData}
           setFormData={setFormData}
           isEditing={true}
