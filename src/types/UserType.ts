@@ -1,12 +1,12 @@
 export interface UserType {
-  tag: string;
-  _id?: string;
+  id: string;
   userName: string;
-  password: string;
-  confirmPassword: string;
+  tag: string;
   name: string;
   email: string;
   documento: string;
   age: number;
   grade: string;
+  password: string;
+  confirmPassword: string;
 }

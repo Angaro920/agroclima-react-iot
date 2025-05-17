@@ -22,6 +22,7 @@ import {
   ReportVelViento,
   DashboardInterno,
   DashboardExterno,
+  InfoUpdate,
 } from "./pages";
 import { Pages } from "./constants/pages";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -85,6 +86,7 @@ const App = () => {
                     {currentPage === Pages.LISTDIRWIND && <ReportDirViento />}
                     {currentPage === Pages.LISTVELWIND && <ReportVelViento />}
                     {currentPage === Pages.AUDITS && <AuditsPage />}
+                    {currentPage === Pages.INFOUPDATE && <InfoUpdate />}
                     {currentPage === Pages.DASHBOARDINTERNO && <DashboardInterno setCurrentPage={setCurrentPage} />}
                     {currentPage === Pages.DASHBOARDEXTERNO && <DashboardExterno setCurrentPage={setCurrentPage} />}
 

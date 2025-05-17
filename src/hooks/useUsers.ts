@@ -83,7 +83,7 @@ export const useUsers = () => {
 
       const updatedUser = await response.json();
       setUsers((prev) =>
-        prev.map((user) => (user._id === id ? updatedUser : user))
+        prev.map((user) => (user.id === id ? updatedUser : user))
       );
       return updatedUser;
     } catch (err) {
@@ -108,7 +108,7 @@ export const useUsers = () => {
 
       if (!response.ok) throw new Error("Error al eliminar usuario");
 
-      setUsers((prev) => prev.filter((user) => user._id !== id));
+      setUsers((prev) => prev.filter((user) => user.id !== id));
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconocido");

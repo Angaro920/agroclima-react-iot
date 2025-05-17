@@ -17,4 +17,8 @@ export * from "./ReportDirViento";
 export * from "./ReportVelViento";
 export * from "./DashboardInterno";
 export * from "./DashboardExterno";
+export * from "./UpdatePersonalInfo";
+
+
+
 

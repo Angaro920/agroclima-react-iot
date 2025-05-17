@@ -15,6 +15,7 @@ import type { MenuProps } from "antd";
 import { FormReport } from "../FormReport";
 import { FormAuditReport } from "../FormAuditReport";
 import { GiGreenhouse, GiSunCloud, GiHouse} from "react-icons/gi";
+import { UserOutlined } from "@ant-design/icons";
 
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -78,13 +79,19 @@ const getMenuItems = (tag: string): MenuItem[] => {
   }
 
   baseItems.push(
-    { type: "divider" },
-    {
-      key: "logout",
-      label: "Cerrar sesión",
-      icon: <LogoutOutlined />,
-    }
-  );
+  {
+    key: Pages.INFOUPDATE,
+    label: "Actualizar Información",
+    icon: <UserOutlined />, // or any icon you prefer
+  },
+  { type: "divider" },
+  {
+    key: "logout",
+    label: "Cerrar sesión",
+    icon: <LogoutOutlined />,
+  }
+);
+
 
   return baseItems;
 };

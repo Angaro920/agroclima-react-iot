@@ -13,12 +13,15 @@ import { Pages } from "../../constants/pages";
 interface Props {
   title: string;
   value: number | string | undefined;
+  previousValue?: number;
   sufix: string;
   parameter: CollectionNameType;
   icon?: React.ReactNode;
   tipo: ChartType;
   data: number;
   setCurrentPage: (page: Pages) => void;
+  valueStyle?: React.CSSProperties;
+  prefix?: React.ReactNode;
 }
 
 export const CartasDashboard = ({
@@ -26,10 +29,12 @@ export const CartasDashboard = ({
   value,
   sufix,
   parameter,
-  data,
   icon,
   tipo,
+  data,
   setCurrentPage,
+  valueStyle,
+  prefix,
 }: Props) => {
   function handleViewMore() {
     switch (parameter) {
@@ -95,7 +100,8 @@ export const CartasDashboard = ({
             title="Actual"
             value={value}
             precision={2}
-            valueStyle={{ color: "#3f8600" }}
+            valueStyle={valueStyle}
+            prefix={prefix}
             suffix={sufix}
           />
           {icon && (

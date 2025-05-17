@@ -68,8 +68,8 @@ export const UsersTable: FC<UsersTableProps> = ({
   };
 
   const mappedUsers: Partial<UserType>[] = users.map((user) => ({
-    key: user._id || "",
-    _id: user._id,
+    key: user.id || "",
+    id: user.id,
     name: user.name,
     email: user.email,
     documento: user.documento,
@@ -232,7 +232,7 @@ export const UsersTable: FC<UsersTableProps> = ({
               variant="outlined"
               color="green"
               icon={<EditOutlined />}
-              onClick={() => onPressUpdate(record._id as string)}
+              onClick={() => onPressUpdate(record.id as string)}
             >
               Editar
             </Button>
@@ -241,7 +241,7 @@ export const UsersTable: FC<UsersTableProps> = ({
             <Popconfirm
               title="¿Estás seguro de eliminar este usuario?"
               onConfirm={() => {
-                onPressDelete(record._id as string);
+                onPressDelete(record.id as string);
               }}
               okText="Sí"
               cancelText="No"
