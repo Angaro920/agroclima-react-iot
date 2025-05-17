@@ -7,6 +7,7 @@ import { useUsers } from "../../hooks/useUsers";
 import type { UserType } from "../../types";
 
 const INITIAL_FORM: UserType = {
+  id: "",
   documento: "",
   userName: "",
   password: "",
@@ -43,7 +44,7 @@ export const UsersPage = () => {
       setSelectedUserId(id);
       
       // Buscar el usuario en el estado actual primero
-      const userToEdit = users.find(user => user._id === id);
+      const userToEdit = users.find(user => user.id === id);
       
       if (userToEdit) {
         // Si encontramos el usuario en el estado, lo usamos directamente
