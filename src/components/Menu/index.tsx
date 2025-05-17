@@ -81,7 +81,7 @@ const getMenuItems = (tag: string): MenuItem[] => {
   baseItems.push(
   {
     key: Pages.INFOUPDATE,
-    label: "Actualizar Información",
+    label: "Mi Usuario",
     icon: <UserOutlined />, // or any icon you prefer
   },
   { type: "divider" },
