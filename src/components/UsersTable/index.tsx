@@ -68,7 +68,7 @@ export const UsersTable: FC<UsersTableProps> = ({
   };
 
   const mappedUsers: Partial<UserType>[] = users.map((user) => ({
-    key: user.id || "",
+    key: user._id || "",
     id: user.id,
     name: user.name,
     email: user.email,
@@ -222,42 +222,43 @@ export const UsersTable: FC<UsersTableProps> = ({
       ...getColumnSearchProps("email"),
     },
     {
-      title: "Acción",
-      width: 330,
-      key: "action",
-      render: (record: Partial<UserType>) => (
-        <Row>
-          <Col span={4} style={{ margin: "auto" }}>
-            <Button
-              variant="outlined"
-              color="green"
-              icon={<EditOutlined />}
-              onClick={() => onPressUpdate(record.id as string)}
-            >
-              Editar
-            </Button>
-          </Col>
-          <Col span={4} style={{ margin: "auto" }}>
-            <Popconfirm
-              title="¿Estás seguro de eliminar este usuario?"
-              onConfirm={() => {
-                onPressDelete(record.id as string);
-              }}
-              okText="Sí"
-              cancelText="No"
-            >
-              <Button
-                variant="outlined"
-                color="danger"
-                icon={<DeleteOutlined />}
-              >
-                Eliminar
-              </Button>
-            </Popconfirm>
-          </Col>
-        </Row>
-      ),
-    },
+  title: "Acción",
+  width: 330,
+  key: "action",
+  render: (record: Partial<UserType>) => (
+    <Row>
+      <Col span={4} style={{ margin: "auto" }}>
+        <Button
+          variant="outlined"
+          color="green"
+          icon={<EditOutlined />}
+          onClick={() => onPressUpdate(record.id as string)} // 🔁 actualizado
+        >
+          Editar
+        </Button>
+      </Col>
+      <Col span={4} style={{ margin: "auto" }}>
+        <Popconfirm
+          title="¿Estás seguro de eliminar este usuario?"
+          onConfirm={() => {
+            onPressDelete(record.id as string); // 🔁 actualizado
+          }}
+          okText="Sí"
+          cancelText="No"
+        >
+          <Button
+            variant="outlined"
+            color="danger"
+            icon={<DeleteOutlined />}
+          >
+            Eliminar
+          </Button>
+        </Popconfirm>
+      </Col>
+    </Row>
+  ),
+},
+
   ];
 
   return (

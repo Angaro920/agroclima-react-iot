@@ -20,6 +20,7 @@ export const useUser = () => {
 
       const data: UserType = {
         id: raw.id,
+        _id: raw._id,
         userName: raw.username, // ✅ mapeo correcto al formato esperado
         tag: raw.tag,
         name: raw.name,

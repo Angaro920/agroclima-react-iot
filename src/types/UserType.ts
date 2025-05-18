@@ -1,5 +1,6 @@
 export interface UserType {
   id: string;
+  _id: string;
   userName: string;
   tag: string;
   name: string;
