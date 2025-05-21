@@ -123,7 +123,7 @@ export const DashboardExterno = (setCurrentPage: DashboardProps) => {
       </h2>
       <Row gutter={16}>
         <Col span={50}>
-          {buildCard("Tempertaura externa", "TemperaturaExterna", "°C", <FaTemperatureHigh size={44} color="#3f8600" />, "line", weather?.TemperaturaExterna.data)}
+          {buildCard("Temperatura externa", "TemperaturaExterna", "°C", <FaTemperatureHigh size={44} color="#3f8600" />, "line", weather?.TemperaturaExterna.data)}
         </Col>
         <Col span={50}>
           {buildCard("Humedad externa", "HumedadExterna", "%", <BsMoisture size={44} color="#3f8600" />, "line", weather?.HumedadExterna.data)}

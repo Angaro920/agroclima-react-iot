@@ -6,7 +6,7 @@ export const usePrediccionClimatica = () => {
   const openNotification = (mensajeTemperatura: string, mensajeHumedad: string) => {
     notification.info({
       message: 'Predicción Climática',
-      description: `${mensajeTemperatura}\n${mensajeHumedad}`+ "en la siguiente",
+      description: `${mensajeTemperatura}\n${mensajeHumedad}`+ "en la siguiente hora.",
       placement: 'topRight',
       duration:0,
     });
