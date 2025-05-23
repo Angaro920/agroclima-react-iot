@@ -101,6 +101,7 @@ export const useUsers = () => {
   // DELETE - Eliminar usuario
   const deleteUser = async (id: string) => {
     setLoading(true);
+    console.log(id)
     try {
       const response = await fetch(
         BACKEND_URL+`/api/deleteUser/${id}`,

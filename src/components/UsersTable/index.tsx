@@ -24,8 +24,8 @@ import { FilterDropdownProps } from "antd/es/table/interface";
 interface UsersTableProps {
   users: UserType[];
   loading: boolean;
-  onPressDelete: (id: string) => void;
-  onPressUpdate: (id: string) => void; // Ahora solo recibe el ID
+  onPressDelete: (_id: string) => void;
+  onPressUpdate: (_id: string) => void; // Ahora solo recibe el ID
 }
 
 interface ColorByTag {
@@ -69,7 +69,7 @@ export const UsersTable: FC<UsersTableProps> = ({
 
   const mappedUsers: Partial<UserType>[] = users.map((user) => ({
     key: user._id || "",
-    id: user.id,
+    id: user._id,
     name: user.name,
     email: user.email,
     documento: user.documento,
