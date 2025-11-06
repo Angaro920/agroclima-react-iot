@@ -3,7 +3,9 @@ import { Card, Col, Row } from "antd";
 import { dashboardStyle } from "../../styles";
 import { CartasDashboard, FetchDualDay } from "../../components";
 import { FaTemperatureHigh } from "react-icons/fa";
-import { LuSun, LuSunDim, LuCloudRainWind } from "react-icons/lu";
+import { GiSaltShaker, GiDustCloud, GiMolecule  } from "react-icons/gi";
+import { TbWavesElectricity } from "react-icons/tb";
+import { LuSun } from "react-icons/lu";
 import { BsMoisture } from "react-icons/bs";
 import { useGetLastData } from "../../hooks/useGetLastData";
 import { Pages } from "../../constants/pages";
@@ -54,7 +56,7 @@ export const DashboardInterno = (setCurrentPage: DashboardProps) => {
     };
 
     updateData();
-    const interval = setInterval(updateData, 60000);
+    const interval = setInterval(updateData, 300000);
     return () => clearInterval(interval);
   }, []);
 
@@ -105,18 +107,27 @@ export const DashboardInterno = (setCurrentPage: DashboardProps) => {
       </h2>
       <Row gutter={16}>
         <Col span={50}>
-          {buildCard("Temperatura Sensor", "TemperaturaSensor", "°C", <FaTemperatureHigh size={44} color="#3f8600" />, "line", weather?.TemperaturaSensor.data)}
+          {buildCard("Temperatura Sensor", "TemperaturaSensor", "°C", <FaTemperatureHigh size={44} color="#A59F96" />, "line", weather?.TemperaturaSensor.data)}
         </Col>
         <Col span={50}>
-          {buildCard("Humedad Sensor", "HumedadSensor", "%", <BsMoisture size={44} color="#3f8600" />, "line", weather?.HumedadSensor.data)}
+          {buildCard("Humedad Sensor", "HumedadSensor", "%", <BsMoisture size={44} color="#A59F96" />, "line", weather?.HumedadSensor.data)}
         </Col>
       </Row>
       <Row gutter={16}>
         <Col span={50}>
-          {buildCard("Lumens", "LuzSensor", "%", <LuSun size={44} color="#3f8600" />, "area", weather?.LuzSensor.data)}
+          {buildCard("Luz", "LuzSensor", "%", <LuSun size={44} color="#A59F96" />, "area", weather?.LuzSensor.data)}
+        </Col>
+       <Col span={50}>
+          {buildCard("Ph", "PHSensor", " ", <GiMolecule size={44} color="#A59F96" />, "line", weather?.PHSensor.data)}
         </Col>
         <Col span={50}>
-          {buildCard("Co2", "HidrogenoSensor", "ppp", <LuSun size={44} color="#3f8600" />, "bar", weather?.HidrogenoSensor.data)}
+          {buildCard("Salinidad", "SalinidadSensor", "g/L", <GiSaltShaker size={44} color="#A59F96" />, "bar", weather?.SalinidadSensor.data)}
+        </Col>
+        <Col span={50}>
+          {buildCard("Conductividad", "ConductividadSensor", "μS/cm", <TbWavesElectricity size={44} color="#A59F96" />, "bar", weather?.ConductividadSensor.data)}
+        </Col>
+        <Col span={50}>
+          {buildCard("Solidos Disueltos", "TDSSensor", "ppm", <GiDustCloud size={44} color="#A59F96" />, "bar", weather?.TDSSensor.data)}
         </Col>
       </Row>
       <h2 style={dashboardStyle.titleH2}>
@@ -124,10 +135,10 @@ export const DashboardInterno = (setCurrentPage: DashboardProps) => {
       </h2>
       <Row gutter={16}>
         <Col span={50}>
-          {buildCard("Temperatura Interna", "TemperaturaInterna", "°C", <FaTemperatureHigh size={44} color="#3f8600" />, "line", weather?.TemperaturaInterna.data)}
+          {buildCard("Temperatura Interna", "TemperaturaInterna", "°C", <FaTemperatureHigh size={44} color="#A59F96" />, "line", weather?.TemperaturaInterna.data)}
         </Col>
         <Col span={50}>
-          {buildCard("Humedad Interna", "HumedadInterna", "%", <BsMoisture size={44} color="#3f8600" />, "line", weather?.HumedadInterna.data)}
+          {buildCard("Humedad Interna", "HumedadInterna", "%", <BsMoisture size={44} color="#A59F96" />, "line", weather?.HumedadInterna.data)}
         </Col>
       </Row>
       <Row gutter={16}>

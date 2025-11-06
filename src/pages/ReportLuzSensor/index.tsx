@@ -6,11 +6,11 @@ import { Card, Col, Row } from "antd";
 import { FetchWeek } from "../../components/FetchWeek";
 import { FetchMonth } from "../../components/FetchMonth";
 
-export const ReportLightPage = () => {
-  const { weather, loading, getLuz } = useGetData();
+export const ReportLuzPage = () => {
+  const { weather, loading, getLuzSensor } = useGetData();
 
   useEffect(() => {
-    getLuz();
+    getLuzSensor();
   }, []);
   return (
     <div style={dashboardStyle.mainSector}>

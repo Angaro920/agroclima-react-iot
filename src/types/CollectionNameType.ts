@@ -1,8 +1,11 @@
 export type CollectionNameType =
   | "TemperaturaSensor"
-  | "HidrogenoSensor"
   | "LuzSensor"
   | "HumedadSensor"
+  | "PHSensor"
+  | "SalinidadSensor"
+  | "ConductividadSensor"
+  | "TDSSensor"
   | "TemperaturaInterna"
   | "TemperaturaExterna"
   | "HumedadSensor"
@@ -15,3 +18,5 @@ export type CollectionNameType =
   | "VelocidadViento"
   | "DireccionViento"
   | "Uv";
+  
+  

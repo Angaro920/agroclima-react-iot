@@ -16,7 +16,10 @@ export interface SensorData {
     PresionBarometricaRelativa: SensorData;
     Uv: SensorData;
     LuzSensor: SensorData;
-    HidrogenoSensor: SensorData;
+    PHSensor: SensorData;
+    SalinidadSensor: SensorData;
+    ConductividadSensor: SensorData;
+    TDSSensor: SensorData;
     DireccionViento: SensorData;
     VelocidadViento: SensorData;    
   }

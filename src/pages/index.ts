@@ -1,9 +1,9 @@
 export * from "./Dashboard";
 export * from "./Devices";
-export * from "./ReportHum";
-export * from "./ReportLight";
-export * from "./ReportTemp";
-export * from "./ReportHid";
+export * from "./ReportHumSensor";
+export * from "./ReportLuzSensor";
+export * from "./ReportTempSensor";
+export * from "./ReportPhSensor";
 export * from "./Users";	
 export * from "./ReportTempOut";
 export * from "./ReportHumeOut";
@@ -18,6 +18,9 @@ export * from "./ReportVelViento";
 export * from "./DashboardInterno";
 export * from "./DashboardExterno";
 export * from "./UpdatePersonalInfo";
+export * from "./ReportSalinidadSensor";
+export * from "./ReportConductividadSensor";
+export * from "./ReportTDSSensor";
 
 
 

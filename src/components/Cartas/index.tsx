@@ -47,8 +47,17 @@ export const CartasDashboard = ({
       case "LuzSensor":
         setCurrentPage(Pages.LISTLUZ);
         break;
-      case "HidrogenoSensor":
-        setCurrentPage(Pages.LISTHIDRO);
+      case "PHSensor":
+        setCurrentPage(Pages.LISTPH);
+        break;
+      case "ConductividadSensor":
+        setCurrentPage(Pages.LISTCONDUCTIVIDAD);
+        break;
+      case "SalinidadSensor":
+        setCurrentPage(Pages.LISTSALINIDAD);
+        break;
+      case "TDSSensor":
+        setCurrentPage(Pages.LISTTDS);
         break;
       case "TemperaturaExterna":
         setCurrentPage(Pages.LISTTEMPOUT);

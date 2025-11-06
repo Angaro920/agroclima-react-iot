@@ -63,7 +63,7 @@ export const useClimaAlerts = () => {
     };
 
     checkData();
-    const interval = setInterval(checkData, 60000); // Cada minuto
+    const interval = setInterval(checkData, 300000); // Cada minuto
 
     return () => clearInterval(interval);
   }, [getLastData]);

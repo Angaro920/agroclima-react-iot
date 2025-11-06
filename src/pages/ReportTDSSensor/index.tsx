@@ -6,27 +6,28 @@ import { Card, Col, Row } from "antd";
 import { FetchWeek } from "../../components/FetchWeek";
 import { FetchMonth } from "../../components/FetchMonth";
 
-export const ReportHumPage = () => {
-  const { weather, loading, getHumedad } = useGetData();
 
-  useEffect(() => {
-    getHumedad();
-  }, []);
+export const ReportTDSPage = () => {
+  const {weather, loading, getTDSSensor} = useGetData();
+    
+    useEffect(() => {
+      getTDSSensor();
+    }, []);
   return (
     <div style={dashboardStyle.mainSector}>
       <Row gutter={16}>
         <Col span={50}>
         <Card title="Reporte Semanal" style={{ width:800 }}>
-          <FetchWeek parameter="HumedadSensor"/>
+          <FetchWeek parameter="TDSSensor"/>
         </Card>
         </Col>
         <Col span={50}>
         <Card title="Reporte Mensual" style={{ width: 800 }}>
-          <FetchMonth parameter="HumedadSensor"/>
+          <FetchMonth parameter="TDSSensor"/>
         </Card>
         </Col>
       </Row>
-      <ReportTable title="Humedad" weather={weather} loading={loading} sufijo="%" />
+      <ReportTable title="Solidos Disueltos en Agua"loading={loading} weather={weather} sufijo="ppm" />
     </div>
   );
 };

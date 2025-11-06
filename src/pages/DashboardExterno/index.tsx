@@ -2,14 +2,15 @@ import { useEffect, useState, useRef } from "react";
 import { Card, Col, Row } from "antd";
 import { dashboardStyle } from "../../styles";
 import { CartasDashboard, FetchDualDay } from "../../components";
-import { FaEquals, FaTemperatureHigh } from "react-icons/fa";
+import {  FaTemperatureHigh } from "react-icons/fa";
 import { FiWind } from "react-icons/fi";
 import { WiBarometer } from "react-icons/wi";
-import { LuSun, LuSunDim, LuCloudRainWind, LuCompass, LuEqual, LuEqualApproximately } from "react-icons/lu";
+import { LuCloudRainWind, LuCompass, } from "react-icons/lu";
+import { GiSunRadiations, GiRadiations  } from "react-icons/gi";
 import { BsMoisture } from "react-icons/bs";
 import { useGetLastData } from "../../hooks/useGetLastData";
 import { Pages } from "../../constants/pages";
-import { ArrowDownOutlined, ArrowRightOutlined, ArrowUpOutlined, MinusOutlined } from "@ant-design/icons";
+import { ArrowDownOutlined, ArrowRightOutlined, ArrowUpOutlined } from "@ant-design/icons";
 
 
 interface DashboardProps {
@@ -57,7 +58,7 @@ export const DashboardExterno = (setCurrentPage: DashboardProps) => {
     };
 
     updateData();
-    const interval = setInterval(updateData, 60000);
+    const interval = setInterval(updateData, 300000);
     return () => clearInterval(interval);
   }, []);
 
@@ -123,34 +124,34 @@ export const DashboardExterno = (setCurrentPage: DashboardProps) => {
       </h2>
       <Row gutter={16}>
         <Col span={50}>
-          {buildCard("Temperatura externa", "TemperaturaExterna", "°C", <FaTemperatureHigh size={44} color="#3f8600" />, "line", weather?.TemperaturaExterna.data)}
+          {buildCard("Temperatura externa", "TemperaturaExterna", "°C", <FaTemperatureHigh size={44} color="#A59F96" />, "line", weather?.TemperaturaExterna.data)}
         </Col>
         <Col span={50}>
-          {buildCard("Humedad externa", "HumedadExterna", "%", <BsMoisture size={44} color="#3f8600" />, "line", weather?.HumedadExterna.data)}
-        </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col span={50}>
-          {buildCard("Presion atmosferica", "PresionBarometricaRelativa", "mmHg", <WiBarometer size={54} color="#3f8600" />, "gauge", weather?.PresionBarometricaRelativa.data)}
-        </Col>
-        <Col span={50}>
-          {buildCard("Velocidad del viento", "VelocidadViento", "kph", <FiWind size={44} color="#3f8600" />, "area", weather?.VelocidadViento.data)}
+          {buildCard("Humedad externa", "HumedadExterna", "%", <BsMoisture size={44} color="#A59F96" />, "line", weather?.HumedadExterna.data)}
         </Col>
       </Row>
       <Row gutter={16}>
         <Col span={50}>
-          {buildCard("Direccion del viento", "DireccionViento", "°", <LuCompass size={44} color="#3f8600" />, "rose", weather?.DireccionViento.data)}
+          {buildCard("Presion atmosferica", "PresionBarometricaRelativa", "mmHg", <WiBarometer size={54} color="#A59F96" />, "gauge", weather?.PresionBarometricaRelativa.data)}
         </Col>
         <Col span={50}>
-          {buildCard("Radiacion solar", "RadiacionSolar", "W/m²", <LuSun size={44} color="#3f8600" />, "bar", weather?.RadiacionSolar.data)}
+          {buildCard("Velocidad del viento", "VelocidadViento", "kph", <FiWind size={44} color="#A59F96" />, "area", weather?.VelocidadViento.data)}
         </Col>
       </Row>
       <Row gutter={16}>
         <Col span={50}>
-          {buildCard("Radiacion UV", "Uv", "mJ/cm²", <LuSunDim size={44} color="#3f8600" />, "bullet", weather?.Uv.data)}
+          {buildCard("Direccion del viento", "DireccionViento", "°", <LuCompass size={44} color="#A59F96" />, "rose", weather?.DireccionViento.data)}
         </Col>
         <Col span={50}>
-          {buildCard("Precipitaciones - Hoy", "Precipitaciones", "mm", <LuCloudRainWind size={44} color="#3f8600" />, "liquid", weather?.Precipitaciones.data)}
+          {buildCard("Radiacion solar", "RadiacionSolar", "W/m²", <GiSunRadiations size={44} color="#A59F96" />, "bar", weather?.RadiacionSolar.data)}
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={50}>
+          {buildCard("Radiacion UV", "Uv", "mJ/cm²", <GiRadiations  size={44} color="#A59F96" />, "bullet", weather?.Uv.data)}
+        </Col>
+        <Col span={50}>
+          {buildCard("Precipitaciones - Hoy", "Precipitaciones", "mm", <LuCloudRainWind size={44} color="#A59F96" />, "liquid", weather?.Precipitaciones.data)}
         </Col>
       </Row>
     </div>

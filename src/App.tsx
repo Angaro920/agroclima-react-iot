@@ -6,11 +6,11 @@ import {
   Dashboard,
   Devices,
   ReportDirViento,
-  ReportHidPage,
+  ReportPhPage,
   ReportHumIn,
   ReportHumOut,
   ReportHumPage,
-  ReportLightPage,
+  ReportLuzPage,
   ReportRain,
   ReportTempIn,
   ReportTempOut,
@@ -23,6 +23,9 @@ import {
   DashboardInterno,
   DashboardExterno,
   InfoUpdate,
+  ReportConductividadPage,
+  ReportSalinidadPage,
+  ReportTDSPage
 } from "./pages";
 import { Pages } from "./constants/pages";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -70,9 +73,9 @@ const App = () => {
                       <Dashboard setCurrentPage={setCurrentPage} />
                     )}
                     {currentPage === Pages.DEVICES && <Devices />}
-                    {currentPage === Pages.LISTHIDRO && <ReportHidPage />}
+                    {currentPage === Pages.LISTPH && <ReportPhPage />}
                     {currentPage === Pages.LISTHUM && <ReportHumPage />}
-                    {currentPage === Pages.LISTLUZ && <ReportLightPage />}
+                    {currentPage === Pages.LISTLUZ && <ReportLuzPage />}
                     {currentPage === Pages.LISTTEMP && <ReportTempPage />}
                     {currentPage === Pages.USERS && <UsersPage />}
                     {currentPage === Pages.LISTTEMPOUT && <ReportTempOut />}
@@ -87,6 +90,9 @@ const App = () => {
                     {currentPage === Pages.LISTVELWIND && <ReportVelViento />}
                     {currentPage === Pages.AUDITS && <AuditsPage />}
                     {currentPage === Pages.INFOUPDATE && <InfoUpdate />}
+                    {currentPage === Pages.LISTCONDUCTIVIDAD && <ReportConductividadPage />}
+                    {currentPage === Pages.LISTSALINIDAD && <ReportSalinidadPage />}
+                    {currentPage === Pages.LISTTDS && <ReportTDSPage />}
                     {currentPage === Pages.DASHBOARDINTERNO && <DashboardInterno setCurrentPage={setCurrentPage} />}
                     {currentPage === Pages.DASHBOARDEXTERNO && <DashboardExterno setCurrentPage={setCurrentPage} />}
 

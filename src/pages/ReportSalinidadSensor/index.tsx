@@ -7,27 +7,27 @@ import { FetchWeek } from "../../components/FetchWeek";
 import { FetchMonth } from "../../components/FetchMonth";
 
 
-export const ReportHidPage = () => {
-  const {weather, loading, getGas} = useGetData();
+export const ReportSalinidadPage = () => {
+  const {weather, loading, getSalinidadSensor} = useGetData();
     
     useEffect(() => {
-      getGas();
+      getSalinidadSensor();
     }, []);
   return (
     <div style={dashboardStyle.mainSector}>
       <Row gutter={16}>
         <Col span={50}>
         <Card title="Reporte Semanal" style={{ width:800 }}>
-          <FetchWeek parameter="HidrogenoSensor"/>
+          <FetchWeek parameter="SalinidadSensor"/>
         </Card>
         </Col>
         <Col span={50}>
         <Card title="Reporte Mensual" style={{ width: 800 }}>
-          <FetchMonth parameter="HidrogenoSensor"/>
+          <FetchMonth parameter="SalinidadSensor"/>
         </Card>
         </Col>
       </Row>
-      <ReportTable title="Gas"loading={loading} weather={weather} sufijo="PPP" />
+      <ReportTable title="Sensor Salinidad"loading={loading} weather={weather} sufijo="g/L" />
     </div>
   );
 };

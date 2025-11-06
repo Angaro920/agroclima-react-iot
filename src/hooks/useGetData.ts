@@ -7,12 +7,12 @@ export const useGetData = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const getTemperatura = async () => {
+  const getTemperaturaSensor = async () => {
     try {
       const response = await fetch(
         BACKEND_URL+"/api/listData/TemperaturaSensor"
       );
-      if (!response.ok) throw new Error("Error al obtener la temperatura");
+      if (!response.ok) throw new Error("Error al obtener la temperatura del sensor");
 
       const data = await response.json();
       setWeather(data);
@@ -25,7 +25,7 @@ export const useGetData = () => {
       setLoading(false);
     }
   };
-  const getHumedad = async () => {
+  const getHumedadSensor = async () => {
     try {
       const response = await fetch(
         BACKEND_URL+"/api/listData/HumedadSensor"
@@ -43,12 +43,12 @@ export const useGetData = () => {
       setLoading(false);
     }
   };
-  const getGas = async () => {
+  const getPhSensor = async () => {
     try {
       const response = await fetch(
-        BACKEND_URL+"/api/listData/HidrogenoSensor"
+        BACKEND_URL+"/api/listData/PHSensor"
       );
-      if (!response.ok) throw new Error("Error al obtener la temperatura");
+      if (!response.ok) throw new Error("Error al obtener el Ph del sensor");
 
       const data = await response.json();
       setWeather(data);
@@ -61,10 +61,58 @@ export const useGetData = () => {
       setLoading(false);
     }
   };
-  const getLuz = async () => {
+  const getLuzSensor = async () => {
     try {
       const response = await fetch(BACKEND_URL+"/api/listData/LuzSensor");
-      if (!response.ok) throw new Error("Error al obtener la temperatura");
+      if (!response.ok) throw new Error("Error al obtener la luz del sensor");
+
+      const data = await response.json();
+      setWeather(data);
+      setLoading(false);
+      return data;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error desconocido");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getTDSSensor = async () => {
+    try {
+      const response = await fetch(BACKEND_URL+"/api/listData/TDSSensor");
+      if (!response.ok) throw new Error("Error al obtener el TDS");
+
+      const data = await response.json();
+      setWeather(data);
+      setLoading(false);
+      return data;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error desconocido");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getSalinidadSensor = async () => {
+    try {
+      const response = await fetch(BACKEND_URL+"/api/listData/SalinidadSensor");
+      if (!response.ok) throw new Error("Error al obtener la salinidad del sensor");
+
+      const data = await response.json();
+      setWeather(data);
+      setLoading(false);
+      return data;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error desconocido");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getConductividadSensor = async () => {
+    try {
+      const response = await fetch(BACKEND_URL+"/api/listData/ConductividadSensor");
+      if (!response.ok) throw new Error("Error al obtener la conductividad del sensor");
 
       const data = await response.json();
       setWeather(data);
@@ -261,10 +309,13 @@ export const useGetData = () => {
     weather,
     error,
     loading,
-    getTemperatura,
-    getHumedad,
-    getGas,
-    getLuz,
+    getTemperaturaSensor,
+    getHumedadSensor,
+    getPhSensor,
+    getLuzSensor,
+    getTDSSensor,
+    getSalinidadSensor,
+    getConductividadSensor,
     getTempOut,
     getHumeOut,
     getTempIn,

@@ -71,18 +71,22 @@ export const FormReport = () => {
         <Select
           placeholder="Seleccione:"
           options={[
-            { value: "TemperaturaSensor", label: "Temperatura" },
-            { value: "HumedadSensor", label: "Humedad" },
-            { value: "LuzSensor", label: "Luminosidad" },
-            { value: "HidrogenoSensor", label: "Gas" },
+            
+            { value: "LuzSensor", label: "Luz" },
+            { value: "PHSensor", label: "Ph" },
+            { value: "ConductividadSensor", label: "Conductividad" },
+            { value: "SalinidadSensor", label: "Salinidad" },
+            { value: "TDSsensor", label: "Solidos Disueltos" },
             { value: "Uv", label: "Radiación UV" },
             { value: "RadiacionSolar", label: "Radiación Solar" },
             { value: "Precipitaciones", label: "Precipitaciones" },
             { value: "PresionBarometricaRelativa", label: "Presión Atmosférica Relativa" },
             { value: "TemperaturaExterna", label: "Temperatura Externa" },
-            { value: "HumedadExterna", label: "Humedad Externa" },
             { value: "TemperaturaInterna", label: "Temperatura Interna" },
+            { value: "TemperaturaSensor", label: "Temperatura Sensor" },
+            { value: "HumedadExterna", label: "Humedad Externa" },
             { value: "HumedadInterna", label: "Humedad Interna" },
+            { value: "HumedadSensor", label: "Humedad Sensor" },
           ]}
         />
       </Form.Item>
