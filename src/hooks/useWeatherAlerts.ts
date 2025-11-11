@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { notification } from "antd";
 import useGetLastData from "./useGetLastData";
-import { hu } from "date-fns/locale";
+
 
 const TEMP_MIN = 13;
 const TEMP_MAX = 31;

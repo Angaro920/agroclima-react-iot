@@ -7,13 +7,13 @@ import { BACKEND_URL } from "../../constants/urls";
 export const Devices: FC = () => {
   const handleToggle = async (device: string, checked: boolean) => {
     try {
-      const token = localStorage.getItem("token"); // 🔐 Obtenemos el token
+      //const token = localStorage.getItem("token"); // 🔐 Obtenemos el token
   
       await axios.post(
        BACKEND_URL+"/api/control",
         {
           device,
-          state: checked ? "ON" : "OFF",
+          state: checked ? "OFF" : "ON",
         },
         {
           withCredentials: true 
@@ -22,7 +22,7 @@ export const Devices: FC = () => {
   
       message.success(`Se envió comando para ${device}: ${checked ? "Encendido" : "Apagado"}`);
     } catch (error) {
-      message.error("Error al enviar comando");
+      message.error("Error al enviar comando: " + error);
     }
   };
 
@@ -34,11 +34,11 @@ export const Devices: FC = () => {
       <div>
         <Row gutter={16}>
           <Col span={8}>
-            <Card title="Ventiladores" bordered={false}>
+            <Card title="Ventiladores Acuaponia" bordered={false}>
               <Switch
                 checkedChildren="Encendido"
                 unCheckedChildren="Apagado"
-                onChange={(checked) => handleToggle("ventilador", checked)}
+                onChange={(checked) => handleToggle("ventiladorAcuaponia", checked)}
               />
             </Card>
           </Col>
@@ -48,7 +48,7 @@ export const Devices: FC = () => {
                 checkedChildren="Encendido"
                 unCheckedChildren="Apagado"
                 style={{ display: "flex", justifyContent: "center" }}
-                onChange={(checked) => handleToggle("bomba", checked)}
+                onChange={(checked) => handleToggle("bombasAgua", checked)}
               />
             </Card>
           </Col>
@@ -57,7 +57,7 @@ export const Devices: FC = () => {
               <Switch
                 checkedChildren="Encendido"
                 unCheckedChildren="Apagado"
-                onChange={(checked) => handleToggle("modo_auto", checked)}
+                onChange={(checked) => handleToggle("cortinas", checked)}
               />
             </Card>
           </Col>
