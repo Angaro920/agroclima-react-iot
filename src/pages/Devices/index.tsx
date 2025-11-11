@@ -13,7 +13,7 @@ export const Devices: FC = () => {
        BACKEND_URL+"/api/control",
         {
           device,
-          state: checked ? "OFF" : "ON",
+          state: checked ? "ON" : "OFF",
         },
         {
           withCredentials: true 
